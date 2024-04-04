@@ -1,0 +1,5 @@
+[19-Sep-2023 10:07:30 America/Fortaleza] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home2/imobi065/public_html/controller/login.service.php on line 29
+[10-Oct-2023 15:03:17 America/Fortaleza] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home2/imobi065/public_html/controller/login.service.php on line 29
+[10-Oct-2023 17:11:20 America/Fortaleza] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home2/imobi065/public_html/controller/login.service.php on line 29
+[10-Oct-2023 17:13:28 America/Fortaleza] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home2/imobi065/public_html/controller/login.service.php on line 29
+[19-Oct-2023 15:38:39 America/Fortaleza] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home2/imobi065/public_html/controller/login.service.php on line 29

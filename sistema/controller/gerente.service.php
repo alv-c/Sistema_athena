@@ -1,0 +1,105 @@
+<?php
+    class GerenteService {
+        private $conexao = null;
+        private $gerente = null;
+
+        public function __construct ($conexao, $gerente) {
+            $this->conexao = $conexao->conectar();
+            $this->gerente = $gerente;
+        }
+
+        public function inserir() {
+            $query = 'INSERT INTO usuarios(nome, email, senha, nivel, gerente, status)values(:nome, :email, :senha, :nivel, :gerenteConsultor, :status)';
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':nome', $this->usuario->__get('nome'));
+            $stmt->bindValue(':email', $this->usuario->__get('email'));
+            $stmt->bindValue(':senha', $this->usuario->__get('senha'));
+            $stmt->bindValue(':nivel', $this->usuario->__get('nivel'));
+            $stmt->bindValue(':gerenteConsultor', $this->usuario->__get('gerenteConsultor'));
+            $stmt->bindValue(':status', $this->usuario->__get('status'));
+            $stmt->execute();
+            return $this->conexao->lastInsertId();
+        }
+
+        public function recuperar($idUsuario, $idConsultor = null) { //read
+            $query;
+            if(is_null($idConsultor)) {
+                $queryNivel = "SELECT nivel FROM usuarios WHERE id = $idUsuario";
+                $stmtNivel = $this->conexao->prepare($queryNivel);
+                $stmtNivel->execute();
+                $nivel = $stmtNivel->fetchAll(PDO::FETCH_OBJ)[0];
+                if($nivel->nivel == 2) $query = "SELECT * FROM usuarios WHERE gerente = $idUsuario AND status = 1";
+                else if ($nivel->nivel == 3) $query = "SELECT * FROM usuarios WHERE nivel = 2 AND status = 1";
+            } else {
+                $query = 
+                    "SELECT usuarios.id, leads.*, status_lead.cor
+                        FROM usuarios 
+                            LEFT JOIN leads 
+                            ON (usuarios.id = leads.id_usuario_consultor)
+                            LEFT JOIN status_lead
+                            ON (status_lead.id = leads.status)
+                        WHERE usuarios.id = $idConsultor
+                        ORDER BY leads.data DESC";
+            }
+            $stmt = $this->conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        public function atualizar($id, $log = false) {
+            $query = 'UPDATE usuarios SET 
+                nome = :nome, 
+                email = :email, 
+                senha = :senha, 
+                nivel = :nivel, 
+                gerente = :gerenteConsultor, 
+                status = :status 
+                WHERE id = :id;
+            ';
+            
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':nome', $this->usuario->__get('nome'));
+            $stmt->bindValue(':email', $this->usuario->__get('email'));
+            $stmt->bindValue(':senha', $this->usuario->__get('senha'));
+            $stmt->bindValue(':nivel', $this->usuario->__get('nivel'));
+            $stmt->bindValue(':gerenteConsultor', $this->usuario->__get('gerenteConsultor'));
+            $stmt->bindValue(':status', $this->usuario->__get('status'));
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+
+        }
+
+        public function deletar($id) {
+            $query = 'DELETE FROM usuarios WHERE id = :id;';
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+        }
+
+        public function retornarNivel () {
+            $query = "SELECT * FROM niveis";
+            $stmt = $this->conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        // public function recuperarGerente ($id) {            
+        //     $query = "SELECT id, nome FROM usuarios WHERE nivel = 2 AND status = 1 $where";
+        //     $stmt = $this->conexao->prepare($query);
+        //     $stmt->execute();
+        //     return $stmt->fetchAll(PDO::FETCH_OBJ);
+        // }
+        
+        public function retornarStatus () {
+            $query = "SELECT * FROM status_lead";
+            $stmt = $this->conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        public function recuperarFiltro($query) { //filtro
+            $stmt = $this->conexao->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+    }

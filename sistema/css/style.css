@@ -1,0 +1,404 @@
+@charset "UTF-8";
+/* width */
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #fafafa;
+  /* ---------------------------------------------------
+  LOGIN
+  ----------------------------------------------------- */
+}
+body .no-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+body#login {
+  background-color: #080710;
+}
+body#login *,
+body#login *:before,
+body#login *:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body#login .background {
+  width: 430px;
+  height: 520px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+body#login .background .shape {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  border-radius: 50%;
+}
+body#login .shape:first-child {
+  background: linear-gradient(#1845ad, #23a2f6);
+  left: -80px;
+  top: -80px;
+}
+body#login .shape:last-child {
+  background: linear-gradient(to right, #ff512f, #f09819);
+  right: -30px;
+  bottom: -80px;
+}
+body#login form {
+  height: 520px;
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.13);
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  padding: 50px 35px;
+}
+body#login form * {
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+}
+body#login form h3 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 42px;
+  text-align: center;
+}
+body#login label {
+  display: block;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 500;
+}
+body#login input {
+  display: block;
+  height: 50px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 300;
+}
+body#login ::placeholder {
+  color: #e5e5e5;
+}
+body#login button {
+  margin-top: 50px;
+  width: 100%;
+  background-color: #ffffff;
+  color: #080710;
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+body#login .social {
+  margin-top: 30px;
+  display: flex;
+}
+body#login .social div {
+  background: red;
+  width: 150px;
+  border-radius: 3px;
+  padding: 5px 10px 10px 5px;
+  background-color: rgba(255, 255, 255, 0.27);
+  color: #eaf0fb;
+  text-align: center;
+}
+body#login .social div:hover {
+  background-color: rgba(255, 255, 255, 0.47);
+}
+body#login .social .fb {
+  margin-left: 25px;
+}
+body#login .social i {
+  margin-right: 4px;
+}
+body .wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  /* ---------------------------------------------------
+      SIDEBAR STYLE LATERAL
+  ----------------------------------------------------- */
+  /* ---------------------------------------------------
+      CONTENT STYLE
+  ----------------------------------------------------- */
+  /* ---------------------------------------------------
+      FOLLOWUP
+  ----------------------------------------------------- */
+  /* ---------------------------------------------------
+      MEDIAQUERIES
+  ----------------------------------------------------- */
+}
+body .wrapper a,
+body .wrapper a:hover,
+body .wrapper a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+body .wrapper #sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  background: #7386D5;
+  color: #fff;
+  transition: all 0.3s;
+}
+body .wrapper #sidebar p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #999;
+}
+body .wrapper #sidebar.active {
+  margin-left: -250px;
+}
+body .wrapper #sidebar .sidebar-header {
+  padding: 20px;
+  background: #6d7fcc;
+}
+body .wrapper #sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid #47748b;
+}
+body .wrapper #sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+body .wrapper #sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+body .wrapper #sidebar ul li a:hover {
+  color: #7386D5;
+  background: #fff;
+}
+body .wrapper #sidebar ul li.active > a,
+body .wrapper #sidebar a[aria-expanded=true] {
+  color: #fff;
+  background: #6d7fcc;
+}
+body .wrapper #sidebar a[data-toggle=collapse] {
+  position: relative;
+}
+body .wrapper #sidebar .dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+body .wrapper #sidebar ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #6d7fcc;
+}
+body .wrapper #sidebar ul.CTAs {
+  padding: 20px;
+}
+body .wrapper #sidebar ul.CTAs a {
+  text-align: center;
+  font-size: 0.9em !important;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+body .wrapper #sidebar a.download {
+  background: #fff;
+  color: #7386D5;
+}
+body .wrapper #sidebar a.article,
+body .wrapper #sidebar a.article:hover {
+  background: #6d7fcc !important;
+  color: #fff !important;
+}
+body .wrapper #content {
+  width: 100%;
+  padding: 20px;
+  min-height: 100vh;
+  transition: all 0.3s;
+  /* ---------------------------------------------------
+  SIDEBAR STYLE SUPERIOR
+  ----------------------------------------------------- */
+  /* ---------------------------------------------------
+  FILTROS
+  ----------------------------------------------------- */
+  /* ---------------------------------------------------
+  SESSÕES
+  ----------------------------------------------------- */
+}
+body .wrapper #content .navbar {
+  padding: 15px 10px;
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 40px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+body .wrapper #content .navbar .navbar-btn {
+  box-shadow: none;
+  outline: none !important;
+  border: none;
+}
+body .wrapper #content .navbar .line {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #ddd;
+  margin: 40px 0;
+}
+body .wrapper #content div#filtros div.contain-filters {
+  border: 1px solid #dcdcdc;
+  border-radius: 3px;
+}
+body .wrapper #content section.sessao-tabela div.circle-stts {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+}
+body .wrapper #content section.sessao-tabela table {
+  margin-top: 25px;
+}
+body .wrapper #content section.sessao-tabela table thead tr th {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+body .wrapper #content section.sessao-tabela table tbody tr td, body .wrapper #content section.sessao-tabela table tbody tr th {
+  font-size: 12.5px;
+}
+body .wrapper #content section.sessao-tabela table tbody tr td form button[type=submit], body .wrapper #content section.sessao-tabela table tbody tr th form button[type=submit] {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #007CFF;
+}
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn {
+  display: flex;
+  flex-wrap: nowrap;
+}
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn form, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn form {
+  display: block;
+}
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.editar, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.editar {
+  border: none;
+  background: #007CFF;
+  outline: none;
+  cursor: pointer;
+  padding: 5px;
+  width: 40px;
+  border-radius: 5px;
+}
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.editar:hover, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.editar:hover {
+  background: #1E90FF;
+}
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.excluir, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.excluir {
+  border: none;
+  background: #B22222;
+  outline: none;
+  cursor: pointer;
+  padding: 5px;
+  width: 40px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.excluir:hover, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.excluir:hover {
+  background: #800000;
+}
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn i, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn i {
+  color: #fff;
+}
+body .wrapper #content section.view-lead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+body .wrapper #content section.view-lead div.contain {
+  width: 100%;
+}
+body .wrapper #content section.view-lead div.contain fieldset {
+  width: 100%;
+  margin: 0 auto;
+}
+body .wrapper #content section.view-lead div.contain fieldset div.content-stts {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  position: relative;
+}
+body .wrapper #content section.view-lead div.contain fieldset div.content-stts span {
+  display: inline-block;
+  margin-right: 20px;
+}
+body .wrapper #content section.view-lead div.contain fieldset div.content-stts div.indicadorStatusCor {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+}
+body .wrapper #content section.view-lead div.contain fieldset form label {
+  display: block;
+  cursor: pointer;
+  margin-top: 10px;
+  text-transform: uppercase;
+  color: #1c1c1c;
+}
+body .wrapper #content section.view-lead div.contain fieldset form input, body .wrapper #content section.view-lead div.contain fieldset form textarea, body .wrapper #content section.view-lead div.contain fieldset form select {
+  display: block;
+  width: 100%;
+  border: 1px solid #708090;
+  outline: none;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+@media (max-width: 768px) {
+  body .wrapper #sidebar {
+    margin-left: -250px;
+  }
+  body .wrapper #sidebar.active {
+    margin-left: 0;
+  }
+  body .wrapper #sidebarCollapse span {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
