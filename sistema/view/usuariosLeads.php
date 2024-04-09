@@ -68,7 +68,7 @@ if (!empty($_GET['idUser'])) :
                                     <div class="item">
                                         <label for="status" class="pt-2">Status:</label>
                                         <select name="status" id="status" class="form-control">
-                                            <option value="" selected>Selecione o status</option>
+                                            <option value="0" hidden>Selecione o status</option>
                                             <?php foreach ($gerenteService->retornarStatus() as $status) : ?>
                                                 <option value="<?= $status->id ?>" <?= !empty($_POST['status']) && $_POST['status'] == $status->id ? 'selected' : ''; ?>><?= $status->status ?></option>
                                             <?php endforeach; ?>

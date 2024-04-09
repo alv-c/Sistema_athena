@@ -108,7 +108,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                             <label for="gerenteConsultor">Gerente do corretor</label>
                                             <select name="gerenteConsultor" id="gerenteConsultor" required>
                                                 <?php if ($usuarioSessao->nivel == 3) : ?>
-                                                    <option selected>Selecione</option>
+                                                    <option value="0" hidden>Selecione</option>
                                                 <?php endif; ?>
                                                 <?php foreach ($usuarioService->recuperarGerentes() as $gerente) : ?>
                                                     <?php if ($usuarioSessao->nivel == 2 && $gerente->id != $usuarioSessao->id) continue; ?>

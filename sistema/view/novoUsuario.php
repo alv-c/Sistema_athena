@@ -40,7 +40,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
             <section class="view-lead">
                 <div class="contain">
                     <fieldset>
-                        <form method="post" action="sistema/controller/usuarios.controller.php">
+                        <form method="post" action="/sistema/controller/usuarios.controller.php">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <label for="nivel">Nível</label>
@@ -87,7 +87,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
                                         <label for="gerenteConsultor">Gerente do corretor</label>
                                         <select name="gerenteConsultor" id="gerenteConsultor">
                                             <?php if ($usuarioSessao->nivel == 3) : ?>
-                                                <option selected>selecione</option>
+                                                <option value="0" hidden>selecione</option>
                                             <?php endif; ?>
                                             <?php foreach ($usuarioService->recuperarGerentes() as $gerente) : ?>
                                                 <?php if ($usuarioSessao->nivel == 2 && $gerente->id != $usuarioSessao->id) continue; ?>

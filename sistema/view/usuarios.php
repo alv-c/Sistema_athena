@@ -63,7 +63,7 @@
                                     <div class="item">
                                         <label for="nivel" class="pt-2">Pesquisa por nivel:</label>
                                         <select name="nivel" id="nivel" class="form-control">
-                                            <option value="" selected>Selecione o nível</option>
+                                            <option hidden>Selecione o nível</option>
                                         <?php foreach($usuarioService->retornarNivel() as $nivel) : ?>
                                             <option value="<?= $nivel->id ?>" <?= !empty($_POST['nivel']) && $nivel->id == $_POST['nivel'] ? 'selected' : ''; ?>><?= $nivel->nome ?></option>
                                         <?php endforeach; ?>
@@ -74,7 +74,7 @@
                                     <div class="item">
                                         <label for="gerente" class="pt-2">Pesquisa por gerente:</label>
                                         <select name="gerente" id="gerente" class="form-control">
-                                            <option value="" selected>Selecione o gerente</option>
+                                            <option value="0" hidden>Selecione o gerente</option>
                                             <?php foreach($usuarioService->recuperarGerentes() as $gerente) : ?>
                                                 <option value="<?= $gerente->id; ?>" <?= !empty($_POST['gerente']) && $_POST['gerente'] == $gerente->id ? 'selected' : ''; ?>><?= $gerente->nome; ?></option>
                                             <?php endforeach; ?>
@@ -87,9 +87,9 @@
                                     <div class="item">
                                         <label for="status" class="pt-2">Status:</label>
                                         <select name="status" id="status" class="form-control">
-                                            <option value="" selected>Selecione o status</option>
+                                            <option value="0" hidden>Selecione o status</option>
                                             <option value="1" <?= !empty($_POST['status']) && $_POST['status'] == '1' ? 'selected' : ''; ?>>Ativo</option>
-                                            <option value="false" <?= !empty($_POST['status']) && $_POST['status'] == 'false' ? 'selected' : ''; ?>>Inativo</option>
+                                            <option value="0" <?= !empty($_POST['status']) && $_POST['status'] == 'false' ? 'selected' : ''; ?>>Inativo</option>
                                         </select>
                                     </div>
                                 </div>

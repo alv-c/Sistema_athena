@@ -88,7 +88,7 @@
                                             <div class="col-md-6 col-sm-12">
                                                 <label for="consultor">Corretor</label>
                                                 <select name="consultor" id="consultor">
-                                                    <option hidden>Selecione um corretor</option>
+                                                    <option value="0" hidden>Selecione um corretor</option>
                                                     <?php foreach ($leadService->retornarConsultores($usuarioSessao->id, $usuarioSessao->nivel) as $consultor) : ?>
                                                         <option value="<?= $consultor->id ?>" <?= $leadService->recuperar($id)[0]->id_usuario_consultor == $consultor->id || $usuarioSessao->nivel == 1 ? 'selected' : ''; ?>><?= $consultor->nome ?></option>
                                                     <?php endforeach; ?>
