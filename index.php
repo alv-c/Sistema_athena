@@ -99,7 +99,7 @@
                                 Faça <span>seu cadastro</span> para saber mais!
                             </h4>
                         </div>
-                        <form method="post" action="./controller/leads.controller.php">
+                        <form method="post" action="/sistema/controller/leads.controller.php">
                             <input type="text" name="nome" id="nome" placeholder="nome" required>
                             <input type="text" name="telefone" id="telefone" placeholder="WhatsApp" required>
                             <input type="email" name="email" id="email" placeholder="email" required>
