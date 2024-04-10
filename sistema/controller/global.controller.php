@@ -7,23 +7,15 @@ class Database
 
     public function __construct(Conexao $conexao)
     {
-        // $this->conexao = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         $this->conexao = $conexao->conectar();
         $this->conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function ler($tabela, $condicoes = [], $order = '')
+    public function ler($sql)
     {
-        $sql = "SELECT * FROM $tabela";
-        if (!empty($condicoes)) {
-            $sql .= " WHERE " . implode(" AND ", $condicoes);
-        }
-        if (!empty($order)) {
-            $sql .= " ORDER BY $order";
-        }
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function inserir($tabela, $dados)
@@ -61,15 +53,15 @@ $conexaoModel = new Conexao();
 $conexao = new Database($conexaoModel);
 
 // Exemplo de leitura **
-// $usuarios = $db->ler('usuarios');
+// $usuarios = $conexao->ler(query);
 // print_r($usuarios);
 
 // Exemplo de inserção **
-// $novo_usuario_id = $db->inserir('usuarios', ['nome' => 'Fulano', 'email' => 'fulano@example.com']);
+// $novo_usuario_id = $conexao->inserir('usuarios', ['nome' => 'Fulano', 'email' => 'fulano@example.com']);
 // echo "Novo usuário inserido com ID: $novo_usuario_id\n";
 
 // Exemplo de atualização **
-// $db->atualizar('usuarios', ['nome' => 'Beltrano'], ['id' => 1]);
+// $conexao->atualizar('usuarios', ['nome' => 'Beltrano'], ['id' => 1]);
 
 // Exemplo de exclusão **
-// $db->excluir('usuarios', ['id' => 2]);
+// $conexao->excluir('usuarios', ['id' => 2]);

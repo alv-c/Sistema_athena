@@ -5,12 +5,9 @@
             session_destroy();
             header("Location: /sistema/view/login.php");
         } else {
-            $query = "SELECT * FROM usuarios WHERE id = :id";
-            $stmt = $conexao->prepare($query);
-            $stmt->bindValue(':id', $sessao['login']);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_OBJ)[0];
+            $query = "SELECT * FROM usuarios WHERE id = {$sessao["login"]}";
+            return $conexao->ler($query)[0];
         }
     }
-    $usuarioSessao = validaSessao($_SESSION, $conexao->conectar());
+    $usuarioSessao = validaSessao($_SESSION, $conexao);
 ?>
