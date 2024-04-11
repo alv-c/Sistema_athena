@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/usuarios.controller.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
+$pagina = 'usuariosEdit';
 if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['editId']) && !is_null($_GET['editId']))) :
     $id = empty($_POST['editId']) ? $_GET['editId'] : $_POST['editId'];
 
@@ -36,6 +37,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
         <link rel="stylesheet" type="text/css" href="/sistema/css/style.css">
 
         <!-- SCRIPT -->
+        <script> var pagina = '<?= $pagina ?>'; </script>
         <script src="/sistema/js/script.js"></script>
 
         <!-- FONT AWEASOME -->

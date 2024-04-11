@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/usuarios.controller.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
+$pagina = 'novoUsuario';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -21,6 +22,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
     <link rel="stylesheet" type="text/css" href="/sistema/css/style.css">
 
     <!-- SCRIPT -->
+    <script> var pagina = '<?= $pagina ?>'; </script>
     <script src="/sistema/js/script.js"></script>
 
     <!-- FONT AWEASOME -->
