@@ -3,16 +3,14 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/global.controller.
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/model/leads.model.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/leads.service.php';
 
-if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') {
+if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') { //OK
 	if (validateForm($_POST)) {
 		$_POST['telefone'] = str_replace("(", "", $_POST['telefone']);
 		$_POST['telefone'] = str_replace(")", "", $_POST['telefone']);
 		$_POST['telefone'] = str_replace("-", "", $_POST['telefone']);
 		$lead = new Lead($_POST['nome'], $_POST['telefone'], null, $_POST['email']);
-		// $conexao = new Conexao();
 		$leadService = new LeadsService($conexao, $lead);
 		$leadService->inserir();
-		// header('Location: /sistema/view/index.php?send=true');
 	}
 }
 

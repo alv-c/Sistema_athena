@@ -78,7 +78,7 @@ class LeadsService
             'midia' => $this->lead->__get('midia'),
             'status' => $this->lead->__get('status')
         ];
-        $this->conexao->atualizar('leads', $campos, ['id' => $id]);
+        $this->conexao->atualizar('leads', $campos, "id = $id");
         if ($log) {
             $campos = [
                 'idLead' => $id,
@@ -134,66 +134,42 @@ class LeadsService
     private function enviarLeadConsultor($idLead)
     {
         $queryConsultores = "SELECT id FROM usuarios WHERE nivel = 1 AND status = 1 ORDER BY id ASC";
-
-        // $stmtConsultores = $this->conexao->prepare($queryConsultores);
-        // $stmtConsultores->execute();
-        // $arrayConsultores = $stmtConsultores->fetchAll(PDO::FETCH_ASSOC);
         $arrayConsultores = (array)$this->conexao->ler($queryConsultores);
-
         $consultores = array();
-
         foreach ($arrayConsultores as $consultor) {
             foreach ($consultor as $indice) {
                 array_push($consultores, $indice);
             }
         }
-
         $queryLeads = "SELECT id_usuario_consultor FROM leads WHERE id != $idLead ORDER BY id DESC LIMIT 1";
-        // $stmtLeads = $this->conexao->prepare($queryLeads);
-        // $stmtLeads->execute();
-        // $idConsLeadAnt = $stmtLeads->fetchAll(PDO::FETCH_OBJ)[0]->id_usuario_consultor;
-        $idConsLeadAnt = $this->conexao->ler($queryLeads)[0]->id_usuario_consultor;
+        $idConsLeadAnt = null;
+        $idConsLeadAnt = $this->conexao->ler($queryLeads);
+        if(!count($idConsLeadAnt)) {
+            $queryLeads = "SELECT id FROM usuarios WHERE nivel = 1 AND status = 1 ORDER BY id DESC LIMIT 1";
+            $idConsLeadAnt = $this->conexao->ler($queryLeads)[0]->id;
+        } else {
+            $idConsLeadAnt = $idConsLeadAnt[0]->id_usuario_consultor;
+        }        
         $key = array_search($idConsLeadAnt, $consultores);
-
         if ($key != false || $key === 0) {
             $key += 1;
             if (array_key_exists($key, $consultores)) {
-                // $query = 'UPDATE leads SET id_usuario_consultor = :id_usuario_consultor WHERE id = :id;';
-                // $stmt = $this->conexao->prepare($query);
-                // $stmt->bindValue(':id_usuario_consultor', $consultores[$key]);
-                // $stmt->bindValue(':id', $idLead);
-                // $stmt->execute();
-
-                $this->conexao->atualizar('leads', ['id_usuario_consultor' => $consultores[$key]], ['id' => $idLead]);
+                $this->conexao->atualizar('leads', ['id_usuario_consultor' => $consultores[$key]], "id = $idLead");
             } else {
                 $key = min($consultores);
-
-                // $query = 'UPDATE leads SET id_usuario_consultor = :id_usuario_consultor WHERE id = :id;';
-                // $stmt = $this->conexao->prepare($query);
-                // $stmt->bindValue(':id_usuario_consultor', $key);
-                // $stmt->bindValue(':id', $idLead);
-                // $stmt->execute();
-
-                $this->conexao->atualizar('leads', ['id_usuario_consultor' => $key], ['id' => $idLead]);
+                $this->conexao->atualizar('leads', ['id_usuario_consultor' => $key], "id = $idLead");
             }
         } else {
-            // $query = 'UPDATE leads SET id_usuario_consultor = :id_usuario_consultor WHERE id = :id;';
-            // $stmt = $this->conexao->prepare($query);
-            // $stmt->bindValue(':id_usuario_consultor', $consultores[0]);
-            // $stmt->bindValue(':id', $idLead);
-            // $stmt->execute();
-
-            $this->conexao->atualizar('leads', ['id_usuario_consultor' => $consultores[0]], ['id' => $idLead]);
+            $this->conexao->atualizar('leads', ['id_usuario_consultor' => $consultores[0]], "id = $idLead");
         }
     }
 
     public function esfriarLead()
     {
-        $query = "SELECT leads.id FROM leads WHERE leads.data < DATE_SUB(CURDATE(), INTERVAL 15 DAY) AND status != 7 AND status != 8";
+        $query = "SELECT leads.id FROM leads WHERE leads.data > DATE_SUB(CURDATE(), INTERVAL 15 DAY) AND status != 7 AND status != 8";
         $ids = $this->conexao->ler($query);
-
         foreach ($ids as $id) {
-            $this->conexao->atualizar('leads', ['status' => 3], ['id' => $id->id]);
+            $this->conexao->atualizar('leads', ['status' => 3], "id = $id->id");
         }
     }
 }

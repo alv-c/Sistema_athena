@@ -35,16 +35,57 @@ class Database
         return $stmt->execute();
     }
 
-    public function atualizar($tabela, $dados, $condicoes)
+    // public function atualizar($tabela, $dados, $condicoes)
+    // {
+    //     $valores = '';
+    //     foreach ($dados as $chave => $valor) {
+    //         $valores .= "$chave=:$chave, ";
+    //     }
+    //     $valores = rtrim($valores, ', ');
+    //     $sql = "UPDATE $tabela SET $valores WHERE " . implode(" AND ", $condicoes);
+    //     echo '<pre>';
+    //     print_r($condicoes);
+    //     echo '</pre>';
+    //     echo "<h1>$sql</h1>";
+    //     echo implode(" AND ", $condicoes);
+    //     // $stmt = $this->conexao->prepare($sql);
+    //     // return $stmt->execute($dados);
+    // }
+
+    function atualizar($tabela, $dados, $condicoes)
     {
-        $valores = '';
-        foreach ($dados as $chave => $valor) {
-            $valores .= "$chave=:$chave, ";
+        // Configurações do banco de dados
+        // $dsn = "mysql:host=seu_host;dbname=seu_banco_de_dados;charset=utf8mb4";
+        // $usuario = "seu_usuario";
+        // $senha = "sua_senha";
+
+        // Tentativa de conexão
+        try {
+            // $conexao = new PDO($dsn, $usuario, $senha);
+            // $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Construção da consulta SQL
+            $sql = "UPDATE $tabela SET ";
+            foreach ($dados as $coluna => $valor) {
+                $sql .= "$coluna = :$coluna, ";
+            }
+            $sql = rtrim($sql, ', '); // Remove a última vírgula
+            $sql .= " WHERE $condicoes";
+
+            // Preparação e execução da consulta
+            $stmt = $this->conexao->prepare($sql);
+            foreach ($dados as $coluna => $valor) {
+                $stmt->bindValue(":$coluna", $valor);
+            }
+            $stmt->execute();
+
+            // Retorna verdadeiro se a atualização for bem-sucedida
+            return true;
+        } catch (PDOException $e) {
+            // Retorna falso em caso de erro e exibe a mensagem de erro
+            echo "Erro: " . $e->getMessage();
+            return false;
         }
-        $valores = rtrim($valores, ', ');
-        $sql = "UPDATE $tabela SET $valores WHERE " . implode(" AND ", $condicoes);
-        $stmt = $this->conexao->prepare($sql);
-        return $stmt->execute($dados);
     }
 }
 
