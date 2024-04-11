@@ -3,7 +3,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/global.controller.
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/model/leads.model.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/leads.service.php';
 
-if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') { //OK
+if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') {
 	if (validateForm($_POST)) {
 		$_POST['telefone'] = str_replace("(", "", $_POST['telefone']);
 		$_POST['telefone'] = str_replace(")", "", $_POST['telefone']);
@@ -14,7 +14,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') { //OK
 	}
 }
 
-if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id'])) { //OK
+if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id'])) {
 	if (validateForm($_POST)) {
 		$log = empty($_POST['anotacao']) ? false : true;
 		$_POST['telefone'] = str_replace("(", "", $_POST['telefone']);
@@ -39,7 +39,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id']
 	}
 }
 
-if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir_lead_manual') { //OK
+if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir_lead_manual') {
 	$_POST['telefone'] = str_replace("(", "", $_POST['telefone']);
 	$_POST['telefone'] = str_replace(")", "", $_POST['telefone']);
 	$_POST['telefone'] = str_replace("-", "", $_POST['telefone']);
@@ -50,7 +50,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir_lead_manual') { //OK
 	$leadService = new LeadsService($conexao, $lead);
 	$leadService->inserir();
 	header('Location: /sistema/view/index.php');
-} else if (strripos($_SERVER['PHP_SELF'], 'sistema')) { //OK
+} else if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
 	$lead = new Lead();
 	$leadService = new LeadsService($conexao, $lead);
 	$arrayLeads = $leadService->recuperar();
