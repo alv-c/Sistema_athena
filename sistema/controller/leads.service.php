@@ -90,12 +90,10 @@ class LeadsService
         }
     }
 
-    // public function deletar($id) {
-    //     $query = 'DELETE FROM leads WHERE id = :id';
-    //     $stmt = $this->conexao->prepare($query);
-    //     $stmt->bindValue(':id', $id);
-    //     $stmt->execute();
-    // }
+    public function deletar($id)
+    {
+        $this->conexao->excluir('leads', "id = $id");
+    }
 
     public function retornarStatus()
     {
@@ -103,12 +101,11 @@ class LeadsService
         return $this->conexao->ler($query);
     }
 
-    // public function retornarGerenteConsultor ($id) {
-    //     $query = "SELECT gerente FROM usuarios WHERE id = $id";
-    //     $stmt = $this->conexao->prepare($query);
-    //     $stmt->execute();
-    //     return $stmt->fetchAll(PDO::FETCH_OBJ);
-    // }
+    public function retornarGerenteConsultor($id)
+    {
+        $query = "SELECT gerente FROM usuarios WHERE id = $id";
+        return $this->conexao->ler($query);
+    }
 
     public function retornarConsultores($id, $nivel)
     {
@@ -144,12 +141,12 @@ class LeadsService
         $queryLeads = "SELECT id_usuario_consultor FROM leads WHERE id != $idLead ORDER BY id DESC LIMIT 1";
         $idConsLeadAnt = null;
         $idConsLeadAnt = $this->conexao->ler($queryLeads);
-        if(!count($idConsLeadAnt)) {
+        if (!count($idConsLeadAnt)) {
             $queryLeads = "SELECT id FROM usuarios WHERE nivel = 1 AND status = 1 ORDER BY id DESC LIMIT 1";
             $idConsLeadAnt = $this->conexao->ler($queryLeads)[0]->id;
         } else {
             $idConsLeadAnt = $idConsLeadAnt[0]->id_usuario_consultor;
-        }        
+        }
         $key = array_search($idConsLeadAnt, $consultores);
         if ($key != false || $key === 0) {
             $key += 1;

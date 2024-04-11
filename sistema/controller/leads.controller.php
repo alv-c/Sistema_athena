@@ -30,15 +30,14 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id
 	}
 }
 
-// if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id'])) {
-// 	if (validateForm($_POST)) {
-// 		$lead = new Lead();
-// 		$conexao = new Conexao();
-// 		$leadService = new LeadsService($conexao, $lead);
-// 		$leadService->deletar($_POST['id']);
-// 		header('Location: /sistema/view/index.php?leadDeletado=true');
-// 	}
-// }
+if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id'])) {
+	if (validateForm($_POST)) {
+		$lead = new Lead();
+		$leadService = new LeadsService($conexao, $lead);
+		$leadService->deletar($_POST['id']);
+		header('Location: /sistema/view/index.php?leadDeletado=true');
+	}
+}
 
 if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir_lead_manual') { //OK
 	$_POST['telefone'] = str_replace("(", "", $_POST['telefone']);
