@@ -4,16 +4,15 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/model/pdo.model.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/model/usuarios.model.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/usuarios.service.php';
 
-// if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') {
-// 	isset($_POST['gerenteConsultor']) ? $_POST['gerenteConsultor'] : null;
-// 	if (validateForm($_POST)) {
-// 		$usuario = new Usuario($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['nivel'], $_POST['gerenteConsultor'], $_POST['creci'], $_POST['status']);
-// 		$conexao = new Conexao();
-// 		$usuarioService = new UsuarioService($conexao, $usuario);
-// 		$idInsert = $usuarioService->inserir();
-// 		header('Location: /sistema/view/usuarios.php');
-// 	}
-// }
+if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') { //	OK
+	isset($_POST['gerenteConsultor']) ? $_POST['gerenteConsultor'] : null;
+	if (validateForm($_POST)) {
+		$usuario = new Usuario($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['nivel'], $_POST['gerenteConsultor'], $_POST['creci'], $_POST['status']);
+		$usuarioService = new UsuarioService($conexao, $usuario);
+		$idInsert = $usuarioService->inserir();
+		header('Location: /sistema/view/usuarios.php');
+	}
+}
 
 // if (!empty($_POST['acao']) && $_POST['acao'] == 'filtrar') {
 // 	$usuario = new Usuario();
@@ -32,27 +31,23 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/usuarios.service.p
 // 	$arrayUsuarios = $usuarioService->recuperarFiltro($query);
 // }
 
-// if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id'])) {
-// 	if (validateForm($_POST)) {
-// 		$usuario = new Usuario($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['nivel'], $_POST['gerenteConsultor'], $_POST['creci'], $_POST['status']);
-// 		$conexao = new Conexao();
-// 		$usuarioService = new UsuarioService($conexao, $usuario);
-// 		$usuarioService->atualizar($_POST['id']);
-// 		header('Location: /sistema/view/usuariosEdit.php?editId=' . $_POST['id']);
-// 	}
-// }
+if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id'])) { //OK
+	if (validateForm($_POST)) {
+		$usuario = new Usuario($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['nivel'], $_POST['gerenteConsultor'], $_POST['creci'], $_POST['status']);
+		$usuarioService = new UsuarioService($conexao, $usuario);
+		$usuarioService->atualizar($_POST['id']);
+		header('Location: /sistema/view/usuariosEdit.php?editId=' . $_POST['id']);
+	}
+}
 
-if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id'])) {
+if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id'])) { //OK
 	if (validateForm($_POST)) {
 		$usuario = new Usuario();
-		$conexao = new Conexao();
 		$usuarioService = new UsuarioService($conexao, $usuario);
 		$usuarioService->deletar($_POST['id']);
 		header('Location: /sistema/view/usuarios.php?usuarioDeletado=true');
 	}
-} 
-
-else if (strripos($_SERVER['PHP_SELF'], 'sistema')) { //OK
+} else if (strripos($_SERVER['PHP_SELF'], 'sistema')) { //OK
 	$usuario = new Usuario();
 	$usuarioService = new UsuarioService($conexao, $usuario);
 	$arrayUsuarios = $usuarioService->recuperar();

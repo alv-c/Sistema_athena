@@ -52,12 +52,16 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                 <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar.php' ?>
 
                 <!-- SESSÕES -->
-                <!-- <div class="indicadorStatusCor" style="background: <?= retornarStatus($usuarioService->recuperar($id)[0]->status)['cor']; ?>;"></div> -->
                 <section class="view-lead">
                     <div class="contain">
                         <fieldset>
+                            <div class="content-stts pb-3">
+                                <span>
+                                    <?= retornarStatus($usuarioService->recuperar($id)[0]->status)['status']; ?>
+                                </span>
+                                <div class="indicadorStatusCor" style="background: <?= retornarStatus($usuarioService->recuperar($id)[0]->status)['cor']; ?>;"></div>
+                            </div>
                             <form method="post" action="/sistema/controller/usuarios.controller.php">
-
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="nivel">Nível</label>

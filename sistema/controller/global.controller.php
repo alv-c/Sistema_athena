@@ -85,7 +85,7 @@ $conexao = new Database($conexaoModel);
 // print_r($usuarios);
 
 // Exemplo de inserção **
-// $novo_usuario_id = $conexao->inserir('usuarios', ['nome' => 'Fulano', 'email' => 'fulano@example.com']);
+// $novo_usuario_id = $conexao->inserir('sua_tabela', ['nome' => 'Fulano', 'email' => 'fulano@example.com']);
 // echo "Novo usuário inserido com ID: $novo_usuario_id\n";
 
 // Exemplo de atualização **

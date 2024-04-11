@@ -2,9 +2,9 @@
 class Conexao
 {
 	private $host = 'localhost';
-	private $dbname = 'imobi065_fettine';
+	private $dbname = 'athena';
 	private $user = 'root';
-	private $pass = 'alvaro01021998';
+	private $pass = 'root';
 
 	public function conectar()
 	{
