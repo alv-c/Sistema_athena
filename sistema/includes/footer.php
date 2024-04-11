@@ -41,33 +41,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js" integrity="sha512-oJCa6FS2+zO3EitUSj+xeiEN9UTr+AjqlBZO58OPadb2RfqwxHpjTU8ckIC8F4nKvom7iru2s8Jwdo+Z8zm0Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function() {
-            // dataTable
-            new DataTable('#tabela-leads', {
-                language: {
-                    info: 'Página _PAGE_ de _PAGES_',
-                    infoEmpty: 'Nenhum registro encontrado!',
-                    infoFiltered: '(_MAX_ registros encontrados.)',
-                    lengthMenu: '_MENU_ Número de registros',
-                    zeroRecords: 'Nenhum registro encontrado!',
-                    search: '',
-                    searchPlaceholder: 'Buscar',
-                    paginate: {
-                        "next": "Avançar",
-                        "previous": "Voltar"
-                    }
-                },
-                paging: true,
-                scrollCollapse: false,
-                scrollY: '500px',
-                order: [],
-                columnDefs: [
-                    {
-                        'targets': [6],
-                        'orderable': false,  
-                    }
-                ],
-            })
-
             $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active')
             });

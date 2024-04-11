@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/leads.controller.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
+$pagina = 'index';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,6 +26,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
     <link rel="stylesheet" type="text/css" href="/sistema/css/style.css">
 
     <!-- JS -->
+    <script> var pagina = '<?= $pagina ?>'; </script>
     <script src="/sistema/js/script.js"></script>
 
     <!-- FONT AWEASOME -->

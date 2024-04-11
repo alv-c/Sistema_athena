@@ -35,12 +35,6 @@ class UsuarioService
         return $this->conexao->ler($query);
     }
 
-    // public function recuperarFiltro($query) { //filtro
-    //     $stmt = $this->conexao->prepare($query);
-    //     $stmt->execute();
-    //     return $stmt->fetchAll(PDO::FETCH_OBJ);
-    // }
-
     public function atualizar($id)
     {
         $this->conexao->atualizar("usuarios", [
