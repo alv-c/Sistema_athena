@@ -36,7 +36,7 @@ class GerenteService
             }
         } else {
             $query =
-                "SELECT usuarios.id, leads.*, status_lead.cor
+                "SELECT usuarios.id, leads.*, status_lead.cor, status_lead.status AS nome_stts_lead
                         FROM leads 
                             LEFT JOIN usuarios 
                             ON (usuarios.id = leads.id_usuario_consultor)
@@ -96,6 +96,7 @@ class GerenteService
         $query = "SELECT * FROM status_lead";
         return $this->conexao->ler($query);
     }
+    
 
     // public function recuperarFiltro($query) { //filtro
     //     $stmt = $this->conexao->prepare($query);

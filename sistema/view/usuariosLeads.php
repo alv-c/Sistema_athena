@@ -132,8 +132,9 @@ if (!empty($_GET['idUser'])) :
                                                 <td><a class="text-primary" href="edit.php?editId=<?= $leads->id ?>"><?= $leads->telefone ?></a></td>
                                                 <td><a class="text-primary" href="edit.php?editId=<?= $leads->id ?>"><?= $leads->email ?></a></td>
                                                 <td>
-                                                    <a class="text-primary" href="edit.php?editId=<?= $leads->id ?>">
+                                                    <a class="text-primary d-flex flex-nowrap justify-content-center align-items-center" href="edit.php?editId=<?= $leads->id ?>">
                                                         <div class="circle-stts" style="background: <?= $leads->cor ?>;"></div>
+                                                        <span class="d-block pl-2"><?= $leads->nome_stts_lead ?></span>
                                                     </a>
                                                 </td>
                                             </tr>
