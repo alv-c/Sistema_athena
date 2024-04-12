@@ -23,6 +23,7 @@
 body {
   font-family: "Poppins", sans-serif;
   background: #fafafa;
+  overflow: hidden;
   /* ---------------------------------------------------
   LOGIN
   ----------------------------------------------------- */
@@ -170,11 +171,13 @@ body .wrapper a:focus {
   transition: all 0.3s;
 }
 body .wrapper #sidebar {
-  min-width: 250px;
-  max-width: 250px;
+  min-width: 260px;
+  max-width: 260px;
   background: #7386D5;
   color: #fff;
   transition: all 0.3s;
+  height: 100vh;
+  overflow-y: scroll;
 }
 body .wrapper #sidebar p {
   font-family: "Poppins", sans-serif;
@@ -254,6 +257,8 @@ body .wrapper #content {
   padding: 20px;
   min-height: 100vh;
   transition: all 0.3s;
+  height: 100vh;
+  overflow-y: scroll;
   /* ---------------------------------------------------
   SIDEBAR STYLE SUPERIOR
   ----------------------------------------------------- */
@@ -299,24 +304,29 @@ body .wrapper #content section.sessao-tabela table thead tr th {
   text-transform: uppercase;
   font-size: 14px;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td, body .wrapper #content section.sessao-tabela table tbody tr th {
+body .wrapper #content section.sessao-tabela table tbody tr td,
+body .wrapper #content section.sessao-tabela table tbody tr th {
   font-size: 12.5px;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td form button[type=submit], body .wrapper #content section.sessao-tabela table tbody tr th form button[type=submit] {
+body .wrapper #content section.sessao-tabela table tbody tr td form button[type=submit],
+body .wrapper #content section.sessao-tabela table tbody tr th form button[type=submit] {
   border: none;
   outline: none;
   background: none;
   cursor: pointer;
   color: #007CFF;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn {
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn,
+body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn {
   display: flex;
   flex-wrap: nowrap;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn form, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn form {
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn form,
+body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn form {
   display: block;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.editar, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.editar {
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.editar,
+body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.editar {
   border: none;
   background: #007CFF;
   outline: none;
@@ -325,10 +335,12 @@ body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn b
   width: 40px;
   border-radius: 5px;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.editar:hover, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.editar:hover {
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.editar:hover,
+body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.editar:hover {
   background: #1E90FF;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.excluir, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.excluir {
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.excluir,
+body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.excluir {
   border: none;
   background: #B22222;
   outline: none;
@@ -338,10 +350,12 @@ body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn b
   border-radius: 5px;
   margin-left: 10px;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.excluir:hover, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.excluir:hover {
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.excluir:hover,
+body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.excluir:hover {
   background: #800000;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn i, body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn i {
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn i,
+body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn i {
   color: #fff;
 }
 body .wrapper #content section.view-lead {
@@ -381,7 +395,9 @@ body .wrapper #content section.view-lead div.contain fieldset form label {
   text-transform: uppercase;
   color: #1c1c1c;
 }
-body .wrapper #content section.view-lead div.contain fieldset form input, body .wrapper #content section.view-lead div.contain fieldset form textarea, body .wrapper #content section.view-lead div.contain fieldset form select {
+body .wrapper #content section.view-lead div.contain fieldset form input,
+body .wrapper #content section.view-lead div.contain fieldset form textarea,
+body .wrapper #content section.view-lead div.contain fieldset form select {
   display: block;
   width: 100%;
   border: 1px solid #708090;

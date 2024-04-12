@@ -50,9 +50,9 @@ class LeadsService
     { //read
         $query = '';
         if (is_null($id)) {
-            $query = "SELECT leads.*, usuarios.nome AS nome_corretor, midias.nome AS nome_midia FROM leads LEFT JOIN usuarios ON (usuarios.id = leads.id_usuario_consultor) LEFT JOIN midias ON (midias.id = leads.midia)";
+            $query = "SELECT leads.*, usuarios.nome AS nome_corretor, midias.nome AS nome_midia FROM leads LEFT JOIN usuarios ON (usuarios.id = leads.id_usuario_consultor) LEFT JOIN midias ON (midias.id = leads.midia) ORDER BY leads.id DESC";
         } else {
-            $query = "SELECT leads.*, midias.id AS id_midia, midias.nome AS nome_midia FROM leads LEFT JOIN midias ON (midias.id = leads.midia) WHERE leads.id = $id";
+            $query = "SELECT leads.*, midias.id AS id_midia, midias.nome AS nome_midia FROM leads LEFT JOIN midias ON (midias.id = leads.midia) WHERE leads.id = $id ORDER BY leads.id DESC";
         }
         return $this->conexao->ler($query);
     }
