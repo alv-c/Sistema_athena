@@ -13,13 +13,18 @@ class LeadsService
     public function inserir()
     {
         $campos = '';
+        // $data = date('Y-m-d H:m:s');
+        $data = date('Y-m-d H:m:s');
+        $data_aux = date('Y-m-d');
         if (empty($this->lead->__get('consultor'))) {
             $campos = [
                 'nome' => $this->lead->__get('nome'),
                 'telefone' => $this->lead->__get('telefone'),
                 'telefone2' => $this->lead->__get('telefone2'),
                 'email' => $this->lead->__get('email'),
-                'profissao' => $this->lead->__get('profissao')
+                'profissao' => $this->lead->__get('profissao'),
+                'data' => $data,
+                'data_aux' => $data_aux
             ];
         } else {
             $campos = [
@@ -29,6 +34,8 @@ class LeadsService
                 'email' => $this->lead->__get('email'),
                 'profissao' => $this->lead->__get('profissao'),
                 'id_usuario_consultor' => $this->lead->__get('consultor'),
+                'data' => $data,
+                'data_aux' => $data_aux,
                 'midia' => $this->lead->__get('midia'),
                 'status' => $this->lead->__get('status')
             ];
@@ -163,7 +170,7 @@ class LeadsService
 
     public function esfriarLead()
     {
-        $query = "SELECT leads.id FROM leads WHERE leads.data > DATE_SUB(CURDATE(), INTERVAL 15 DAY) AND status != 7 AND status != 8";
+        $query = "SELECT leads.id FROM leads WHERE leads.data_aux < DATE_SUB(CURRENT_DATE(), INTERVAL 14 DAY) AND status != 7 AND status != 8";
         $ids = $this->conexao->ler($query);
         foreach ($ids as $id) {
             $this->conexao->atualizar('leads', ['status' => 3], "id = $id->id");

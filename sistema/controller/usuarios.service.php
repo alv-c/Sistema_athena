@@ -53,9 +53,14 @@ class UsuarioService
         $this->conexao->excluir("usuarios", "id = $id");
     }
 
-    public function retornarNivel()
+    public function retornarNivel($id = null)
     {
-        $query = "SELECT * FROM niveis";
+        $query = null;
+        if(is_null($id)) {
+            $query = "SELECT * FROM niveis";
+        } else {
+            $query = "SELECT * FROM niveis WHERE id = $id";
+        }
         return $this->conexao->ler($query);
     }
 

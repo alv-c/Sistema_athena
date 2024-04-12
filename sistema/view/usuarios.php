@@ -22,7 +22,9 @@ $pagina = 'usuarios';
     <link rel="stylesheet" type="text/css" href="/sistema/css/style.css">
 
     <!-- JS -->
-    <script> var pagina = '<?= $pagina ?>'; </script>
+    <script>
+        var pagina = '<?= $pagina ?>';
+    </script>
     <script src="/sistema/js/script.js"></script>
 
     <!-- FONT AWEASOME -->
@@ -60,6 +62,7 @@ $pagina = 'usuarios';
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Nome</th>
+                                        <th scope="col">Cargo</th>
                                         <th scope="col">Status</th>
                                         <?php if ($usuarioSessao->nivel == 3) : ?>
                                             <th scope="col">Operações</th>
@@ -80,6 +83,13 @@ $pagina = 'usuarios';
                                                 <form method="post" action="/sistema/view/usuariosEdit.php">
                                                     <input type="hidden" name="editId" value="<?= $usuario->id ?>">
                                                     <button type="submit" class="btn btn-success"><?= $usuario->nome ?></button>
+                                                </form>
+                                            </td>
+
+                                            <td>
+                                                <form method="post" action="/sistema/view/usuariosEdit.php">
+                                                    <input type="hidden" name="editId" value="<?= $usuario->id ?>">
+                                                    <button type="submit" class="btn btn-success"><?= $usuarioService->retornarNivel($usuario->nivel)[0]->nome; ?></button>
                                                 </form>
                                             </td>
 

@@ -31,6 +31,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id']
 		header('Location: /sistema/view/usuarios.php?usuarioDeletado=true');
 	}
 } else if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
+	header('Content-Type: text/html; charset=utf-8');
 	$usuario = new Usuario();
 	$usuarioService = new UsuarioService($conexao, $usuario);
 	$arrayUsuarios = $usuarioService->recuperar();

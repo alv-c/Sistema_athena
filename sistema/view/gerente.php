@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/gerente.controller.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
+$pagina = 'gerente';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -21,10 +22,15 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
     <link rel="stylesheet" type="text/css" href="/sistema/css/style.css">
 
     <!-- JS -->
+    <script> var pagina = '<?= $pagina ?>'; </script>
     <script src="/sistema/js/script.js"></script>
 
     <!-- FONT AWEASOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- DATATABLE -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
     <title>Gerente | Sistema Athena</title>
 </head>
@@ -41,10 +47,10 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
             <!-- SESSÕES -->
             <section class="sessao-tabela">
                 <span class="h5">Lista de <?= $usuarioSessao->nivel == 2 || isset($_GET['idUser']) ? 'corretores' : 'gerentes'; ?></span>
-                <div class="contain">
+                <div class="contain pt-4">
                     <div id="scroll">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-striped table-bordered" id="tabela-gerentes">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

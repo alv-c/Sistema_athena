@@ -78,7 +78,38 @@ if (pagina == 'usuarios') {
             order: [],
             columnDefs: [
                 {
-                    'targets': [2],
+                    'targets': [4],
+                    'orderable': false,
+                }
+            ],
+        });
+    });
+}
+
+if (pagina == 'gerente') {
+    $(document).ready(function () {
+        // dataTable
+        new DataTable('#tabela-gerentes', {
+            language: {
+                info: 'Página _PAGE_ de _PAGES_',
+                infoEmpty: 'Nenhum registro encontrado!',
+                infoFiltered: '(_MAX_ registros encontrados.)',
+                lengthMenu: '_MENU_ Número de registros',
+                zeroRecords: 'Nenhum registro encontrado!',
+                search: '',
+                searchPlaceholder: 'Buscar',
+                paginate: {
+                    "next": "Avançar",
+                    "previous": "Voltar"
+                }
+            },
+            paging: true,
+            scrollCollapse: false,
+            scrollY: '500px',
+            order: [],
+            columnDefs: [
+                {
+                    'targets': [3],
                     'orderable': false,
                 }
             ],
