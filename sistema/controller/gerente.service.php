@@ -37,8 +37,8 @@ class GerenteService
         } else {
             $query =
                 "SELECT usuarios.id, leads.*, status_lead.cor
-                        FROM usuarios 
-                            LEFT JOIN leads 
+                        FROM leads 
+                            LEFT JOIN usuarios 
                             ON (usuarios.id = leads.id_usuario_consultor)
                             LEFT JOIN status_lead
                             ON (status_lead.id = leads.status)
@@ -92,12 +92,10 @@ class GerenteService
     // //     return $stmt->fetchAll(PDO::FETCH_OBJ);
     // // }
 
-    // public function retornarStatus () {
-    //     $query = "SELECT * FROM status_lead";
-    //     $stmt = $this->conexao->prepare($query);
-    //     $stmt->execute();
-    //     return $stmt->fetchAll(PDO::FETCH_OBJ);
-    // }
+    public function retornarStatus () {
+        $query = "SELECT * FROM status_lead";
+        return $this->conexao->ler($query);
+    }
 
     // public function recuperarFiltro($query) { //filtro
     //     $stmt = $this->conexao->prepare($query);

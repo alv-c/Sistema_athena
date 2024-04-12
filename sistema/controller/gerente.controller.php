@@ -46,17 +46,18 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/gerente.service.ph
 // 	}
 // }
 
-if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id'])) {
-	if (validateForm($_POST)) {
-		$usuario = new Usuario();
-		$conexao = new Conexao();
-		$usuarioService = new UsuarioService($conexao, $usuario);
-		$usuarioService->deletar($_POST['id']);
-		header('Location: /sistema/view/usuarios.php?usuarioDeletado=true');
-	}
-} 
+// if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id'])) {
+// 	if (validateForm($_POST)) {
+// 		$usuario = new Usuario();
+// 		$conexao = new Conexao();
+// 		$usuarioService = new UsuarioService($conexao, $usuario);
+// 		$usuarioService->deletar($_POST['id']);
+// 		header('Location: /sistema/view/usuarios.php?usuarioDeletado=true');
+// 	}
+// } 
 
-else if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
+// else if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
+if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
 	$gerente = new Gerente();
 	$gerenteService = new GerenteService($conexao, $gerente);
 }

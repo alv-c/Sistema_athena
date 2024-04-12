@@ -38,7 +38,7 @@ if (!empty($_GET['idUser'])) :
                 <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar.php' ?>
 
                 <!-- FILTROS -->
-                <div class="filtros pb-2" id="filtros">
+                <!-- <div class="filtros pb-2" id="filtros">
                     <button class="btn-filter btn btn-dark btn-sm" onclick="openFilters()">Filtros</button>
                     <form method="post" action="usuariosLeads.php?idUser=<?= $_GET['idUser'] ?>">
                         <input type="hidden" name="acao" value="filtrar">
@@ -101,7 +101,7 @@ if (!empty($_GET['idUser'])) :
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
 
                 <!-- SESSÕES -->
                 <section class="sessao-tabela mt-3">
@@ -120,8 +120,7 @@ if (!empty($_GET['idUser'])) :
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $arrayLeads = isset($arrayFiltro) ? $arrayFiltro : $gerenteService->recuperar($usuarioSessao->id, $_GET['idUser']); ?>
-                                        <?php foreach ($arrayLeads as $leads) : ?>
+                                        <?php foreach ($gerenteService->recuperar($usuarioSessao->id, $_GET['idUser']) as $leads) : ?>
                                             <?php
                                             $leads->telefone = substr_replace($leads->telefone, '(', 0, 0);
                                             $leads->telefone = substr_replace($leads->telefone, ')', 3, 0);
