@@ -56,7 +56,7 @@ class UsuarioService
     public function retornarNivel($id = null)
     {
         $query = null;
-        if(is_null($id)) {
+        if (is_null($id)) {
             $query = "SELECT * FROM niveis";
         } else {
             $query = "SELECT * FROM niveis WHERE id = $id";

@@ -94,12 +94,13 @@ $pagina = 'usuarios';
                                             </td>
 
                                             <td>
-                                                <!-- <form method="post" action="./usuariosEdit.php">
-                                                        <input type="hidden" name="editId" value="<?= $usuario->id ?>">
-                                                        <button type="submit" class="btn btn-success"> -->
-                                                <div class="circle-stts" style="background: <?= $usuario->status == 1 ? '#228B22' : '#B22222'; ?>;"></div>
-                                                <!-- </button>
-                                                    </form> -->
+                                                <form method="post" action="./usuariosEdit.php">
+                                                    <input type="hidden" name="editId" value="<?= $usuario->id ?>">
+                                                    <button type="submit" class="btn btn-success d-flex flex-nowrap justify-content-center align-items-center">
+                                                        <div class="circle-stts" style="background: <?= $usuario->status == 1 ? '#228B22' : '#B22222'; ?>;"></div>
+                                                        <span class="d-block pl-2"><?= $usuario->status ? 'Ativo' : 'Inativo'; ?></span>
+                                                    </button>
+                                                </form>
                                             </td>
 
                                             <?php if ($usuarioSessao->nivel == 3) : ?>
