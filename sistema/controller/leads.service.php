@@ -119,12 +119,15 @@ class LeadsService
         $query = "SELECT id, nome FROM usuarios ";
         switch ($nivel) {
             case 1:
-                $query .= "WHERE id = $id";
+                $query .= "WHERE id = $id AND status = 1";
                 break;
 
             case 2:
-                $query .= "WHERE gerente = $id";
+                $query .= "WHERE gerente = $id AND nivel = 1 AND status = 1";
                 break;
+
+            default:
+                $query .= "WHERE nivel = 1 AND status = 1";
         }
         return $this->conexao->ler($query);
     }
@@ -175,5 +178,38 @@ class LeadsService
         foreach ($ids as $id) {
             $this->conexao->atualizar('leads', ['status' => 3], "id = $id->id");
         }
+    }
+
+    public function filtroDados($table, $filters)
+    {
+        $sql = "SELECT * FROM $table WHERE ";
+        $conditions = [];
+        foreach ($filters as $column => $value) {
+            if (is_array($value)) {
+                $conditions[] = "$column BETWEEN '$value[0]' AND '$value[1]'";
+            } else {
+                if (empty($value)) continue;
+                $conditions[] = "$column LIKE '%$value%'";
+            }
+        }
+        $sql .= implode(" AND ", $conditions);
+        return $this->conexao->ler($sql);
+
+        // **** Exemplo de uso FILTRO ****
+
+        // Definindo os filtros
+        // $filters = [
+        //     'nome' => 'João',
+        //     'idade' => 25,
+        //     'data_nascimento' => ['2020-01-01', '2024-01-01'] // Intervalo de datas
+        // ];
+
+        // Chamando o método de filtragem
+        // $resultados = $this->filtroDados('tabela', $filters);
+
+        // Exibindo os resultados
+        // foreach ($resultados as $resultado) {
+        // fazer algo com os resultados
+        // }
     }
 }

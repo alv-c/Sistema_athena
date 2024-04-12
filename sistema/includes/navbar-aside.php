@@ -1,4 +1,3 @@
-
 <!-- Sidebar  -->
 <nav id="sidebar">
     <div class="sidebar-header">
@@ -35,6 +34,9 @@
                 <a href="#">Página</a>
             </li> -->
         <?php endif; ?>
+        <li>
+            <a href="/sistema/view/exportar_lead.php">Exportar Lead</a>
+        </li>
     </ul>
 
     <ul class="list-unstyled CTAs">
@@ -48,4 +50,4 @@
             <a href="" class="article">Back to article</a>
         </li> -->
     </ul>
-</nav>        
+</nav>

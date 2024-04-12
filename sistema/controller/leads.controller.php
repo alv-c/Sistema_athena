@@ -50,6 +50,20 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir_lead_manual') {
 	$leadService = new LeadsService($conexao, $lead);
 	$leadService->inserir();
 	header('Location: /sistema/view/index.php');
+}
+
+if (!empty($_POST['acao']) && $_POST['acao'] == 'filtrarLead') {
+	if (validateForm($_POST)) {
+		$lead = new Lead();
+		$leadService = new LeadsService($conexao, $lead);
+		$array_post = $_POST;
+		$array_post['data_aux'] = [$_POST['data_ini'], $_POST['data_fim']];
+		unset($array_post['data_ini']);
+		unset($array_post['data_fim']);
+		unset($array_post['acao']);
+		$arrayLeads = $leadService->filtroDados('leads', $array_post);
+		$filtro = true;
+	}
 } else if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
 	$lead = new Lead();
 	$leadService = new LeadsService($conexao, $lead);
