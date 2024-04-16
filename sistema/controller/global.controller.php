@@ -71,6 +71,48 @@ class Database
             return false;
         }
     }
+
+    public function removerCaracteresEsp($string)
+    {
+        $regex = '/[^a-zA-Z0-9\s]/u';
+        $string_sem_especiais = preg_replace($regex, '', $string);
+        return $string_sem_especiais;
+    }
+
+    public function filtroDados($table, $filters)
+    {
+        $sql = "SELECT $table.* FROM $table WHERE ";
+        $conditions = [];
+        foreach ($filters as $column => $value) {
+            if (is_array($value)) {
+                $conditions[] = "$table.$column BETWEEN '$value[0]' AND '$value[1]'";
+            } else if (is_numeric($value)) {
+                $value = (int)$value;
+                if ($value) $conditions[] = "$table.$column = '$value'";
+            } else {
+                if (empty($value)) continue;
+                $conditions[] = "$table.$column LIKE '%$value%'";
+            }
+        }
+        $sql .= implode(" AND ", $conditions);
+        return $this->ler($sql);
+
+        // **** Exemplo de uso FILTRO ****
+        // Definindo os filtros
+        // $filters = [
+        //     'nome' => 'João',
+        //     'idade' => 25,
+        //     'data_nascimento' => ['2020-01-01', '2024-01-01'] // Intervalo de datas
+        // ];
+
+        // Chamando o método de filtragem
+        // $resultados = $this->filtroDados('tabela', $filters);
+
+        // Exibindo os resultados
+        // foreach ($resultados as $resultado) {
+            // fazer algo com os resultados
+        // }
+    }
 }
 
 $conexaoModel = new Conexao();

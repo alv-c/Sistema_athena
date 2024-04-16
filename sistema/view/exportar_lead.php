@@ -53,7 +53,7 @@ $data_dia_ant = date('Y-m-d', $data);
 
             <!-- FILTROS -->
             <div class="filtros pb-2" id="filtros">
-                <?php if ($filtro) : ?>
+                <?php if (!empty($filtro)) : ?>
                     <a href="./exportar_lead.php" class="btn btn-dark btn-sm text-white">Limpar filtro</a>
                 <?php endif; ?>
 
@@ -124,84 +124,90 @@ $data_dia_ant = date('Y-m-d', $data);
             <!-- SESSÕES -->
             <section class="sessao-tabela pt-4">
                 <div class="contain">
+                    <div class="contain-btn-exp">
+                        <button type="button" onclick="exportToExcel('tabela-export')">EXPORTAR</button>
+                    </div>
+
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Data</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Telefone</th>
-                                    <th scope="col">Telefone 2</th>
-                                    <th scope="col">Mídia</th>
-                                    <th scope="col">Profissão</th>
-                                    <th scope="col">Corretor</th>
-                                    <th scope="col">Status</th>
-                                    <!-- <th scope="col">Operações</th> -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($arrayLeads as $key => $lead) { ?>
-                                    <?php if ($usuarioSessao->nivel == 1) : ?>
-                                        <?php if ($lead->id_usuario_consultor != $usuarioSessao->id) continue; ?>
-                                    <?php endif; ?>
-                                    <?php if ($usuarioSessao->nivel == 2) : ?>
-                                        <?php if ($leadService->retornarGerenteConsultor($lead->id_usuario_consultor)[0]->gerente != $usuarioSessao->id) continue; ?>
-                                    <?php endif; ?>
+                        <div id="tabela-export">
+                            <table class="table table-striped table-bordered">
+                                <thead>
                                     <tr>
-                                        <th scope="row"><?= date('d/m/Y',  strtotime($lead->data)) ?></th>
-                                        <td>
-                                            <form method="post" action="/sistema/view/edit.php">
-                                                <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                <button class="d-block text-left" type="submit"><?= $lead->nome ?></button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form method="post" action="/sistema/view/edit.php">
-                                                <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                <button class="d-block text-left" type="submit"><?= $lead->telefone ?></button>
-                                            </form>
-                                        </td>
-
-                                        <td>
-                                            <form method="post" action="/sistema/view/edit.php">
-                                                <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                <button class="d-block text-left" type="submit"><?= $lead->telefone2 ?></button>
-                                            </form>
-                                        </td>
-
-
-                                        <td>
-                                            <form method="post" action="/sistema/view/edit.php">
-                                                <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                <button class="d-block text-left" type="submit"><?= $lead->nome_midia ?></button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form method="post" action="/sistema/view/edit.php">
-                                                <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                <button class="d-block text-left" type="submit"><?= empty($lead->profissao) ? 'Não informado' : $lead->profissao ?></button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form method="post" action="/sistema/view/edit.php">
-                                                <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                <button class="d-block text-left" type="submit"><?= $lead->nome_corretor ?></button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            foreach ($leadService->retornarStatus() as $status) {
-                                                if ($status->id == $leadService->recuperar($lead->id)[0]->status) {
-                                                    echo "<div style='background: $status->cor; border-radius: 3px;' class='d-inline-block pt-1 pb-1 pl-2 pr-2 text-white'>$status->status</div>";
-                                                    break;
-                                                }
-                                            }
-                                            ?>
-                                        </td>
+                                        <th scope="col">Data</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Telefone</th>
+                                        <th scope="col">Telefone 2</th>
+                                        <th scope="col">Mídia</th>
+                                        <th scope="col">Profissão</th>
+                                        <th scope="col">Corretor</th>
+                                        <th scope="col">Status</th>
+                                        <!-- <th scope="col">Operações</th> -->
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($arrayLeads as $key => $lead) { ?>
+                                        <?php if ($usuarioSessao->nivel == 1) : ?>
+                                            <?php if ($lead->id_usuario_consultor != $usuarioSessao->id) continue; ?>
+                                        <?php endif; ?>
+                                        <?php if ($usuarioSessao->nivel == 2) : ?>
+                                            <?php if ($leadService->retornarGerenteConsultor($lead->id_usuario_consultor)[0]->gerente != $usuarioSessao->id) continue; ?>
+                                        <?php endif; ?>
+                                        <tr>
+                                            <th scope="row"><?= date('d/m/Y',  strtotime($lead->data)) ?></th>
+                                            <td>
+                                                <form method="post" action="/sistema/view/edit.php">
+                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                    <button class="d-block text-left" type="submit"><?= $lead->nome ?></button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form method="post" action="/sistema/view/edit.php">
+                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                    <button class="d-block text-left" type="submit"><?= $lead->telefone ?></button>
+                                                </form>
+                                            </td>
+
+                                            <td>
+                                                <form method="post" action="/sistema/view/edit.php">
+                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                    <button class="d-block text-left" type="submit"><?= $lead->telefone2 ?></button>
+                                                </form>
+                                            </td>
+
+
+                                            <td>
+                                                <form method="post" action="/sistema/view/edit.php">
+                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                    <button class="d-block text-left" type="submit"><?= $lead->nome_midia ?></button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form method="post" action="/sistema/view/edit.php">
+                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                    <button class="d-block text-left" type="submit"><?= empty($lead->profissao) ? 'Não informado' : $lead->profissao ?></button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form method="post" action="/sistema/view/edit.php">
+                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                    <button class="d-block text-left" type="submit"><?= $lead->nome_corretor ?></button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                foreach ($leadService->retornarStatus() as $status) {
+                                                    if ($status->id == $leadService->recuperar($lead->id)[0]->status) {
+                                                        echo "<div style='background: $status->cor; border-radius: 3px;' class='d-inline-block pt-1 pb-1 pl-2 pr-2 text-white'>$status->status</div>";
+                                                        break;
+                                                    }
+                                                }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </section>

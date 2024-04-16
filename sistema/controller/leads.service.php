@@ -182,21 +182,30 @@ class LeadsService
 
     public function filtroDados($table, $filters)
     {
-        $sql = "SELECT * FROM $table WHERE ";
+        $sql = "SELECT 
+            $table.*, midias.nome AS nome_midia, usuarios.nome AS nome_corretor
+                FROM $table 
+                    LEFT JOIN midias
+                        ON (midias.id = $table.midia)
+                    LEFT JOIN usuarios
+                        ON (usuarios.id = $table.id_usuario_consultor)
+            WHERE ";
         $conditions = [];
         foreach ($filters as $column => $value) {
             if (is_array($value)) {
-                $conditions[] = "$column BETWEEN '$value[0]' AND '$value[1]'";
+                $conditions[] = "$table.$column BETWEEN '$value[0]' AND '$value[1]'";
+            } else if (is_numeric($value)) {
+                $value = (int)$value;
+                if($value) $conditions[] = "$table.$column = '$value'";
             } else {
                 if (empty($value)) continue;
-                $conditions[] = "$column LIKE '%$value%'";
+                $conditions[] = "$table.$column LIKE '%$value%'";
             }
         }
         $sql .= implode(" AND ", $conditions);
         return $this->conexao->ler($sql);
 
         // **** Exemplo de uso FILTRO ****
-
         // Definindo os filtros
         // $filters = [
         //     'nome' => 'João',
