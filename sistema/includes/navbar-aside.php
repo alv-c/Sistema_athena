@@ -34,6 +34,12 @@
                 <a href="#">Página</a>
             </li> -->
         <?php endif; ?>
+
+        <?php if ($usuarioSessao->nivel >= 3) : ?>
+            <li>
+                <a href="/sistema/view/financeiro.php">Financeiro</a>
+            </li>
+        <?php endif; ?>
         <li>
             <a href="/sistema/view/exportar_lead.php">Exportar Lead</a>
         </li>
