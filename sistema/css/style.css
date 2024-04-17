@@ -297,8 +297,18 @@ body .wrapper #content section.sessao-tabela div.circle-stts {
   height: 17px;
   border-radius: 50%;
 }
+body .wrapper #content section.sessao-tabela .contain-btn-exp {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 body .wrapper #content section.sessao-tabela table {
   margin-top: 25px;
+}
+body .wrapper #content section.sessao-tabela table.tabela-export {
+  height: 100%;
+  max-height: 650px;
+  overflow-y: auto;
 }
 body .wrapper #content section.sessao-tabela table thead tr th {
   text-transform: uppercase;
@@ -404,6 +414,45 @@ body .wrapper #content section.view-lead div.contain fieldset form select {
   outline: none;
   padding: 5px 10px;
   font-size: 14px;
+}
+body .wrapper #content section.filtro-lead > div.contain-filtro {
+  padding-top: 20px;
+}
+body .wrapper #content section.filtro-lead > div.contain-filtro > form div.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+}
+@media (min-width: 576px) {
+  body .wrapper #content section.filtro-lead > div.contain-filtro > form div.grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  body .wrapper #content section.filtro-lead > div.contain-filtro > form div.grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+}
+body .wrapper #content section.filtro-lead > div.contain-filtro > form div.grid > div.item > label {
+  display: block;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #1c1c1c;
+}
+body .wrapper #content section.filtro-lead > div.contain-filtro > form div.grid > div.item .form-filtro {
+  display: block;
+  width: 100%;
+  border: 1px solid #708090;
+  outline: none;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+body .wrapper #content section.filtro-lead > div.contain-filtro > form div.contain-submit-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
 }
 @media (max-width: 768px) {
   body .wrapper #sidebar {

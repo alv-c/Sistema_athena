@@ -342,8 +342,20 @@ body {
                         border-radius: 50%;
                     }
 
+                    .contain-btn-exp {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                    }
+
                     table {
                         margin-top: 25px;
+
+                        &.tabela-export {
+                            height: 100%;
+                            max-height: 650px;
+                            overflow-y: auto;
+                        }
 
                         thead {
                             tr {
@@ -474,6 +486,54 @@ body {
                                     padding: 5px 10px;
                                     font-size: 14px;
                                 }
+                            }
+                        }
+                    }
+                }
+
+                &.filtro-lead {
+                    >div.contain-filtro {
+                        padding-top: 20px;
+
+                        >form {
+                            div.grid {
+                                display: grid;
+                                grid-template-columns: repeat(1, 1fr);
+                                gap: 10px;
+
+                                @media (min-width: 576px) {
+                                    grid-template-columns: repeat(2, 1fr);
+                                }
+
+                                @media (min-width: 992px) {
+                                    grid-template-columns: repeat(3, 1fr);
+                                    gap: 15px;
+                                }
+
+                                >div.item {
+                                    >label {
+                                        display: block;
+                                        cursor: pointer;
+                                        text-transform: uppercase;
+                                        color: #1c1c1c;
+                                    }
+
+                                    .form-filtro {
+                                        display: block;
+                                        width: 100%;
+                                        border: 1px solid #708090;
+                                        outline: none;
+                                        padding: 5px 10px;
+                                        font-size: 14px;
+                                    }
+                                }
+                            }
+
+                            div.contain-submit-filter {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                padding-top: 30px;
                             }
                         }
                     }

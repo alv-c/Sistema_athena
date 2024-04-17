@@ -44,7 +44,6 @@ $data_dia_ant = date('Y-m-d', $data);
 </head>
 
 <body>
-    <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modalDelete.php' ?>
     <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modalFollowup.php' ?>
     <div class="wrapper">
         <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar-aside.php' ?>
@@ -52,85 +51,95 @@ $data_dia_ant = date('Y-m-d', $data);
             <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar.php' ?>
 
             <!-- FILTROS -->
-            <div class="filtros pb-2" id="filtros">
+            <section class="filtro-lead" pb-2" id="filtros">
                 <?php if (!empty($filtro)) : ?>
                     <a href="./exportar_lead.php" class="btn btn-dark btn-sm text-white">Limpar filtro</a>
                 <?php endif; ?>
 
-                <div class="filtro-lead" style="margin-top: 50px; border: 2px solid red;">
+                <div class="contain-filtro">
                     <form method="post" action="./exportar_lead.php">
-
-                        <label for="nome" class="d-block pt-2">Nome:</label>
-                        <input type="text" name="nome" id="nome" class="form-filtro" placeholder="Nome" value="<?= isset($_POST['nome']) ? $_POST['nome'] : ''; ?>">
-
-                        <label for="telefone" class="d-block pt-2">Telefone:</label>
-                        <input type="text" name="telefone" id="telefone" class="form-filtro" placeholder="Telefone" value="<?= isset($_POST['telefone']) ? $_POST['telefone'] : ''; ?>">
-
-                        <label for="telefone2" class="d-block pt-2">Telefone 2:</label>
-                        <input type="text" name="telefone2" id="telefone2" class="form-filtro" placeholder="Telefone 2" value="<?= isset($_POST['telefone2']) ? $_POST['telefone2'] : ''; ?>">
-
-                        <label for="email" class="d-block pt-2">E-mail:</label>
-                        <input type="email" name="email" id="email" class="form-filtro" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : ''; ?>">
-
-                        <label for="profissao" class="d-block pt-2">Profissão:</label>
-                        <input type="text" name="profissao" id="profissao" class="form-filtro" placeholder="Profissão" value="<?= isset($_POST['profissao']) ? $_POST['profissao'] : ''; ?>">
-
-                        <label for="id_usuario_consultor" class="d-block pt-2">Consultor:</label>
-                        <select name="id_usuario_consultor" id="id_usuario_consultor">
-                            <option hidden value="0">Selecione o consultor</option>
-                            <?php foreach ($leadService->retornarConsultores($usuarioSessao->id, $usuarioSessao->nivel) as $consultor) : ?>
-                                <option value="<?= $consultor->id ?>" <?= isset($_POST['id_usuario_consultor']) && $consultor->id == $_POST['id_usuario_consultor'] ? 'selected' : ''; ?>><?= $consultor->nome ?></option>
-                            <?php endforeach; ?>
-                        </select>
-
-                        <label for="data_ini" class="d-block pt-2">Data início:</label>
-                        <input type="date" name="data_ini" id="data_ini" class="form-filtro" value="<?= isset($_POST['data_ini']) ? $_POST['data_ini'] : $data_dia_ant ?>">
-
-                        <label for="data_fim" class="d-block pt-2">Data fim:</label>
-                        <input type="date" name="data_fim" id="data_fim" class="form-filtro" value="<?= isset($_POST['data_fim']) ? $_POST['data_fim'] : date('Y-m-d') ?>">
-
-                        <label for="midia" class="d-block pt-2">Mídia:</label>
-                        <select name="midia" id="midia">
-                            <option hidden value="0">Selecione a mídia</option>
-                            <?php foreach ($leadService->retornarMidias() as $midia) : ?>
-                                <option value="<?= $midia->id ?>" <?= isset($_POST['midia']) && $midia->id == $_POST['midia'] ? 'selected' : ''; ?>><?= $midia->nome ?></option>
-                            <?php endforeach; ?>
-                        </select>
-
-                        <label for="status" class="d-block pt-2">Status:</label>
-                        <select name="status" id="status">
-                            <option value="0" hidden>Selecione o status</option>
-                            <?php foreach ($leadService->retornarStatus() as $status) : ?>
-                                <option value="<?= $status->id ?>" <?= isset($_POST['status']) && $status->id == $_POST['status'] ? 'selected' : ''; ?>><?= $status->status ?></option>
-                            <?php endforeach; ?>
-                        </select>
-
-
-                        <!-- <input type="hidden" name="id" value="<?= $lead->id ?>"> -->
+                        <div class="grid">
+                            <div class="item">
+                                <label for="nome">Nome:</label>
+                                <input type="text" name="nome" id="nome" class="form-filtro" placeholder="Nome" value="<?= isset($_POST['nome']) ? $_POST['nome'] : ''; ?>">
+                            </div>
+                            <div class="item">
+                                <label for="telefone">Telefone:</label>
+                                <input type="text" name="telefone" id="telefone" class="form-filtro" placeholder="Telefone" value="<?= isset($_POST['telefone']) ? $_POST['telefone'] : ''; ?>">
+                            </div>
+                            <div class="item">
+                                <label for="telefone2">Telefone 2:</label>
+                                <input type="text" name="telefone2" id="telefone2" class="form-filtro" placeholder="Telefone 2" value="<?= isset($_POST['telefone2']) ? $_POST['telefone2'] : ''; ?>">
+                            </div>
+                            <div class="item">
+                                <label for="email">E-mail:</label>
+                                <input type="email" name="email" id="email" class="form-filtro" placeholder="Email" value="<?= isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+                            </div>
+                            <div class="item">
+                                <label for="profissao">Profissão:</label>
+                                <input type="text" name="profissao" id="profissao" class="form-filtro" placeholder="Profissão" value="<?= isset($_POST['profissao']) ? $_POST['profissao'] : ''; ?>">
+                            </div>
+                            <div class="item">
+                                <label for="id_usuario_consultor">Consultor:</label>
+                                <select name="id_usuario_consultor" id="id_usuario_consultor" class="form-filtro">
+                                    <option hidden value="0">Selecione o consultor</option>
+                                    <?php foreach ($leadService->retornarConsultores($usuarioSessao->id, $usuarioSessao->nivel) as $consultor) : ?>
+                                        <option value="<?= $consultor->id ?>" <?= isset($_POST['id_usuario_consultor']) && $consultor->id == $_POST['id_usuario_consultor'] ? 'selected' : ''; ?>><?= $consultor->nome ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="item">
+                                <label for="data_ini">Data início:</label>
+                                <input type="date" name="data_ini" id="data_ini" class="form-filtro" value="<?= isset($_POST['data_ini']) ? $_POST['data_ini'] : $data_dia_ant ?>">
+                            </div>
+                            <div class="item">
+                                <label for="data_fim">Data fim:</label>
+                                <input type="date" name="data_fim" id="data_fim" class="form-filtro" value="<?= isset($_POST['data_fim']) ? $_POST['data_fim'] : date('Y-m-d') ?>">
+                            </div>
+                            <div class="item">
+                                <label for="midia">Mídia:</label>
+                                <select name="midia" id="midia" class="form-filtro">
+                                    <option hidden value="0">Selecione a mídia</option>
+                                    <?php foreach ($leadService->retornarMidias() as $midia) : ?>
+                                        <option value="<?= $midia->id ?>" <?= isset($_POST['midia']) && $midia->id == $_POST['midia'] ? 'selected' : ''; ?>><?= $midia->nome ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="item">
+                                <label for="status">Status:</label>
+                                <select name="status" id="status" class="form-filtro">
+                                    <option value="0" hidden>Selecione o status</option>
+                                    <?php foreach ($leadService->retornarStatus() as $status) : ?>
+                                        <option value="<?= $status->id ?>" <?= isset($_POST['status']) && $status->id == $_POST['status'] ? 'selected' : ''; ?>><?= $status->status ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
                         <input type="hidden" name="acao" value="filtrarLead">
-                        <div class="pt-3">
-                            <button type="submit">
-                                filtrar
+                        <div class="contain-submit-filter">
+                            <button type="submit" class="btn btn-dark btn-sm btn-block">
+                                <i class="fas fa-search" id="ico-btn-flw"></i>
+                                <span id="span-btn-flw">Filtrar</span>
                             </button>
                         </div>
+
                     </form>
                 </div>
-
-
-
-
-            </div>
+            </section>
 
             <!-- SESSÕES -->
             <section class="sessao-tabela pt-4">
                 <div class="contain">
                     <div class="contain-btn-exp">
-                        <button type="button" onclick="exportToExcel('tabela-export')">EXPORTAR</button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="exportToExcel('tabela-export')">
+                            <i class="fas fa-file-excel mr-1" id="ico-btn-flw"></i>
+                            <span id="span-btn-flw">Exportar Excel</span>
+                        </button>
                     </div>
 
                     <div class="table-responsive">
                         <div id="tabela-export">
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-striped table-bordered tabela-export">
                                 <thead>
                                     <tr>
                                         <th scope="col">Data</th>
@@ -141,70 +150,77 @@ $data_dia_ant = date('Y-m-d', $data);
                                         <th scope="col">Profissão</th>
                                         <th scope="col">Corretor</th>
                                         <th scope="col">Status</th>
-                                        <!-- <th scope="col">Operações</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($arrayLeads as $key => $lead) { ?>
-                                        <?php if ($usuarioSessao->nivel == 1) : ?>
-                                            <?php if ($lead->id_usuario_consultor != $usuarioSessao->id) continue; ?>
-                                        <?php endif; ?>
-                                        <?php if ($usuarioSessao->nivel == 2) : ?>
-                                            <?php if ($leadService->retornarGerenteConsultor($lead->id_usuario_consultor)[0]->gerente != $usuarioSessao->id) continue; ?>
-                                        <?php endif; ?>
+                                    <?php if (!$arrayLeads) : ?>
                                         <tr>
-                                            <th scope="row"><?= date('d/m/Y',  strtotime($lead->data)) ?></th>
-                                            <td>
-                                                <form method="post" action="/sistema/view/edit.php">
-                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                    <button class="d-block text-left" type="submit"><?= $lead->nome ?></button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form method="post" action="/sistema/view/edit.php">
-                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                    <button class="d-block text-left" type="submit"><?= $lead->telefone ?></button>
-                                                </form>
-                                            </td>
-
-                                            <td>
-                                                <form method="post" action="/sistema/view/edit.php">
-                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                    <button class="d-block text-left" type="submit"><?= $lead->telefone2 ?></button>
-                                                </form>
-                                            </td>
-
-
-                                            <td>
-                                                <form method="post" action="/sistema/view/edit.php">
-                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                    <button class="d-block text-left" type="submit"><?= $lead->nome_midia ?></button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form method="post" action="/sistema/view/edit.php">
-                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                    <button class="d-block text-left" type="submit"><?= empty($lead->profissao) ? 'Não informado' : $lead->profissao ?></button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form method="post" action="/sistema/view/edit.php">
-                                                    <input type="hidden" name="editId" value="<?= $lead->id ?>">
-                                                    <button class="d-block text-left" type="submit"><?= $lead->nome_corretor ?></button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                foreach ($leadService->retornarStatus() as $status) {
-                                                    if ($status->id == $leadService->recuperar($lead->id)[0]->status) {
-                                                        echo "<div style='background: $status->cor; border-radius: 3px;' class='d-inline-block pt-1 pb-1 pl-2 pr-2 text-white'>$status->status</div>";
-                                                        break;
-                                                    }
-                                                }
-                                                ?>
+                                            <td colspan="8">
+                                                <span class="sem-registros d-block text-center text-muted">Nenhum registro encontrado!</span>
                                             </td>
                                         </tr>
-                                    <?php } ?>
+                                    <?php else : ?>
+                                        <?php foreach ($arrayLeads as $key => $lead) : ?>
+                                            <?php if ($usuarioSessao->nivel == 1) : ?>
+                                                <?php if ($lead->id_usuario_consultor != $usuarioSessao->id) continue; ?>
+                                            <?php endif; ?>
+                                            <?php if ($usuarioSessao->nivel == 2) : ?>
+                                                <?php if ($leadService->retornarGerenteConsultor($lead->id_usuario_consultor)[0]->gerente != $usuarioSessao->id) continue; ?>
+                                            <?php endif; ?>
+                                            <tr>
+                                                <th scope="row"><?= date('d/m/Y',  strtotime($lead->data)) ?></th>
+                                                <td>
+                                                    <form method="post" action="/sistema/view/edit.php">
+                                                        <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                        <button class="d-block text-left" type="submit"><?= $lead->nome ?></button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form method="post" action="/sistema/view/edit.php">
+                                                        <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                        <button class="d-block text-left" type="submit"><?= $lead->telefone ?></button>
+                                                    </form>
+                                                </td>
+
+                                                <td>
+                                                    <form method="post" action="/sistema/view/edit.php">
+                                                        <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                        <button class="d-block text-left" type="submit"><?= $lead->telefone2 ?></button>
+                                                    </form>
+                                                </td>
+
+
+                                                <td>
+                                                    <form method="post" action="/sistema/view/edit.php">
+                                                        <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                        <button class="d-block text-left" type="submit"><?= $lead->nome_midia ?></button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form method="post" action="/sistema/view/edit.php">
+                                                        <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                        <button class="d-block text-left" type="submit"><?= empty($lead->profissao) ? 'Não informado' : $lead->profissao ?></button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form method="post" action="/sistema/view/edit.php">
+                                                        <input type="hidden" name="editId" value="<?= $lead->id ?>">
+                                                        <button class="d-block text-left" type="submit"><?= $lead->nome_corretor ?></button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    foreach ($leadService->retornarStatus() as $status) {
+                                                        if ($status->id == $leadService->recuperar($lead->id)[0]->status) {
+                                                            echo "<div style='background: $status->cor; border-radius: 3px;' class='d-inline-block pt-1 pb-1 pl-2 pr-2 text-white'>$status->status</div>";
+                                                            break;
+                                                        }
+                                                    }
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
