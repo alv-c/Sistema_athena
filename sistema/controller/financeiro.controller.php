@@ -3,41 +3,38 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/global.controller.
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/model/pdo.model.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/model/financeiro.model.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/financeiro.service.php';
+$tipos_pagamento = ['A vista', 'Parcelamento', 'A prazo'];
 
-// if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') {
-// 	isset($_POST['gerenteConsultor']) ? $_POST['gerenteConsultor'] : null;
-// 	if (validateForm($_POST)) {
-// 		$usuario = new Usuario($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['nivel'], $_POST['gerenteConsultor'], $_POST['creci'], $_POST['status']);
-// 		$usuarioService = new UsuarioService($conexao, $usuario);
-// 		$idInsert = $usuarioService->inserir();
-// 		header('Location: /sistema/view/usuarios.php');
-// 	}
-// }
+if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') {
+	if (validateForm($_POST)) {
+		$financeiro = new Financeiro($_POST);
+		$financeiroService = new FinanceiroService($conexao, $financeiro);
+		$idInsert = $financeiroService->inserir();
+		header('Location: /sistema/view/financeiro.php');
+	}
+}
 
-// if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id'])) {
-// 	if (validateForm($_POST)) {
-// 		$usuario = new Usuario($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['nivel'], $_POST['gerenteConsultor'], $_POST['creci'], $_POST['status']);
-// 		$usuarioService = new UsuarioService($conexao, $usuario);
-// 		$usuarioService->atualizar($_POST['id']);
-// 		header('Location: /sistema/view/usuariosEdit.php?editId=' . $_POST['id']);
-// 	}
-// }
+if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id'])) {
+	if (validateForm($_POST)) {
+		$financeiro = new Financeiro($_POST);
+		$financeiroService = new FinanceiroService($conexao, $financeiro);
+		$financeiroService->atualizar($_POST['id']);
+		header('Location: /sistema/view/financeiroEdit.php?editId=' . $_POST['id']);
+	}
+}
 
-// if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id'])) {
-// 	if (validateForm($_POST)) {
-// 		$usuario = new Usuario();
-// 		$usuarioService = new UsuarioService($conexao, $usuario);
-// 		$usuarioService->deletar($_POST['id']);
-// 		header('Location: /sistema/view/usuarios.php?usuarioDeletado=true');
-// 	}
-// } 
-
-// else if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
-if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
+if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id'])) {
+	if (validateForm($_POST)) {
+		$financeiro = new Financeiro();
+		$financeiroService = new FinanceiroService($conexao, $financeiro);
+		$financeiroService->deletar($_POST['id']);
+		header('Location: /sistema/view/financeiro.php?usuarioDeletado=true');
+	}
+} else {
 	header('Content-Type: text/html; charset=utf-8');
 	$financeiro = new Financeiro();
 	$financeiroService = new FinanceiroService($conexao, $financeiro);
-	$arrayUsuarios = $financeiroService->recuperar();
+	$arrayFinanceiro = $financeiroService->recuperar();
 }
 
 function validateForm($post)

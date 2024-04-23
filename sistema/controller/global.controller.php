@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/model/pdo.model.php';
 
 class Database

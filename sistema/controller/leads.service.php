@@ -73,6 +73,7 @@ class LeadsService
 
     public function atualizar($id, $log = false, $usuario)
     {
+        $data_atual = date('Y-m-d H:i:s');
         $statusAtual = $this->recuperar($id);
         if ($statusAtual[0]->status != $this->lead->__get('status')) $log = true;
         $campos = [
@@ -91,7 +92,8 @@ class LeadsService
                 'idLead' => $id,
                 'idUsuario' => $usuario,
                 'idStatus' => $this->lead->__get('status'),
-                'anotacao' => $this->lead->__get('anotacao')
+                'anotacao' => $this->lead->__get('anotacao'),
+                'data' => $data_atual,
             ];
             $this->conexao->inserir('historico_lead', $campos);
         }

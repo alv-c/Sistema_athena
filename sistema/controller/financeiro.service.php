@@ -11,62 +11,49 @@ class FinanceiroService
         $this->usuario = $usuario;
     }
 
-    // public function inserir()
-    // {
-    //     return $this->conexao->inserir('usuarios', [
-    //         'nome' => $this->usuario->__get('nome'),
-    //         'email' => $this->usuario->__get('email'),
-    //         'senha' => $this->usuario->__get('senha'),
-    //         'nivel' => $this->usuario->__get('nivel'),
-    //         'gerente' => $this->usuario->__get('gerenteConsultor'),
-    //         'creci' => $this->usuario->__get('creci'),
-    //         'status' => $this->usuario->__get('status')
-    //     ]);
-    // }
+    public function inserir()
+    {
+        $data_atual = date('Y-m-d H:i:s');
+        return $this->conexao->inserir('financeiro', [
+            'nome_pagador' => $this->usuario->__get('nome_pagador'),
+            'nome_recebedor' => $this->usuario->__get('nome_recebedor'),
+            'tipo_pagamento' => $this->usuario->__get('tipo_pagamento'),
+            'preco' => $this->usuario->__get('preco'),
+            'valor_entrada' => $this->usuario->__get('valor_entrada'),
+            'num_parcelas' => $this->usuario->__get('num_parcelas'),
+            'val_parcela' => $this->usuario->__get('val_parcela'),
+            'val_juros' => $this->usuario->__get('val_juros'),
+            'data' => $data_atual,
+        ]);
+    }
 
     public function recuperar($id = null)
     { //read
         $query = null;
         if (is_null($id)) {
-            $query = "SELECT * FROM usuarios";
+            $query = "SELECT * FROM financeiro";
         } else {
-            $query = "SELECT * FROM usuarios WHERE id = $id";
+            $query = "SELECT * FROM financeiro WHERE id = $id";
         }
         return $this->conexao->ler($query);
     }
 
-    // public function atualizar($id)
-    // {
-    //     $this->conexao->atualizar("usuarios", [
-    //         'nome' => $this->usuario->__get('nome'),
-    //         'email' => $this->usuario->__get('email'),
-    //         'senha' => $this->usuario->__get('senha'),
-    //         'nivel' => $this->usuario->__get('nivel'),
-    //         'gerente' => $this->usuario->__get('gerenteConsultor'),
-    //         'creci' => $this->usuario->__get('creci'),
-    //         'status' => $this->usuario->__get('status'),
-    //     ], "id = $id");
-    // }
+    public function atualizar($id)
+    {
+        $this->conexao->atualizar("financeiro", [
+            'nome_pagador' => $this->usuario->__get('nome_pagador'),
+            'nome_recebedor' => $this->usuario->__get('nome_recebedor'),
+            'tipo_pagamento' => $this->usuario->__get('tipo_pagamento'),
+            'preco' => $this->usuario->__get('preco'),
+            'valor_entrada' => $this->usuario->__get('valor_entrada'),
+            'num_parcelas' => $this->usuario->__get('num_parcelas'),
+            'val_parcela' => $this->usuario->__get('val_parcela'),
+            'val_juros' => $this->usuario->__get('val_juros'),
+        ], "id = $id");
+    }
 
-    // public function deletar($id)
-    // {
-    //     $this->conexao->excluir("usuarios", "id = $id");
-    // }
-
-    // public function retornarNivel($id = null)
-    // {
-    //     $query = null;
-    //     if (is_null($id)) {
-    //         $query = "SELECT * FROM niveis";
-    //     } else {
-    //         $query = "SELECT * FROM niveis WHERE id = $id";
-    //     }
-    //     return $this->conexao->ler($query);
-    // }
-
-    // public function recuperarGerentes()
-    // {
-    //     $query = "SELECT id, nome FROM usuarios WHERE nivel = 2 AND status = 1";
-    //     return $this->conexao->ler($query);
-    // }
+    public function deletar($id)
+    {
+        $this->conexao->excluir("financeiro", "id = $id");
+    }
 }

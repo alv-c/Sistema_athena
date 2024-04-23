@@ -318,8 +318,8 @@ body .wrapper #content section.sessao-tabela table tbody tr td,
 body .wrapper #content section.sessao-tabela table tbody tr th {
   font-size: 12.5px;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td form button[type=submit],
-body .wrapper #content section.sessao-tabela table tbody tr th form button[type=submit] {
+body .wrapper #content section.sessao-tabela table tbody tr td form button[type=submit]:not(.editar):not(.excluir),
+body .wrapper #content section.sessao-tabela table tbody tr th form button[type=submit]:not(.editar):not(.excluir) {
   border: none;
   outline: none;
   background: none;
@@ -335,8 +335,8 @@ body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn f
 body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn form {
   display: block;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.editar,
-body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.editar {
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.editar[type=button],
+body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.editar[type=button] {
   border: none;
   background: #007CFF;
   outline: none;
@@ -345,8 +345,8 @@ body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn b
   width: 40px;
   border-radius: 5px;
 }
-body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.editar:hover,
-body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.editar:hover {
+body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.editar[type=button]:hover,
+body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn button.editar[type=button]:hover {
   background: #1E90FF;
 }
 body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn button.excluir,

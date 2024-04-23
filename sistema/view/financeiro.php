@@ -34,11 +34,12 @@ $pagina = 'financeiro';
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
-    <title>Usuários | Sistema Athena</title>
+    <title>Financeiro | Sistema Athena</title>
 </head>
 
 <body>
-    <?php //require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modalDelete.php' ?>
+    <?php //require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modalDelete.php' 
+    ?>
     <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modalFollowup.php' ?>
     <div class="wrapper">
         <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar-aside.php' ?>
@@ -48,7 +49,7 @@ $pagina = 'financeiro';
             <!-- FILTROS -->
             <div class="filtros pb-2" id="filtros">
                 <?php if ($usuarioSessao->nivel >= 2) : ?>
-                    <a href="novoUsuario.php" class="btn btn-dark btn-sm text-white">Adicionar novo usuário</a>
+                    <a href="novoFinanceiro.php" class="btn btn-dark btn-sm text-white">Adicionar novo registro</a>
                 <?php endif; ?>
             </div>
 
@@ -61,57 +62,54 @@ $pagina = 'financeiro';
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Nome</th>
-                                        <th scope="col">Cargo</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">Nome pagador</th>
+                                        <th scope="col">Nome recebedor</th>
+                                        <th scope="col">Tipo de pagamento</th>
                                         <?php if ($usuarioSessao->nivel == 3) : ?>
                                             <th scope="col">Operações</th>
                                         <?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($arrayUsuarios as $key => $usuario) : ?>
-                                        <?php
-                                        if ($usuarioSessao->nivel == 2 && ($usuario->nivel == 2 || $usuario->nivel == 3)) continue;
-                                        if ($usuarioSessao->nivel == 2) {
-                                            if ($usuario->gerente != $usuarioSessao->id) continue;
-                                        }
-                                        ?>
+                                    <?php foreach ($arrayFinanceiro as $key => $financeiro) : ?>
                                         <tr>
                                             <td><?= $key ?></td>
                                             <td>
-                                                <form method="post" action="/sistema/view/usuariosEdit.php">
-                                                    <input type="hidden" name="editId" value="<?= $usuario->id ?>">
-                                                    <button type="submit" class="btn btn-success"><?= $usuario->nome ?></button>
+                                                <form method="post" action="/sistema/view/financeiroEdit.php">
+                                                    <input type="hidden" name="editId" value="<?= $financeiro->id ?>">
+                                                    <button type="submit" class="btn btn-success"><?= $financeiro->nome_pagador ?></button>
                                                 </form>
                                             </td>
-
                                             <td>
-                                                <form method="post" action="/sistema/view/usuariosEdit.php">
-                                                    <input type="hidden" name="editId" value="<?= $usuario->id ?>">
-                                                    <button type="submit" class="btn btn-success"><?= $usuarioService->retornarNivel($usuario->nivel)[0]->nome; ?></button>
+                                                <form method="post" action="/sistema/view/financeiroEdit.php">
+                                                    <input type="hidden" name="editId" value="<?= $financeiro->id ?>">
+                                                    <button type="submit" class="btn btn-success"><?= $financeiro->nome_recebedor ?></button>
                                                 </form>
                                             </td>
-
                                             <td>
-                                                <form method="post" action="./usuariosEdit.php">
-                                                    <input type="hidden" name="editId" value="<?= $usuario->id ?>">
-                                                    <button type="submit" class="btn btn-success d-flex flex-nowrap justify-content-center align-items-center">
-                                                        <div class="circle-stts" style="background: <?= $usuario->status == 1 ? '#228B22' : '#B22222'; ?>;"></div>
-                                                        <span class="d-block pl-2"><?= $usuario->status ? 'Ativo' : 'Inativo'; ?></span>
-                                                    </button>
+                                                <form method="post" action="/sistema/view/financeiroEdit.php">
+                                                    <input type="hidden" name="editId" value="<?= $financeiro->id ?>">
+                                                    <button type="submit" class="btn btn-success"><?= $financeiro->tipo_pagamento ?></button>
                                                 </form>
                                             </td>
-
                                             <?php if ($usuarioSessao->nivel == 3) : ?>
                                                 <td>
-                                                    <form method="post" action="/sistema/controller/usuarios.controller.php" id="formDel" data-form="form-<?= $usuario->id ?>">
-                                                        <input type="hidden" name="id" value="<?= $usuario->id ?>">
-                                                        <input type="hidden" name="acao" value="deletar">
-                                                        <button type="button" class="excluir btn btn-danger" onclick="confirmDel('<?= $usuario->nome ?>', 'usuário', 'form-<?= $usuario->id ?>')">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </form>
+                                                    <div class="d-flex flex-nowrap" style="gap: 10px;">
+                                                        <form method="post" action="/sistema/controller/financeiro.controller.php" id="formDel" data-form="form-<?= $financeiro->id ?>">
+                                                            <input type="hidden" name="id" value="<?= $financeiro->id ?>">
+                                                            <input type="hidden" name="acao" value="deletar">
+                                                            <button type="submit" class="excluir btn btn-danger" onclick="confirmDel('<?= $financeiro->id ?>', 'financeiro', 'form-<?= $financeiro->id ?>')">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </form>
+
+                                                        <form method="post" action="./financeiroEdit.php">
+                                                            <input type="hidden" name="editId" value="<?= $financeiro->id ?>">
+                                                            <button type="submit" class="editar btn btn-warning">
+                                                                <i class="fas fa-edit text-white"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             <?php endif; ?>
                                         </tr>

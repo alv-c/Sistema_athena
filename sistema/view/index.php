@@ -113,7 +113,7 @@ $pagina = 'index';
                                                 <form method="post" action="/sistema/view/edit.php">
                                                     <input type="hidden" name="editId" value="<?= $lead->id ?>">
                                                     <input type="hidden" name="editarLead" value="true">
-                                                    <button type="submit" class="editar">
+                                                    <button type="submit" class="editar btn btn-warning">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                 </form>
@@ -121,7 +121,7 @@ $pagina = 'index';
                                                     <form method="post" action="/sistema/controller/leads.controller.php" id="formDel" data-form="form-<?= $lead->id ?>">
                                                         <input type="hidden" name="id" value="<?= $lead->id ?>">
                                                         <input type="hidden" name="acao" value="deletar">
-                                                        <button type="button" class="excluir" onclick="confirmDel('<?= $lead->nome ?>', 'lead', 'form-<?= $lead->id ?>')">
+                                                        <button type="button" class="excluir btn btn-danger" onclick="confirmDel('<?= $lead->nome ?>', 'lead', 'form-<?= $lead->id ?>')">
                                                             <i class="fas fa-times"></i>
                                                         </button>
                                                     </form>

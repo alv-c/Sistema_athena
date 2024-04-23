@@ -374,7 +374,7 @@ body {
                                     font-size: 12.5px;
 
                                     form {
-                                        button[type="submit"] {
+                                        button[type="submit"]:not(.editar):not(.excluir) {
                                             border: none;
                                             outline: none;
                                             background: none;
@@ -392,7 +392,7 @@ body {
                                         }
 
                                         button {
-                                            &.editar {
+                                            &.editar[type="button"] {
                                                 border: none;
                                                 background: #007CFF;
                                                 outline: none;

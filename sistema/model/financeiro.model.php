@@ -1,32 +1,30 @@
 <?php
 
-    class Financeiro {
-        // private $nome = null;
-        // private $email = null;
-        // private $senha = null;
-        // private $nivel = null;
-        // private $gerenteConsultor = null;
-        // private $creci = null;
-        // private $status = null;
+class Financeiro
+{
+    private $nome_pagador = null;
+    private $nome_recebedor = null;
+    private $tipo_pagamento = null;
+    private $valor_entrada = null;
+    private $num_parcelas = null;
+    private $val_parcela = null;
+    private $val_juros = null;
+    private $preco = null;
 
-        public function __construct (array $post = []) {
-            foreach($post as $index => $attr) {
-                $this->$index = $attr;
-            }
-            // $this->nome = $nome;
-            // $this->email = $email;
-            // $this->senha = $senha;
-            // $this->nivel = $nivel;
-            // $this->gerenteConsultor = $gerenteConsultor;
-            // $this->creci = $creci;
-            // $this->status = $status;
-        }
-
-        public function __get($attr) {
-            return $this->$attr;
-        }
-
-        public function __set($attr, $valor) {
-            $this->$attr = $valor;
+    public function __construct(array $post = [])
+    {
+        foreach ($post as $index => $attr) {
+            $this->$index = $attr;
         }
     }
+
+    public function __get($attr)
+    {
+        return $this->$attr;
+    }
+
+    public function __set($attr, $valor)
+    {
+        $this->$attr = $valor;
+    }
+}
