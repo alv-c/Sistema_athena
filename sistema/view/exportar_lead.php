@@ -51,7 +51,7 @@ $data_dia_ant = date('Y-m-d', $data);
             <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar.php' ?>
 
             <!-- FILTROS -->
-            <section class="filtro-lead" pb-2" id="filtros">
+            <section class="filtro-lead pb-2" id="filtros">
                 <?php if (!empty($filtro)) : ?>
                     <a href="./exportar_lead.php" class="btn btn-dark btn-sm text-white">Limpar filtro</a>
                 <?php endif; ?>

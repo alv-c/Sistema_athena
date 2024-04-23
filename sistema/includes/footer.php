@@ -50,6 +50,10 @@
             $("#telefone").mask('(00)00000-0000');
             $("#telefone2").mask('(00)00000-0000');
             $(".input_filtro_data").mask('00/00/0000');
+            $('#preco').mask('000,000,000,000,000.00', {reverse: true});
+            $('#valor_entrada').mask('000,000,000,000,000.00', {reverse: true});
+            $('#val_parcela').mask('000,000,000,000,000.00', {reverse: true});
+            $('#val_juros').mask('0,00', {reverse: true});
         });
 
         let initFollow = (id_usuario) => {

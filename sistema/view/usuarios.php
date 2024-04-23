@@ -48,7 +48,7 @@ $pagina = 'usuarios';
             <!-- FILTROS -->
             <div class="filtros pb-2" id="filtros">
                 <?php if ($usuarioSessao->nivel >= 2) : ?>
-                    <a href="novoUsuario.php" class="btn btn-dark btn-sm text-white">Adicionar novo usuário</a>
+                    <a href="novoUsuario.php" class="btn btn-dark btn-sm text-white">Novo usuário</a>
                 <?php endif; ?>
             </div>
 

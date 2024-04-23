@@ -90,7 +90,7 @@ $pagina = 'novoUsuario';
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <label for="val_juros">Juros (%)</label>
-                                    <input type="text" name="val_juros" id="val_juros" placeholder="0.1" required>
+                                    <input type="text" name="val_juros" id="val_juros" placeholder="00.1" required>
                                 </div>
                             </div>
 

@@ -49,7 +49,7 @@ $pagina = 'financeiro';
             <!-- FILTROS -->
             <div class="filtros pb-2" id="filtros">
                 <?php if ($usuarioSessao->nivel >= 2) : ?>
-                    <a href="novoFinanceiro.php" class="btn btn-dark btn-sm text-white">Adicionar novo registro</a>
+                    <a href="novoFinanceiro.php" class="btn btn-dark btn-sm text-white">Novo registro</a>
                 <?php endif; ?>
             </div>
 
