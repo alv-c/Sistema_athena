@@ -58,7 +58,7 @@ $pagina = 'financeiro';
                 <div class="contain">
                     <div id="scroll">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered" id="tabela-usuarios">
+                            <table class="table table-striped table-bordered" id="tabela-financeiro">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
