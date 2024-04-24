@@ -4,9 +4,10 @@
         private $email = null;
         private $senha = null;
 
-        public function __construct ($email = null, $senha = null) {
-            $this->email = $email;
-            $this->senha = $senha;
+        public function __construct (array $post = []) {
+            foreach ($post as $index => $attr) {
+                $this->$index = $attr;
+            }
         }
 
         public function __get($attr) {

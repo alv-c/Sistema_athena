@@ -18,7 +18,7 @@ class UsuarioService
             'email' => $this->usuario->__get('email'),
             'senha' => $this->usuario->__get('senha'),
             'nivel' => $this->usuario->__get('nivel'),
-            'gerente' => $this->usuario->__get('gerenteConsultor'),
+            'gerente' => $this->usuario->__get('gerente'),
             'creci' => $this->usuario->__get('creci'),
             'status' => $this->usuario->__get('status')
         ]);
@@ -42,7 +42,7 @@ class UsuarioService
             'email' => $this->usuario->__get('email'),
             'senha' => $this->usuario->__get('senha'),
             'nivel' => $this->usuario->__get('nivel'),
-            'gerente' => $this->usuario->__get('gerenteConsultor'),
+            'gerente' => $this->usuario->__get('gerente'),
             'creci' => $this->usuario->__get('creci'),
             'status' => $this->usuario->__get('status'),
         ], "id = $id");

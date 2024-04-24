@@ -4,7 +4,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/model/login.model.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/login.service.php';
 
 if (!empty($_POST['email']) && validateForm($_POST)) {
-    $login = new Login($_POST['email'], $_POST['senha']);
+    $login = new Login($_POST);
     $loginService = new LoginService($conexao, $login);
     if ((bool)count($loginService->validaLogin())) {
         $loginService->iniciarSessao($loginService->validaLogin()[0]->id);

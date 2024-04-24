@@ -111,8 +111,8 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <div class="contain-input-consultor <?= $usuarioService->recuperar($id)[0]->nivel != 1 ? 'initfadeOut' : ''; ?>">
-                                            <label for="gerenteConsultor">Gerente do corretor</label>
-                                            <select name="gerenteConsultor" id="gerenteConsultor" required>
+                                            <label for="gerente">Gerente do corretor</label>
+                                            <select name="gerente" id="gerente" required>
                                                 <?php if ($usuarioSessao->nivel == 3) : ?>
                                                     <option value="0" hidden>Selecione</option>
                                                 <?php endif; ?>

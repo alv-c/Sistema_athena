@@ -44,6 +44,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir_lead_manual') {
 
 if (!empty($_POST['acao']) && $_POST['acao'] == 'filtrarLead') {
 	if (validateForm($_POST)) {
+		header('Content-Type: text/html; charset=utf-8');
 		$lead = new Lead();
 		$leadService = new LeadsService($conexao, $lead);
 		$array_post = $_POST;
@@ -57,6 +58,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'filtrarLead') {
 		$filtro = true;
 	}
 } else if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
+	header('Content-Type: text/html; charset=utf-8');
 	$lead = new Lead();
 	$leadService = new LeadsService($conexao, $lead);
 	$arrayLeads = $leadService->recuperar();

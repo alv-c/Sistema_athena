@@ -58,6 +58,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/gerente.service.ph
 
 // else if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
 if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
+	header('Content-Type: text/html; charset=utf-8');
 	$gerente = new Gerente();
 	$gerenteService = new GerenteService($conexao, $gerente);
 }

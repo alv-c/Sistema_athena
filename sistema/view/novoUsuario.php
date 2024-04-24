@@ -86,8 +86,8 @@ $pagina = 'novoUsuario';
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <div class="contain-input-consultor">
-                                        <label for="gerenteConsultor">Gerente do corretor</label>
-                                        <select name="gerenteConsultor" id="gerenteConsultor">
+                                        <label for="gerente">Gerente do corretor</label>
+                                        <select name="gerente" id="gerente">
                                             <?php if ($usuarioSessao->nivel == 3) : ?>
                                                 <option value="0" hidden>selecione</option>
                                             <?php endif; ?>
