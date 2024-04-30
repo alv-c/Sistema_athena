@@ -13,10 +13,9 @@ class LeadsService
     public function inserir()
     {
         $campos = '';
-        // $data = date('Y-m-d H:m:s');
         $data = date('Y-m-d H:m:s');
         $data_aux = date('Y-m-d');
-        if (empty($this->lead->__get('consultor'))) {
+        if (empty($this->lead->__get('id_usuario_consultor'))) {
             $campos = [
                 'nome' => $this->lead->__get('nome'),
                 'telefone' => $this->lead->__get('telefone'),
@@ -33,7 +32,7 @@ class LeadsService
                 'telefone2' => $this->lead->__get('telefone2'),
                 'email' => $this->lead->__get('email'),
                 'profissao' => $this->lead->__get('profissao'),
-                'id_usuario_consultor' => $this->lead->__get('consultor'),
+                'id_usuario_consultor' => $this->lead->__get('id_usuario_consultor'),
                 'data' => $data,
                 'data_aux' => $data_aux,
                 'midia' => $this->lead->__get('midia'),
@@ -41,7 +40,7 @@ class LeadsService
             ];
         }
         $lastId = $this->conexao->inserir('leads', $campos);
-        if (is_null($this->lead->__get('consultor')) || empty($this->lead->__get('consultor'))) {
+        if (is_null($this->lead->__get('id_usuario_consultor')) || empty($this->lead->__get('id_usuario_consultor'))) {
             $this->enviarLeadConsultor($lastId);
         }
     }
@@ -82,7 +81,7 @@ class LeadsService
             'telefone2' => $this->lead->__get('telefone2'),
             'email' => $this->lead->__get('email'),
             'profissao' => $this->lead->__get('profissao'),
-            'id_usuario_consultor' => $this->lead->__get('consultor'),
+            'id_usuario_consultor' => $this->lead->__get('id_usuario_consultor'),
             'midia' => $this->lead->__get('midia'),
             'status' => $this->lead->__get('status')
         ];

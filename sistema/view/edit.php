@@ -93,8 +93,8 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="consultor">Corretor</label>
-                                        <select name="consultor" id="consultor">
+                                        <label for="id_usuario_consultor">Corretor</label>
+                                        <select name="id_usuario_consultor" id="id_usuario_consultor">
                                             <option value="0" hidden>Selecione um corretor</option>
                                             <?php foreach ($leadService->retornarConsultores($usuarioSessao->id, $usuarioSessao->nivel) as $consultor) : ?>
                                                 <option value="<?= $consultor->id ?>" <?= $leadService->recuperar($id)[0]->id_usuario_consultor == $consultor->id || $usuarioSessao->nivel == 1 ? 'selected' : ''; ?>><?= $consultor->nome ?></option>

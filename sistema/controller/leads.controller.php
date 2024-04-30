@@ -6,7 +6,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/leads.service.php'
 if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') {
 	if (validateForm($_POST)) {
 		$_POST['telefone'] = $conexao->removerCaracteresEsp($_POST['telefone']);
-		$lead = new Lead($_POST['nome'], $_POST['telefone'], null, $_POST['email']);
+		$lead = new Lead($_POST);
 		$leadService = new LeadsService($conexao, $lead);
 		$leadService->inserir();
 	}
@@ -17,7 +17,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id
 		$log = empty($_POST['anotacao']) ? false : true;
 		$_POST['telefone'] = $conexao->removerCaracteresEsp($_POST['telefone']);
 		$_POST['telefone2'] = $conexao->removerCaracteresEsp($_POST['telefone2']);
-		$lead = new Lead($_POST['nome'], $_POST['telefone2'], $_POST['telefone2'], $_POST['email'], $_POST['profissao'], $_POST['consultor'], $_POST['anotacao'], $_POST['midia'], $_POST['status']);
+		$lead = new Lead($_POST);
 		$leadService = new LeadsService($conexao, $lead);
 		$leadService->atualizar($_POST['id'], $log, $_POST['user']);
 		header('Location: /sistema/view/edit.php?editId=' . $_POST['id']);
@@ -36,7 +36,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id']
 if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir_lead_manual') {
 	$_POST['telefone'] = $conexao->removerCaracteresEsp($_POST['telefone']);
 	$_POST['telefone2'] = $conexao->removerCaracteresEsp($_POST['telefone2']);
-	$lead = new Lead($_POST['nome'], $_POST['telefone'], $_POST['telefone2'], $_POST['email'], $_POST['profissao'], $_POST['id_usuario_consultor'], null, $_POST['midia'], $_POST['status']);
+	$lead = new Lead($_POST);
 	$leadService = new LeadsService($conexao, $lead);
 	$leadService->inserir();
 	header('Location: /sistema/view/index.php');
