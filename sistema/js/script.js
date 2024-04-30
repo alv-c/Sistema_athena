@@ -162,3 +162,25 @@ if (pagina == 'financeiro') {
         });
     });
 }
+
+if (pagina == 'edit') {
+    function marcarFollowp(btn) {
+        let containFllw = document.getElementById('contain-confirm-follow');
+        let inputs = document.getElementsByClassName('required-js');
+        let aviso = document.getElementById('aviso-follow');
+        console.log(inputs)
+        if (btn.checked == true) {
+            containFllw.style.display = 'block'
+            aviso.style.display = 'block'
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].setAttribute("required", "true");
+            }
+        } else {
+            containFllw.style.display = 'none';
+            aviso.style.display = 'none'
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].setAttribute("required", "false");
+            }
+        }
+    }
+}

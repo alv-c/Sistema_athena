@@ -17,9 +17,33 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id
 		$log = empty($_POST['anotacao']) ? false : true;
 		$_POST['telefone'] = $conexao->removerCaracteresEsp($_POST['telefone']);
 		$_POST['telefone2'] = $conexao->removerCaracteresEsp($_POST['telefone2']);
+		$dados_follow = [
+			'data_follow' => $_POST['data_follow'],
+			'hora_follow' => $_POST['hora_follow'],
+			'criar_follow' => $_POST['criar_follow'],
+			'anotacao' => $_POST['anotacao'],
+		];
+		unset($_POST['data_follow']);
+		unset($_POST['hora_follow']);
+		unset($_POST['criar_follow']);
 		$lead = new Lead($_POST);
 		$leadService = new LeadsService($conexao, $lead);
 		$leadService->atualizar($_POST['id'], $log, $_POST['user']);
+		if(
+			!is_null($dados_follow['data_follow']) && 
+			!is_null($dados_follow['hora_follow']) && 
+			isset($dados_follow['criar_follow']) && 
+			!empty($dados_follow['anotacao'])
+		) {
+			$data_follow = $dados_follow['data_follow'] . ' ' . $dados_follow['hora_follow'];
+			$campos = [
+				'descricao' => $dados_follow['anotacao'],
+				'data' => $data_follow,
+				'id_usuario' => $_POST['user'],
+				'id_lead' => $_POST['id']
+			];
+			$leadService->criar_followup($campos);
+		}
 		header('Location: /sistema/view/edit.php?editId=' . $_POST['id']);
 	}
 }

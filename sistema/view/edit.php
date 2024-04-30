@@ -27,7 +27,9 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- JS -->
-        <script> var pagina = '<?= $pagina ?>'; </script>
+        <script>
+            var pagina = '<?= $pagina ?>';
+        </script>
         <script src="/sistema/js/script.js"></script>
 
         <title>Página incial | Sistema Athena</title>
@@ -112,8 +114,27 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
+
+
+
                                         <label for="anotacao">Anotação</label>
+                                        <div class="aviso-follow" id="aviso-follow">
+                                            <span>Atenção! Esta anotação será utilizada para a criação de follow-up!</span>
+                                        </div>
                                         <textarea name="anotacao" id="anotacao" placeholder="Comentário"></textarea>
+
+                                        <div id="contain-confirm-follow">
+                                            <input type="date" name="data_follow" class="required-js" value="<?= date('Y-m-d') ?>" required="false">
+                                            <input type="time" name="hora_follow" class="required-js" value="<?= date('H:i:s') ?>" required="false">
+                                        </div>
+
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="criar_follow" value="true" id="customCheck1" onchange="marcarFollowp(this)">
+                                            <label class="custom-control-label label-followup" for="customCheck1">Gerar follow-up</label>
+                                        </div>
+
+
+
                                     </div>
                                 </div>
                                 <div class="mt-3">

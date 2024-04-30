@@ -222,4 +222,10 @@ class LeadsService
         // fazer algo com os resultados
         // }
     }
+
+    public function criar_followup($campos = []) {
+        if((bool)count($campos)) {
+            $this->conexao->inserir('followup', $campos);
+        }
+    }
 }
