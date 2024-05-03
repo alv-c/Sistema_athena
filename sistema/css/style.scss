@@ -324,12 +324,12 @@ body {
             /* ---------------------------------------------------
             FILTROS
             ----------------------------------------------------- */
-            div#filtros {
-                div.contain-filters {
-                    border: 1px solid #dcdcdc;
-                    border-radius: 3px;
-                }
-            }
+            // div#filtros {
+            //     div.contain-filters {
+            //         border: 1px solid #dcdcdc;
+            //         border-radius: 3px;
+            //     }
+            // }
 
             /* ---------------------------------------------------
             SESSÕES
@@ -488,14 +488,40 @@ body {
                                 }
 
                                 div.aviso-follow {
-                                    border: 2px solid yellow;
                                     display: none;
+
+                                    div.alert {
+                                        font-size: 12px;
+                                        font-weight: 600;
+                                    }
                                 }
 
                                 div#contain-confirm-follow {
-                                    border: 2px solid cyan;
-                                    margin-top: 20px;
                                     display: none;
+                                    gap: 10px;
+                                    flex-wrap: nowrap;
+                                    flex-direction: column;
+
+                                    @media(min-width: 768px) {
+                                        gap: 15px;
+                                    }
+
+                                    @media(min-width: 992px) {
+                                        flex-direction: row;
+                                    }
+
+                                    >div {
+                                        width: 100%;
+
+                                        label {
+                                            font-weight: 600;
+                                            font-size: 12px;
+                                            margin-top: 0;
+                                        }
+
+                                        input[type="date"],
+                                        input[type="time"] {}
+                                    }
                                 }
 
                                 .custom-control {
@@ -504,6 +530,10 @@ body {
                                         font-weight: 700;
                                         line-height: 24px;
                                     }
+                                }
+
+                                .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+                                    background-color: #343a40;
                                 }
                             }
                         }

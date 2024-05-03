@@ -28,19 +28,21 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id
 		unset($_POST['criar_follow']);
 		$lead = new Lead($_POST);
 		$leadService = new LeadsService($conexao, $lead);
-		$leadService->atualizar($_POST['id'], $log, $_POST['user']);
+		$id_insercao_log = $leadService->atualizar($_POST['id'], $log, $_POST['user']);
 		if(
 			!is_null($dados_follow['data_follow']) && 
 			!is_null($dados_follow['hora_follow']) && 
 			isset($dados_follow['criar_follow']) && 
-			!empty($dados_follow['anotacao'])
+			!empty($dados_follow['anotacao']) &&
+			(bool)$id_insercao_log
 		) {
 			$data_follow = $dados_follow['data_follow'] . ' ' . $dados_follow['hora_follow'];
 			$campos = [
 				'descricao' => $dados_follow['anotacao'],
 				'data' => $data_follow,
 				'id_usuario' => $_POST['user'],
-				'id_lead' => $_POST['id']
+				'id_lead' => $_POST['id'],
+				'id_anotacao' => $id_insercao_log
 			];
 			$leadService->criar_followup($campos);
 		}
@@ -86,7 +88,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'filtrarLead') {
 	$lead = new Lead();
 	$leadService = new LeadsService($conexao, $lead);
 	$arrayLeads = $leadService->recuperar();
-	$leadService->esfriarLead();
+	// $leadService->esfriarLead();
 }
 
 function validateForm($post)

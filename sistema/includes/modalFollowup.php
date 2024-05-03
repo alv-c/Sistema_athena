@@ -9,32 +9,65 @@
                 </button>
             </div>
             <div class="modal-body" style="padding: 0;">
-                <div class="pt-2 pb-4" style="padding: 0 23px 0 13px;">
-                    <label for="tipo_filtro" style="font-size: 12px; margin-bottom: 3px;">
-                        <strong>Tipo de filtro:</strong>
-                    </label>
-                    <div class="input-group mb-3">
-                        <select id="tipo_filtro" class="form-control" onchange="tipoCampoFiltroFollow(this.value)">
-                            <option value="1" selected>Dia/Mês/Ano</option>
-                            <option value="2">Dia</option>
-                            <option value="3">Mês</option>
-                            <option value="4">Ano</option>
-                        </select>
-                    </div>
 
-                    <label for="filtro-follow-data" style="font-size: 12px; margin-bottom: 3px;">
-                        <strong>Filtro por data:</strong>
-                    </label>
-                    <div class="input-group mb-3">
-                        <input type="text" id="input-follow-data_1" class="form-control input_filtro_data" aria-describedby="filtro-follow-data" placeholder="00/00/0000">
-                        <div class="input-group-append">
-                            <button class="btn btn-dark" type="button" id="filtro-follow-data" onclick="filterFollowUp(document.getElementById('input-follow-data_1').value)">Filtrar</button>
-                            <button class="btn btn-danger" type="button" onclick="filterFollowUp(null)">Limpar</button>
-                        </div>
-                    </div>
+
+                <div class="pt-2 pb-4" style="padding: 0 23px 0 13px;">
+                    
+                    <?php 
+                        $queryFlw = '';
+                        switch($usuarioSessao->nivel) {
+                            case 1:
+                                $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
+                                    FROM followup FLW
+                                        LEFT JOIN usuarios USR
+                                            ON (USR.id = FLW.id_usuario)
+                                        LEFT JOIN leads LEADS
+                                            ON (LEADS.id = FLW.id_lead)
+                                    WHERE FLW.data >= CURDATE()
+                                        AND FLW.id_usuario = $usuarioSessao->id
+                                    ORDER BY LEADS.nome ASC";
+                            break;
+
+                            case 2:
+                                $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
+                                    FROM followup FLW
+                                        LEFT JOIN usuarios USR
+                                            ON (USR.id = FLW.id_usuario)
+                                        LEFT JOIN leads LEADS
+                                            ON (LEADS.id = FLW.id_lead)
+                                    WHERE FLW.data >= CURDATE()
+                                        AND USR.gerente = $usuarioSessao->id 
+                                        OR FLW.id_usuario = $usuarioSessao->id 
+                                    ORDER BY LEADS.nome ASC";
+                            break;
+
+                            case 3:
+                                $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
+                                    FROM followup FLW
+                                        LEFT JOIN usuarios USR
+                                            ON (USR.id = FLW.id_usuario)
+                                        LEFT JOIN leads LEADS
+                                            ON (LEADS.id = FLW.id_lead)
+                                    WHERE FLW.data >= CURDATE()
+                                    ORDER BY LEADS.nome ASC";
+                            break;
+                        }
+
+                        // if ($usuarioSessao->nivel == 1) {
+
+                        // } else if ($usuarioSessao->nivel == 2) {
+
+                        // } else if ($usuarioSessao->nivel == 3) {
+
+                        // }
+                        echo '<pre>';
+                        print_r($conexao->ler($queryFlw));
+                        echo '</pre>';
+                    ?>
 
                 </div>
-                <div id="itens_followup" style="height: 100%; max-height: 300px; overflow-y: auto; padding: 30px 15px 5px;"></div>
+
+            
             </div>
             <div class="modal-footer d-block">
                 <form id="form-followup">

@@ -114,27 +114,27 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-
-
-
                                         <label for="anotacao">Anotação</label>
-                                        <div class="aviso-follow" id="aviso-follow">
-                                            <span>Atenção! Esta anotação será utilizada para a criação de follow-up!</span>
-                                        </div>
                                         <textarea name="anotacao" id="anotacao" placeholder="Comentário"></textarea>
-
-                                        <div id="contain-confirm-follow">
-                                            <input type="date" name="data_follow" class="required-js" value="<?= date('Y-m-d') ?>" required="false">
-                                            <input type="time" name="hora_follow" class="required-js" value="<?= date('H:i:s') ?>" required="false">
+                                        <div class="aviso-follow" id="aviso-follow">
+                                            <div class="alert alert-warning mt-3 role="alert">
+                                                <strong>Atenção!</strong> Esta anotação será utilizada para a criação de follow-up!
+                                            </div>
                                         </div>
-
+                                        <div id="contain-confirm-follow">
+                                            <div>
+                                                <label for="data_follow">Data follow-up</label>
+                                                <input type="date" id="data_follow" name="data_follow" class="required-js border border-warning" value="<?= date('Y-m-d') ?>" required="false">
+                                            </div>
+                                            <div>
+                                                <label for="hora_follow">Hora follow-up</label>
+                                                <input type="time" name="hora_follow" class="required-js border border-warning" value="<?= date('H:i:s') ?>" required="false">
+                                            </div>
+                                        </div>
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" name="criar_follow" value="true" id="customCheck1" onchange="marcarFollowp(this)">
                                             <label class="custom-control-label label-followup" for="customCheck1">Gerar follow-up</label>
                                         </div>
-
-
-
                                     </div>
                                 </div>
                                 <div class="mt-3">
@@ -165,7 +165,14 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                         <?php foreach ($leadService->recuperarLogsLead($id) as $itemLogArray) : ?>
                                             <tr>
                                                 <td><?= $itemLogArray->id ?></td>
-                                                <td><?= $anotacao = empty($itemLogArray->anotacao) ? 'Mudança de status' : $itemLogArray->anotacao; ?></td>
+                                                <td>
+                                                    <?php if((bool)$itemLogArray->id_follow) : ?>
+                                                        <div>
+                                                            <span class="badge badge-warning">Follow-up</span>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <?= $anotacao = empty($itemLogArray->anotacao) ? 'Mudança de status' : $itemLogArray->anotacao; ?>
+                                                </td>
                                                 <td><?= $itemLogArray->data ?></td>
                                                 <td style="background: <?= $itemLogArray->cor ?>; color: #fff;"><?= $itemLogArray->status ?></td>
                                                 <td><?= $itemLogArray->nomeUsuarioAnotacao ?></td>

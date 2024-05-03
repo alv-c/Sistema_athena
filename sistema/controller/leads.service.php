@@ -58,14 +58,16 @@ class LeadsService
 
     public function recuperarLogsLead($id)
     {
-        $query = "SELECT HL.id, HL.anotacao, DATE_FORMAT(HL.data, '%d/%m/%Y %H:%i') AS data, SL.status, SL.cor, US.nome AS nomeUsuarioAnotacao
-                FROM historico_lead AS HL 
+        $query = "SELECT FLW.id AS id_follow, HL.id, HL.anotacao, DATE_FORMAT(HL.data, '%d/%m/%Y %H:%i') AS data, SL.status, SL.cor, US.nome AS nomeUsuarioAnotacao
+            FROM historico_lead AS HL 
                 INNER JOIN status_lead AS SL 
-                ON (HL.idStatus = SL.id) 
+                    ON (HL.idStatus = SL.id) 
                 LEFT JOIN usuarios AS US
-                ON (HL.idUsuario = US.id)
-                WHERE HL.idLead = $id
-                ORDER BY HL.data DESC
+                    ON (HL.idUsuario = US.id)
+                LEFT JOIN followup FLW 
+                    ON (FLW.id_anotacao = HL.id)
+            WHERE HL.idLead = $id
+        ORDER BY HL.data DESC
             ";
         return $this->conexao->ler($query);
     }
@@ -94,7 +96,7 @@ class LeadsService
                 'anotacao' => $this->lead->__get('anotacao'),
                 'data' => $data_atual,
             ];
-            $this->conexao->inserir('historico_lead', $campos);
+            return $this->conexao->inserir('historico_lead', $campos);
         }
     }
 

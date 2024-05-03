@@ -170,7 +170,7 @@ if (pagina == 'edit') {
         let aviso = document.getElementById('aviso-follow');
         console.log(inputs)
         if (btn.checked == true) {
-            containFllw.style.display = 'block'
+            containFllw.style.display = 'flex'
             aviso.style.display = 'block'
             for (let i = 0; i < inputs.length; i++) {
                 inputs[i].setAttribute("required", "true");
