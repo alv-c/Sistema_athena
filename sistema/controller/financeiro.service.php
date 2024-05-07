@@ -31,9 +31,21 @@ class FinanceiroService
     { //read
         $query = null;
         if (is_null($id)) {
-            $query = "SELECT * FROM financeiro";
+            $query = "SELECT FINAN.*, LEADS.nome AS nome_pagador, USUARIOS.nome AS nome_recebedor
+                FROM financeiro FINAN
+                    LEFT JOIN leads LEADS
+                        ON (LEADS.id = FINAN.id_pagador)
+                    LEFT JOIN usuarios USUARIOS
+                        ON (USUARIOS.id = FINAN.id_recebedor)
+            ";
         } else {
-            $query = "SELECT * FROM financeiro WHERE id = $id";
+            $query = "SELECT FINAN.*, LEADS.nome AS nome_pagador, USUARIOS.nome AS nome_recebedor
+                        FROM financeiro FINAN
+                            LEFT JOIN leads LEADS
+                                ON (LEADS.id = FINAN.id_pagador)
+                            LEFT JOIN usuarios USUARIOS
+                                ON (USUARIOS.id = FINAN.id_recebedor)
+                        WHERE FINAN.id = $id";
         }
         return $this->conexao->ler($query);
     }

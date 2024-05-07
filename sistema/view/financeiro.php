@@ -73,13 +73,13 @@ $pagina = 'financeiro';
                                             <td>
                                                 <form method="post" action="/sistema/view/financeiroEdit.php">
                                                     <input type="hidden" name="editId" value="<?= $financeiro->id ?>">
-                                                    <button type="submit" class="btn btn-success"><?= $financeiro->id_pagador ?></button>
+                                                    <button type="submit" class="btn btn-success"><?= $financeiro->nome_pagador ?></button>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form method="post" action="/sistema/view/financeiroEdit.php">
                                                     <input type="hidden" name="editId" value="<?= $financeiro->id ?>">
-                                                    <button type="submit" class="btn btn-success"><?= $financeiro->id_recebedor ?></button>
+                                                    <button type="submit" class="btn btn-success"><?= $financeiro->nome_recebedor ?></button>
                                                 </form>
                                             </td>
                                             <td>
@@ -90,13 +90,15 @@ $pagina = 'financeiro';
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-nowrap" style="gap: 10px;">
-                                                    <form method="post" action="/sistema/controller/financeiro.controller.php" id="formDel" data-form="form-<?= $financeiro->id ?>">
-                                                        <input type="hidden" name="id" value="<?= $financeiro->id ?>">
-                                                        <input type="hidden" name="acao" value="deletar">
-                                                        <button type="submit" class="excluir btn btn-danger" onclick="confirmDel('<?= $financeiro->id ?>', 'financeiro', 'form-<?= $financeiro->id ?>')">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </form>
+                                                    <?php if ($usuarioSessao->nivel == 3) : ?>
+                                                        <form method="post" action="/sistema/controller/financeiro.controller.php" id="formDel" data-form="form-<?= $financeiro->id ?>">
+                                                            <input type="hidden" name="id" value="<?= $financeiro->id ?>">
+                                                            <input type="hidden" name="acao" value="deletar">
+                                                            <button type="submit" class="excluir btn btn-danger" onclick="confirmDel('<?= $financeiro->id ?>', 'financeiro', 'form-<?= $financeiro->id ?>')">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </form>
+                                                    <?php endif; ?>
 
                                                     <form method="post" action="./financeiroEdit.php">
                                                         <input type="hidden" name="editId" value="<?= $financeiro->id ?>">
