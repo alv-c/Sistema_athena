@@ -1,6 +1,33 @@
 
 $(document).ready(function () {
     $('.initfadeOut').fadeOut()
+
+    // datatable-followup
+    new DataTable('#table-follow-modal', {
+        language: {
+            info: 'Página _PAGE_ de _PAGES_',
+            infoEmpty: 'Nenhum registro encontrado!',
+            infoFiltered: '(_MAX_ registros encontrados.)',
+            lengthMenu: '_MENU_ Número de registros',
+            zeroRecords: 'Nenhum registro encontrado!',
+            search: '',
+            searchPlaceholder: 'Buscar',
+            paginate: {
+                "next": "Avançar",
+                "previous": "Voltar"
+            }
+        },
+        paging: true,
+        scrollCollapse: false,
+        scrollY: '400px',
+        order: [],
+        columnDefs: [
+            {
+                'targets': [3],
+                'orderable': false,
+            }
+        ],
+    });
 })
 
 let confirmDel = (name, modulo, dataForm) => {
@@ -198,9 +225,9 @@ if (pagina == 'novoFinanceiro' || pagina == 'financeiroEdit') {
         });
     });
 
-    function ajustarParcela (campo) {
+    function ajustarParcela(campo) {
         let inputNumParc = document.getElementById('num_parcelas');
-        if(campo.value == 'Parcelamento') {
+        if (campo.value == 'Parcelamento') {
             inputNumParc.style.pointerEvents = 'auto'
         } else {
             inputNumParc.value = 1;
@@ -208,12 +235,12 @@ if (pagina == 'novoFinanceiro' || pagina == 'financeiroEdit') {
         }
     }
 
-    function calcularParcela () {
+    function calcularParcela() {
         let numParcelas = document.getElementById('num_parcelas').value;
         let valorComissai = document.getElementById('valor_entrada').value;
         let campoValorParcela = document.getElementById('val_parcela');
-        
-        if(numParcelas != '' && valorComissai != '') {
+
+        if (numParcelas != '' && valorComissai != '') {
             let valor_parcela = (valorComissai / numParcelas);
             valor_parcela = valor_parcela.toFixed(2);
             campoValorParcela.value = valor_parcela;

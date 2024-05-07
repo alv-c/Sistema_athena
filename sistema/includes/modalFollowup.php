@@ -12,12 +12,12 @@
 
 
                 <div class="pt-2 pb-4" style="padding: 0 23px 0 13px;">
-                    
-                    <?php 
-                        $queryFlw = '';
-                        switch($usuarioSessao->nivel) {
-                            case 1:
-                                $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
+
+                    <?php
+                    $queryFlw = '';
+                    switch ($usuarioSessao->nivel) {
+                        case 1:
+                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
                                     FROM followup FLW
                                         LEFT JOIN usuarios USR
                                             ON (USR.id = FLW.id_usuario)
@@ -28,8 +28,8 @@
                                     ORDER BY LEADS.nome ASC";
                             break;
 
-                            case 2:
-                                $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
+                        case 2:
+                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
                                     FROM followup FLW
                                         LEFT JOIN usuarios USR
                                             ON (USR.id = FLW.id_usuario)
@@ -41,8 +41,8 @@
                                     ORDER BY LEADS.nome ASC";
                             break;
 
-                            case 3:
-                                $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
+                        case 3:
+                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
                                     FROM followup FLW
                                         LEFT JOIN usuarios USR
                                             ON (USR.id = FLW.id_usuario)
@@ -51,25 +51,35 @@
                                     WHERE FLW.data >= CURDATE()
                                     ORDER BY LEADS.nome ASC";
                             break;
-                        }
-
-                        // if ($usuarioSessao->nivel == 1) {
-
-                        // } else if ($usuarioSessao->nivel == 2) {
-
-                        // } else if ($usuarioSessao->nivel == 3) {
-
-                        // }
-                        echo '<pre>';
-                        print_r($conexao->ler($queryFlw));
-                        echo '</pre>';
+                    }
                     ?>
+
+                    <table class="table table-hover" id="table-follow-modal" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($conexao->ler($queryFlw) as $index => $follow) : ?>
+                            <tr>
+                                <td scope="row"><?= $index ?></td>
+                                <td><?= $follow->nome_lead ?></td>
+                                <td><?= $follow->descricao ?></td>
+                                <td><?= $follow->data ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
 
                 </div>
 
-            
+
             </div>
-            <div class="modal-footer d-block">
+            <!-- <div class="modal-footer d-block">
                 <form id="form-followup">
                     <input type="hidden" name="id_usuario" value="<?= $usuarioSessao->id ?>">
                     <input type="hidden" name="nivel_usuario" value="<?= $usuarioSessao->nivel ?>">
@@ -85,7 +95,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
