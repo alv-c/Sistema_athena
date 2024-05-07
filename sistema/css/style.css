@@ -411,6 +411,29 @@ body .wrapper #content section.view-lead div.contain fieldset form select {
   padding: 5px 10px;
   font-size: 14px;
 }
+body .wrapper #content section.view-lead div.contain fieldset form .select2 {
+  display: block !important;
+  width: 100% !important;
+  border: 1px solid #708090 !important;
+  outline: none !important;
+  padding: 5px 10px !important;
+  font-size: 14px !important;
+  outline: none !important;
+}
+body .wrapper #content section.view-lead div.contain fieldset form .select2 .select2-selection {
+  background: #fff !important;
+  border: none !important;
+  border-radius: 0px !important;
+  height: auto !important;
+  outline: none !important;
+}
+body .wrapper #content section.view-lead div.contain fieldset form .select2 .select2-selection .select2-selection__rendered {
+  color: #000 !important;
+  line-height: normal !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  outline: none !important;
+}
 body .wrapper #content section.view-lead div.contain fieldset form div.aviso-follow {
   display: none;
 }

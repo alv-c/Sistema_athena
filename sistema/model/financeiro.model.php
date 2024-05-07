@@ -2,8 +2,8 @@
 
 class Financeiro
 {
-    private $nome_pagador = null;
-    private $nome_recebedor = null;
+    private $id_pagador = null;
+    private $id_recebedor = null;
     private $tipo_pagamento = null;
     private $valor_entrada = null;
     private $num_parcelas = null;

@@ -15,8 +15,8 @@ class FinanceiroService
     {
         $data_atual = date('Y-m-d H:i:s');
         return $this->conexao->inserir('financeiro', [
-            'nome_pagador' => $this->usuario->__get('nome_pagador'),
-            'nome_recebedor' => $this->usuario->__get('nome_recebedor'),
+            'id_pagador' => $this->usuario->__get('id_pagador'),
+            'id_recebedor' => $this->usuario->__get('id_recebedor'),
             'tipo_pagamento' => $this->usuario->__get('tipo_pagamento'),
             'preco' => $this->usuario->__get('preco'),
             'valor_entrada' => $this->usuario->__get('valor_entrada'),
@@ -41,8 +41,8 @@ class FinanceiroService
     public function atualizar($id)
     {
         $this->conexao->atualizar("financeiro", [
-            'nome_pagador' => $this->usuario->__get('nome_pagador'),
-            'nome_recebedor' => $this->usuario->__get('nome_recebedor'),
+            'id_pagador' => $this->usuario->__get('id_pagador'),
+            'id_recebedor' => $this->usuario->__get('id_recebedor'),
             'tipo_pagamento' => $this->usuario->__get('tipo_pagamento'),
             'preco' => $this->usuario->__get('preco'),
             'valor_entrada' => $this->usuario->__get('valor_entrada'),
@@ -55,5 +55,48 @@ class FinanceiroService
     public function deletar($id)
     {
         $this->conexao->excluir("financeiro", "id = $id");
+    }
+
+    public function recuperarPagadores($data)
+    { //read
+        $query = null;
+        switch($data) {
+            case $data['nivel'] == 1:
+                $query = "SELECT id, nome FROM leads WHERE id_usuario_consultor = {$data['id']} ORDER BY nome ASC";
+                break;
+
+            case $data['nivel'] == 2:
+                $query = "SELECT id, nome 
+                            FROM leads 
+                                WHERE id_usuario_consultor IN (
+                                    SELECT id FROM usuarios WHERE gerente = {$data['id']}
+                                ) 
+                        ORDER BY nome ASC";
+                break;
+
+            case $data['nivel'] == 3:
+                $query = "SELECT id, nome FROM leads ORDER BY nome DESC";
+                break;
+        }
+        return $this->conexao->ler($query);
+    }
+
+    public function recuperarRecebedores($data)
+    { //read
+        $query = null;
+        switch($data) {
+            case $data['nivel'] == 1:
+                $query = "SELECT id, nome FROM usuarios WHERE id = {$data['id']} ORDER BY nome ASC";
+                break;
+
+            case $data['nivel'] == 2:
+                $query = "SELECT id, nome FROM usuarios WHERE id = {$data['id']} OR gerente = {$data['id']} ORDER BY nome ASC";
+                break;
+
+            case $data['nivel'] == 3:
+                $query = "SELECT id, nome FROM usuarios ORDER BY nome DESC";
+                break;
+        }
+        return $this->conexao->ler($query);
     }
 }

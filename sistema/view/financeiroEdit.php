@@ -33,6 +33,10 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+        <!-- SELECT 2 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
         <!-- ESTILO -->
         <link rel="stylesheet" type="text/css" href="/sistema/css/style.css">
 
@@ -54,7 +58,6 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
             <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar-aside.php' ?>
             <div id="content">
                 <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar.php' ?>
-
                 <!-- SESSÕES -->
                 <section class="view-lead">
                     <div class="contain">
@@ -62,18 +65,28 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                             <form method="post" action="/sistema/controller/financeiro.controller.php">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="nome_pagador">Nome do pagador</label>
-                                        <input type="text" name="nome_pagador" id="nome_pagador" placeholder="Nome do pagador" required value="<?= $financeiroService->recuperar($id)[0]->nome_pagador ?>">
+                                        <label for="id_pagador">Nome do pagador</label>
+                                        <select name="id_pagador" id="id_pagador" required>
+                                            <option selected value="">Selecione o pagador</option>
+                                            <?php foreach ($financeiroService->recuperarPagadores(['id' => $usuarioSessao->id, 'nivel' => $usuarioSessao->nivel]) as $pagador) : ?>
+                                                <option value="<?= $pagador->id ?>" <?= $pagador->id == $financeiroService->recuperar($id)[0]->id_pagador ? 'selected' : ''; ?> ><?= $pagador->nome ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="nome_recebedor">Nome do recebedor</label>
-                                        <input type="text" name="nome_recebedor" id="nome_recebedor" placeholder="Nome do recebedor" required value="<?= $financeiroService->recuperar($id)[0]->nome_recebedor ?>">
+                                        <label for="id_recebedor">Nome do recebedor</label>
+                                        <select name="id_recebedor" id="id_recebedor" required>
+                                            <option selected value="">Selecione o recebedor</option>
+                                            <?php foreach ($financeiroService->recuperarRecebedores(['id' => $usuarioSessao->id, 'nivel' => $usuarioSessao->nivel]) as $recebedor) : ?>
+                                                <option value="<?= $recebedor->id ?>" <?= $recebedor->id == $financeiroService->recuperar($id)[0]->id_recebedor ? 'selected' : ''; ?> ><?= $recebedor->nome ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="tipo_pagamento">Tipo de pagamento</label>
+                                        <label for="tipo_pagamento">Pagamento de intermediação</label>
                                         <select name="tipo_pagamento" id="tipo_pagamento" required>
                                             <?php foreach ($tipos_pagamento as $tipo_pag) : ?>
                                                 <option <?= $tipo_pag == $financeiroService->recuperar($id)[0]->tipo_pagamento ? 'selected' : ''; ?> value="<?= $tipo_pag ?>"><?= $tipo_pag ?></option>
@@ -81,7 +94,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                         </select>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="preco">Preço</label>
+                                        <label for="preco">Valor geral de venda</label>
                                         <input type="text" name="preco" id="preco" placeholder="000,000,000" required value="<?= $financeiroService->recuperar($id)[0]->preco ?>">
                                     </div>
                                 </div>
@@ -131,6 +144,16 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
     </body>
 
     </html>
+
+    <script>
+        $(document).ready(function() {
+            /**
+             * SELECT 2 (SELECT COM BUSCA)
+             */
+            $("#id_pagador").select2();
+            $("#id_recebedor").select2();
+        })
+    </script>
 
     <script>
         $(document).ready(function() {
