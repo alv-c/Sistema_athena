@@ -1,7 +1,9 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/financeiro.controller.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
-$pagina = 'novoUsuario';
+$pagina = 'novoFinanceiro';
+
+$numero_parcelas = array(1, 2, 3, 4, 5);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -54,16 +56,16 @@ $pagina = 'novoUsuario';
                                 <div class="col-md-6 col-sm-12">
                                     <label for="id_pagador">Nome do pagador</label>
                                     <select name="id_pagador" id="id_pagador" required>
-                                        <option selected value="">Selecione o pagador</option>
+                                        <option hidden value="">Selecione o pagador</option>
                                         <?php foreach ($financeiroService->recuperarPagadores(['id' => $usuarioSessao->id, 'nivel' => $usuarioSessao->nivel]) as $pagador) : ?>
                                             <option value="<?= $pagador->id ?>"><?= $pagador->nome ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <label for="id_recebedor">Nome do recebedor</label>                                    
+                                    <label for="id_recebedor">Nome do recebedor</label>
                                     <select name="id_recebedor" id="id_recebedor" required>
-                                        <option selected value="">Selecione o recebedor</option>
+                                        <option hidden value="">Selecione o recebedor</option>
                                         <?php foreach ($financeiroService->recuperarRecebedores(['id' => $usuarioSessao->id, 'nivel' => $usuarioSessao->nivel]) as $recebedor) : ?>
                                             <option value="<?= $recebedor->id ?>"><?= $recebedor->nome ?></option>
                                         <?php endforeach; ?>
@@ -74,7 +76,7 @@ $pagina = 'novoUsuario';
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <label for="tipo_pagamento">Pagamento de intermediação</label>
-                                    <select name="tipo_pagamento" id="tipo_pagamento" required>
+                                    <select name="tipo_pagamento" id="tipo_pagamento" required onchange="ajustarParcela(this), calcularParcela()">
                                         <?php foreach ($tipos_pagamento as $tipo_pag) : ?>
                                             <option value="<?= $tipo_pag ?>"><?= $tipo_pag ?></option>
                                         <?php endforeach; ?>
@@ -82,29 +84,33 @@ $pagina = 'novoUsuario';
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <label for="preco">Valor geral de venda</label>
-                                    <input type="text" name="preco" id="preco" placeholder="000,000,000" required>
+                                    <input type="text" name="preco" id="preco" placeholder="000,000,000" required onkeyup="calcularParcela()">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                    <label for="valor_entrada">Valor de entrada</label>
-                                    <input type="text" name="valor_entrada" id="valor_entrada" placeholder="Valor de entrada" required>
+                                    <label for="valor_entrada">Valor de comissão</label>
+                                    <input type="text" name="valor_entrada" id="valor_entrada" placeholder="Valor de entrada" required readonly>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <label for="num_parcelas">Número de parcelas</label>
-                                    <input type="number" name="num_parcelas" id="num_parcelas" placeholder="Número de parcelas" required>
+                                    <select name="num_parcelas" id="num_parcelas" required onchange="calcularParcela()">
+                                        <?php foreach ($numero_parcelas as $parcelas) : ?>
+                                            <option value="<?= $parcelas ?>"><?= $parcelas ?> <?= $parcelas == 1 ? 'Parcela' : 'Parcelas'; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <label for="val_parcela">Valor da parcela</label>
-                                    <input type="text" name="val_parcela" id="val_parcela" placeholder="Valor da parcela" required>
+                                    <input type="text" name="val_parcela" id="val_parcela" placeholder="Valor da parcela" required readonly>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <label for="val_juros">Juros (%)</label>
-                                    <input type="text" name="val_juros" id="val_juros" placeholder="00.1" required>
+                                    <label for="data">Comentário</label>
+                                    <textarea name="comentario" id="comentario" placeholder="Comentário"></textarea>
                                 </div>
                             </div>
 

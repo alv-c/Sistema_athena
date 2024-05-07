@@ -8,8 +8,8 @@ class Financeiro
     private $valor_entrada = null;
     private $num_parcelas = null;
     private $val_parcela = null;
-    private $val_juros = null;
     private $preco = null;
+    private $comentario = null;
 
     public function __construct(array $post = [])
     {

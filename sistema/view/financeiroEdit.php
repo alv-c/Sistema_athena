@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/financeiro.controller.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
-$pagina = 'usuariosEdit';
+$pagina = 'financeiroEdit';
 if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['editId']) && !is_null($_GET['editId']))) :
     $id = empty($_POST['editId']) ? $_GET['editId'] : $_POST['editId'];
 
@@ -17,6 +17,8 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                 break;
         }
     }
+
+    $numero_parcelas = array(1, 2, 3, 4, 5);
 ?>
     <!DOCTYPE html>
     <html lang="pt-br">
@@ -67,18 +69,18 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                     <div class="col-md-6 col-sm-12">
                                         <label for="id_pagador">Nome do pagador</label>
                                         <select name="id_pagador" id="id_pagador" required>
-                                            <option selected value="">Selecione o pagador</option>
+                                            <option hidden value="">Selecione o pagador</option>
                                             <?php foreach ($financeiroService->recuperarPagadores(['id' => $usuarioSessao->id, 'nivel' => $usuarioSessao->nivel]) as $pagador) : ?>
-                                                <option value="<?= $pagador->id ?>" <?= $pagador->id == $financeiroService->recuperar($id)[0]->id_pagador ? 'selected' : ''; ?> ><?= $pagador->nome ?></option>
+                                                <option value="<?= $pagador->id ?>" <?= $pagador->id == $financeiroService->recuperar($id)[0]->id_pagador ? 'selected' : ''; ?>><?= $pagador->nome ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="id_recebedor">Nome do recebedor</label>
                                         <select name="id_recebedor" id="id_recebedor" required>
-                                            <option selected value="">Selecione o recebedor</option>
+                                            <option hidden value="">Selecione o recebedor</option>
                                             <?php foreach ($financeiroService->recuperarRecebedores(['id' => $usuarioSessao->id, 'nivel' => $usuarioSessao->nivel]) as $recebedor) : ?>
-                                                <option value="<?= $recebedor->id ?>" <?= $recebedor->id == $financeiroService->recuperar($id)[0]->id_recebedor ? 'selected' : ''; ?> ><?= $recebedor->nome ?></option>
+                                                <option value="<?= $recebedor->id ?>" <?= $recebedor->id == $financeiroService->recuperar($id)[0]->id_recebedor ? 'selected' : ''; ?>><?= $recebedor->nome ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -87,7 +89,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="tipo_pagamento">Pagamento de intermediação</label>
-                                        <select name="tipo_pagamento" id="tipo_pagamento" required>
+                                        <select name="tipo_pagamento" id="tipo_pagamento" required onchange="ajustarParcela(this), calcularParcela()">
                                             <?php foreach ($tipos_pagamento as $tipo_pag) : ?>
                                                 <option <?= $tipo_pag == $financeiroService->recuperar($id)[0]->tipo_pagamento ? 'selected' : ''; ?> value="<?= $tipo_pag ?>"><?= $tipo_pag ?></option>
                                             <?php endforeach; ?>
@@ -95,36 +97,41 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="preco">Valor geral de venda</label>
-                                        <input type="text" name="preco" id="preco" placeholder="000,000,000" required value="<?= $financeiroService->recuperar($id)[0]->preco ?>">
+                                        <input type="text" name="preco" id="preco" placeholder="000,000,000" required value="<?= $financeiroService->recuperar($id)[0]->preco ?>" onkeyup="calcularParcela()">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="valor_entrada">Valor de entrada</label>
-                                        <input type="text" name="valor_entrada" id="valor_entrada" placeholder="Valor de entrada" required value="<?= $financeiroService->recuperar($id)[0]->valor_entrada ?>">
+                                        <input type="text" name="valor_entrada" id="valor_entrada" placeholder="Valor de entrada" required value="<?= $financeiroService->recuperar($id)[0]->valor_entrada ?>" readonly>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="num_parcelas">Número de parcelas</label>
-                                        <input type="number" name="num_parcelas" id="num_parcelas" placeholder="Número de parcelas" required value="<?= $financeiroService->recuperar($id)[0]->num_parcelas ?>">
+                                        <select name="num_parcelas" id="num_parcelas" required onchange="calcularParcela()">
+                                            <option value="" hidden>Nº parcelas</option>
+                                            <?php foreach ($numero_parcelas as $parcelas) : ?>
+                                                <option value="<?= $parcelas ?>" <?= $parcelas == $financeiroService->recuperar($id)[0]->num_parcelas ? 'selected' : ''; ?>><?= $parcelas ?> <?= $parcelas == 1 ? 'Parcela' : 'Parcelas'; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="val_parcela">Valor da parcela</label>
-                                        <input type="text" name="val_parcela" id="val_parcela" placeholder="Valor da parcela" required value="<?= $financeiroService->recuperar($id)[0]->val_parcela ?>">
+                                        <input type="text" name="val_parcela" id="val_parcela" placeholder="Valor da parcela" required value="<?= $financeiroService->recuperar($id)[0]->val_parcela ?>" readonly>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="val_juros">Juros (%)</label>
-                                        <input type="text" name="val_juros" id="val_juros" placeholder="0.1" required value="<?= $financeiroService->recuperar($id)[0]->val_juros ?>">
+                                        <label for="data">Data</label>
+                                        <input type="text" name="data" id="data" placeholder="Data" disabled value="<?= $financeiroService->recuperar($id)[0]->data ?>">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="data">Data</label>
-                                        <input type="text" name="data" id="data" placeholder="Data" disabled value="<?= $financeiroService->recuperar($id)[0]->data ?>">
+                                        <label for="data">Comentário</label>
+                                        <textarea name="comentario" id="comentario" placeholder="Comentário"><?= $financeiroService->recuperar($id)[0]->comentario ?></textarea>
                                     </div>
                                 </div>
 

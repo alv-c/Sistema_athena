@@ -22,7 +22,7 @@ class FinanceiroService
             'valor_entrada' => $this->usuario->__get('valor_entrada'),
             'num_parcelas' => $this->usuario->__get('num_parcelas'),
             'val_parcela' => $this->usuario->__get('val_parcela'),
-            'val_juros' => $this->usuario->__get('val_juros'),
+            'comentario' => $this->usuario->__get('comentario'),
             'data' => $data_atual,
         ]);
     }
@@ -48,7 +48,7 @@ class FinanceiroService
             'valor_entrada' => $this->usuario->__get('valor_entrada'),
             'num_parcelas' => $this->usuario->__get('num_parcelas'),
             'val_parcela' => $this->usuario->__get('val_parcela'),
-            'val_juros' => $this->usuario->__get('val_juros'),
+            'comentario' => $this->usuario->__get('comentario'),
         ], "id = $id");
     }
 

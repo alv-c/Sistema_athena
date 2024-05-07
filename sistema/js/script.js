@@ -184,3 +184,41 @@ if (pagina == 'edit') {
         }
     }
 }
+
+if (pagina == 'novoFinanceiro' || pagina == 'financeiroEdit') {
+    window.addEventListener("DOMContentLoaded", (event) => {
+        document.getElementById("preco").addEventListener("input", function () {
+            var valorOriginal = parseFloat(this.value);
+            if (!isNaN(valorOriginal)) {
+                var desconto = valorOriginal * 0.05;
+                document.getElementById("valor_entrada").value = desconto.toFixed(2);
+            } else {
+                document.getElementById("valor_entrada").value = "";
+            }
+        });
+    });
+
+    function ajustarParcela (campo) {
+        let inputNumParc = document.getElementById('num_parcelas');
+        if(campo.value == 'Parcelamento') {
+            inputNumParc.style.pointerEvents = 'auto'
+        } else {
+            inputNumParc.value = 1;
+            inputNumParc.style.pointerEvents = 'none'
+        }
+    }
+
+    function calcularParcela () {
+        let numParcelas = document.getElementById('num_parcelas').value;
+        let valorComissai = document.getElementById('valor_entrada').value;
+        let campoValorParcela = document.getElementById('val_parcela');
+        
+        if(numParcelas != '' && valorComissai != '') {
+            let valor_parcela = (valorComissai / numParcelas);
+            valor_parcela = valor_parcela.toFixed(2);
+            campoValorParcela.value = valor_parcela;
+        } else {
+            campoValorParcela.value = 0.00;
+        }
+    }
+}

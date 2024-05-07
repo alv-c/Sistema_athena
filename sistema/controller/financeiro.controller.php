@@ -3,7 +3,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/global.controller.
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/model/pdo.model.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/model/financeiro.model.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/financeiro.service.php';
-$tipos_pagamento = ['A vista', 'Parcelamento', 'A prazo'];
+$tipos_pagamento = ['A vista', 'Parcelamento'];
 
 if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') {
 	if (validateForm($_POST)) {
