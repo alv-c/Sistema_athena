@@ -20,6 +20,10 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+        <!-- DATATABLE -->
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
         <!-- ESTILO -->
         <link rel="stylesheet" type="text/css" href="/sistema/css/style.css">
 
@@ -117,7 +121,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                         <label for="anotacao">Anotação</label>
                                         <textarea name="anotacao" id="anotacao" placeholder="Comentário"></textarea>
                                         <div class="aviso-follow" id="aviso-follow">
-                                            <div class="alert alert-warning mt-3 role="alert">
+                                            <div class="alert alert-warning mt-3 role=" alert">
                                                 <strong>Atenção!</strong> Esta anotação será utilizada para a criação de follow-up!
                                             </div>
                                         </div>
@@ -166,7 +170,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                             <tr>
                                                 <td><?= $itemLogArray->id ?></td>
                                                 <td>
-                                                    <?php if((bool)$itemLogArray->id_follow) : ?>
+                                                    <?php if ((bool)$itemLogArray->id_follow) : ?>
                                                         <div>
                                                             <span class="badge badge-warning">Follow-up</span>
                                                         </div>
@@ -186,6 +190,42 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                 <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/footer.php'; ?>
             </div>
         </div>
+
+
+        <!-- BOTAO WHATSAPP -->
+        <!-- START Widget WhastApp hospedagemwordpresspro -->
+        <a href="https://api.whatsapp.com/send?phone=55<?= $leadService->recuperar($id)[0]->telefone ?>&text=" id="waurlsite" class="bt-whatsApp" target="_blank" style="right:25px; position:fixed;width:60px;height:60px;bottom:40px;z-index:100;">
+            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDI4Ljg3IDI4Ljg3IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMTg5ZDBlO30uY2xzLTJ7ZmlsbDojZmZmO2ZpbGwtcnVsZTpldmVub2RkO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMiIgaWQ9IkxheWVyXzIiPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMSIgaWQ9IkxheWVyXzEtMiI+PHJlY3QgY2xhc3M9ImNscy0xIiBoZWlnaHQ9IjI4Ljg3IiByeD0iNi40OCIgcnk9IjYuNDgiIHdpZHRoPSIyOC44NyIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTcuMDksMjEuODJsLjIzLS44N2MuMjQtLjg5LjQ5LTEuNzcuNzItMi42NmEuNjUuNjUsMCwwLDAsMC0uNDMsNy4zMiw3LjMyLDAsMSwxLDMuMTYsMy4wOC43My43MywwLDAsMC0uNDUsMEM4Ljc3LDIxLjM4LDcuNDksMjEuNzQsNy4wOSwyMS44MlpNOC44LDIwLjE0Yy43My0uMTksMS40LS4zNiwyLjA3LS41NGEuNi42LDAsMCwxLC41LjA3LDYsNiwwLDAsMCw0LjA1Ljc3LDYuMTIsNi4xMiwwLDEsMC02LjMxLTMuMDksMS4yOCwxLjI4LDAsMCwxLC4xNCwxLjE2QzkuMDcsMTksOSwxOS41NSw4LjgsMjAuMTRaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMTYuMzcsMTcuODljLTEuNDMtLjA1LTMuNzEtMS4xOC01LjI3LTMuODlhMi4yLDIuMiwwLDAsMSwuMzQtMi44MSwxLDEsMCwwLDEsLjk0LS4xNGMuMDgsMCwuMTYuMTMuMi4yMi4yMS40Ny40MS45NS41OSwxLjQzLjEuMjYtLjA4LjUtLjQ1LjkyYS4zMi4zMiwwLDAsMCwwLC40Miw1LDUsMCwwLDAsMi41NCwyLjE4LjMuMywwLDAsMCwuMzktLjFjLjU4LS43MS42NC0uOTIsMS0uNzgsMS40OC43MSwxLjU5Ljc0LDEuNi45QTEuNjEsMS42MSwwLDAsMSwxNi4zNywxNy44OVoiLz48L2c+PC9nPjwvc3ZnPg==" alt="" width="60px">
+        </a>
+        <span id="alertWapp" style="right:30px; visibility: hidden; position:fixed;	width:17px;	height:17px;bottom:90px; background:red;z-index:101; font-size:11px;color:#fff;text-align:center;border-radius: 50px; font-weight:bold;line-height: normal; "> 1 </span>
+        <div id="msg1" style="right: 90px; visibility: visible; background: #1EBC59; color: #fff; position: fixed; width: 200px; bottom: 52px; text-align: center; font-size: 13px; line-height: 31px; height: 32px; border-radius: 100px; z-index: 100; ">Falar com lead</div>
+        <script type="text/javascript">
+            function showIt2() {
+                document.getElementById("msg1").style.visibility = "visible";
+            }
+            setTimeout("showIt2()", 5000);
+
+            function hiddenIt() {
+                document.getElementById("msg1").style.visibility = "hidden";
+            }
+            setTimeout("hiddenIt()", 15000);
+
+            function showIt3() {
+                document.getElementById("msg1").style.visibility = "visible";
+            }
+            setTimeout("showIt3()", 25000);
+            msg1.onclick = function() {
+                document.getElementById('msg1').style.visibility = "hidden";
+            };
+
+            function alertW() {
+                document.getElementById("alertWapp").style.visibility = "visible";
+            }
+            setTimeout("alertW()", 15000);
+        </script>
+        <!-- END Widget WhastApp -->
+
+
     </body>
 
     </html>

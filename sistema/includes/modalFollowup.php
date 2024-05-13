@@ -54,26 +54,45 @@
                     }
                     ?>
 
-                    <table class="table table-hover" id="table-follow-modal" style="width: 100%;">
+                    <table class="table table-striped table-bordered" id="table-follow-modal">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nome</th>
-                                <th scope="col">Descrição</th>
-                                <th scope="col">Data</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($conexao->ler($queryFlw) as $index => $follow) : ?>
+                            <?php foreach ($conexao->ler($queryFlw) as $key => $follow) : ?>
+                                <tr>
+                                    <th scope="row"><?= $key ?></th>
+                                    <td><?= $follow->nome_lead ?></td>
+                                    <td><?= $follow->descricao ?></td>
+                                    <td><?= $follow->data ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                    <!-- <table id="table-follow-modal">
+                        <tr>
+                            <td>#</td>
+                            <td>Nome</td>
+                            <td>Descrição</td>
+                            <td>Data</td>
+                        </tr>
+                        <?php //foreach ($conexao->ler($queryFlw) as $index => $follow) : 
+                        ?>
                             <tr>
-                                <td scope="row"><?= $index ?></td>
+                                <td><?= $index ?></td>
                                 <td><?= $follow->nome_lead ?></td>
                                 <td><?= $follow->descricao ?></td>
                                 <td><?= $follow->data ?></td>
                             </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                        <?php //endforeach; 
+                        ?>
+                    </table> -->
 
                 </div>
 

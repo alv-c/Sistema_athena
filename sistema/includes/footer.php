@@ -69,11 +69,5 @@
                 label.innerHTML = 'Esconder'
             }
         }
-
-        // let openFilters = () => {
-        //     let display = $("#contain-filters").css("display")
-        //     if (display == 'none') $('#contain-filters').fadeIn()
-        //     else $('#contain-filters').fadeOut()
-        // }
     </script>
 </footer>
