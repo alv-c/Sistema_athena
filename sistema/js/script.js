@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     $('.initfadeOut').fadeOut()
 
@@ -29,6 +28,10 @@ $(document).ready(function () {
         ],
     });
 })
+
+$(document).on('shown.bs.modal', function (e) {
+    $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+});
 
 let confirmDel = (name, modulo, dataForm) => {
     $('#modalDelete').modal('show')

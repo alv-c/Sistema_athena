@@ -9,8 +9,6 @@
                 </button>
             </div>
             <div class="modal-body" style="padding: 0;">
-
-
                 <div class="pt-2 pb-4" style="padding: 0 23px 0 13px;">
 
                     <?php
@@ -66,55 +64,16 @@
                         <tbody>
                             <?php foreach ($conexao->ler($queryFlw) as $key => $follow) : ?>
                                 <tr>
-                                    <th scope="row"><?= $key ?></th>
+                                    <td scope="row"><?= $key ?></td>
                                     <td><?= $follow->nome_lead ?></td>
                                     <td><?= $follow->descricao ?></td>
-                                    <td><?= $follow->data ?></td>
+                                    <td><?= date('d/m/Y H:m:s',  strtotime($follow->data)) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-
-                    <!-- <table id="table-follow-modal">
-                        <tr>
-                            <td>#</td>
-                            <td>Nome</td>
-                            <td>Descrição</td>
-                            <td>Data</td>
-                        </tr>
-                        <?php //foreach ($conexao->ler($queryFlw) as $index => $follow) : 
-                        ?>
-                            <tr>
-                                <td><?= $index ?></td>
-                                <td><?= $follow->nome_lead ?></td>
-                                <td><?= $follow->descricao ?></td>
-                                <td><?= $follow->data ?></td>
-                            </tr>
-                        <?php //endforeach; 
-                        ?>
-                    </table> -->
-
                 </div>
-
-
             </div>
-            <!-- <div class="modal-footer d-block">
-                <form id="form-followup">
-                    <input type="hidden" name="id_usuario" value="<?= $usuarioSessao->id ?>">
-                    <input type="hidden" name="nivel_usuario" value="<?= $usuarioSessao->nivel ?>">
-                    <div class="row no-margin-padding w-100">
-                        <div class="col-md-5 col-sm-12 no-margin-padding px-md-1 py-sm-2">
-                            <textarea name="descricao" id="descricao" class="form-control" placeholder="Descrição followup" required></textarea>
-                        </div>
-                        <div class="col-md-4 col-sm-12 no-margin-padding px-md-1 py-sm-2 py-2">
-                            <input type="date" name="data" id="data" class="form-control" required>
-                        </div>
-                        <div class="col-md-3 col-sm-12 no-margin-padding px-md-1 py-sm-2 py-2">
-                            <button type="button" class="btn btn-dark btn-block" onclick="insertFollowup('form-followup')">Salvar</button>
-                        </div>
-                    </div>
-                </form>
-            </div> -->
         </div>
     </div>
 </div>
