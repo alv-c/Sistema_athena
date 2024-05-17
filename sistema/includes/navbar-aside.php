@@ -41,6 +41,9 @@
         <li>
             <a href="/sistema/view/exportar_lead.php">Exportar Lead</a>
         </li>
+        <li>
+            <a href="/sistema/view/importar_lead.php">Importar Lead</a>
+        </li>
     </ul>
 
     <ul class="list-unstyled CTAs">

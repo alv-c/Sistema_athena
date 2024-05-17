@@ -15,7 +15,7 @@
                     $queryFlw = '';
                     switch ($usuarioSessao->nivel) {
                         case 1:
-                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
+                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead, LEADS.telefone
                                     FROM followup FLW
                                         LEFT JOIN usuarios USR
                                             ON (USR.id = FLW.id_usuario)
@@ -27,7 +27,7 @@
                             break;
 
                         case 2:
-                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
+                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead, LEADS.telefone
                                     FROM followup FLW
                                         LEFT JOIN usuarios USR
                                             ON (USR.id = FLW.id_usuario)
@@ -40,7 +40,7 @@
                             break;
 
                         case 3:
-                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead
+                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead, LEADS.telefone
                                     FROM followup FLW
                                         LEFT JOIN usuarios USR
                                             ON (USR.id = FLW.id_usuario)
@@ -52,26 +52,28 @@
                     }
                     ?>
 
-                    <table class="table table-striped table-bordered" id="table-follow-modal">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($conexao->ler($queryFlw) as $key => $follow) : ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" id="table-follow-modal" style="font-size: 12px; font-weight: 500;">
+                            <thead>
                                 <tr>
-                                    <td scope="row"><?= $key ?></td>
-                                    <td><?= $follow->nome_lead ?></td>
-                                    <td><?= $follow->descricao ?></td>
-                                    <td><?= date('d/m/Y H:m:s',  strtotime($follow->data)) ?></td>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Telefone</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Data</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($conexao->ler($queryFlw) as $key => $follow) : ?>
+                                    <tr>
+                                        <td scope="row"><?= $follow->nome_lead ?></td>
+                                        <td class="col-fone"><?= $follow->telefone ?></td>
+                                        <td><?= $follow->descricao ?></td>
+                                        <td><?= date('d/m/Y H:i:s',  strtotime($follow->data)) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

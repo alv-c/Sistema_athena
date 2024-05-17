@@ -132,7 +132,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                             </div>
                                             <div>
                                                 <label for="hora_follow">Hora follow-up</label>
-                                                <input type="time" name="hora_follow" class="required-js border border-warning" value="<?= date('H:i:s') ?>" required="false">
+                                                <input type="text" name="hora_follow" class="required-js input_hora border border-warning" value="<?= date('H:i:s') ?>" required="false">
                                             </div>
                                         </div>
                                         <div class="custom-control custom-checkbox">

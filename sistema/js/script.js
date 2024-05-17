@@ -198,7 +198,6 @@ if (pagina == 'edit') {
         let containFllw = document.getElementById('contain-confirm-follow');
         let inputs = document.getElementsByClassName('required-js');
         let aviso = document.getElementById('aviso-follow');
-        console.log(inputs)
         if (btn.checked == true) {
             containFllw.style.display = 'flex'
             aviso.style.display = 'block'
