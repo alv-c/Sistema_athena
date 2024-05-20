@@ -128,7 +128,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="data">Data</label>
-                                        <input type="text" name="data" id="data" placeholder="Data" disabled value="<?= $financeiroService->recuperar($id)[0]->data ?>">
+                                        <input type="text" name="data" class="input_data_hora" id="data" placeholder="Data" value="<?= date('d/m/Y H:i',  strtotime($financeiroService->recuperar($id)[0]->data)) ?>">
                                     </div>
                                 </div>
 

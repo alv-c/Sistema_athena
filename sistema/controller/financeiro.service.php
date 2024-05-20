@@ -3,27 +3,27 @@
 class FinanceiroService
 {
     private $conexao = null;
-    private $usuario = null;
+    private $financeiro = null;
 
-    public function __construct($conexao, $usuario)
+    public function __construct($conexao, $financeiro)
     {
         $this->conexao = $conexao;
-        $this->usuario = $usuario;
+        $this->financeiro = $financeiro;
     }
 
     public function inserir()
     {
-        $data_atual = date('Y-m-d H:i:s');
+        $data_registro = date('Y-m-d H:i',  strtotime($this->financeiro->__get('data')));
         return $this->conexao->inserir('financeiro', [
-            'id_pagador' => $this->usuario->__get('id_pagador'),
-            'id_recebedor' => $this->usuario->__get('id_recebedor'),
-            'tipo_pagamento' => $this->usuario->__get('tipo_pagamento'),
-            'preco' => $this->usuario->__get('preco'),
-            'valor_entrada' => $this->usuario->__get('valor_entrada'),
-            'num_parcelas' => $this->usuario->__get('num_parcelas'),
-            'val_parcela' => $this->usuario->__get('val_parcela'),
-            'comentario' => $this->usuario->__get('comentario'),
-            'data' => $data_atual,
+            'id_pagador' => $this->financeiro->__get('id_pagador'),
+            'id_recebedor' => $this->financeiro->__get('id_recebedor'),
+            'tipo_pagamento' => $this->financeiro->__get('tipo_pagamento'),
+            'preco' => $this->financeiro->__get('preco'),
+            'valor_entrada' => $this->financeiro->__get('valor_entrada'),
+            'num_parcelas' => $this->financeiro->__get('num_parcelas'),
+            'val_parcela' => $this->financeiro->__get('val_parcela'),
+            'comentario' => $this->financeiro->__get('comentario'),
+            'data' => $data_registro,
         ]);
     }
 
@@ -52,15 +52,17 @@ class FinanceiroService
 
     public function atualizar($id)
     {
+        $data_registro = date('Y-m-d H:i',  strtotime($this->financeiro->__get('data')));
         $this->conexao->atualizar("financeiro", [
-            'id_pagador' => $this->usuario->__get('id_pagador'),
-            'id_recebedor' => $this->usuario->__get('id_recebedor'),
-            'tipo_pagamento' => $this->usuario->__get('tipo_pagamento'),
-            'preco' => $this->usuario->__get('preco'),
-            'valor_entrada' => $this->usuario->__get('valor_entrada'),
-            'num_parcelas' => $this->usuario->__get('num_parcelas'),
-            'val_parcela' => $this->usuario->__get('val_parcela'),
-            'comentario' => $this->usuario->__get('comentario'),
+            'id_pagador' => $this->financeiro->__get('id_pagador'),
+            'id_recebedor' => $this->financeiro->__get('id_recebedor'),
+            'tipo_pagamento' => $this->financeiro->__get('tipo_pagamento'),
+            'preco' => $this->financeiro->__get('preco'),
+            'valor_entrada' => $this->financeiro->__get('valor_entrada'),
+            'num_parcelas' => $this->financeiro->__get('num_parcelas'),
+            'val_parcela' => $this->financeiro->__get('val_parcela'),
+            'comentario' => $this->financeiro->__get('comentario'),
+            'data' => $data_registro,
         ], "id = $id");
     }
 

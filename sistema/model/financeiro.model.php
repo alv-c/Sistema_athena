@@ -10,6 +10,7 @@ class Financeiro
     private $val_parcela = null;
     private $preco = null;
     private $comentario = null;
+    private $data = null;
 
     public function __construct(array $post = [])
     {

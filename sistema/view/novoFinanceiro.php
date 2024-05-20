@@ -109,11 +109,21 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
 
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                    <label for="val_parcela">Valor da parcela</label>
+                                    <label for="val_parcela">
+                                        Valor da parcela 
+                                        <span class="badge badge-warning" style="font-size: 11px;">(Comissão)</span>
+                                    </label>
                                     <input type="text" name="val_parcela" id="val_parcela" placeholder="Valor da parcela" required readonly>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <label for="data">Comentário</label>
+                                    <label for="data">Data</label>
+                                    <input type="text" name="data" class="input_data_hora" id="data" placeholder="Data do registro" value="<?= date('d/m/Y H:i',  strtotime(date('Y-m-d H:i'))) ?>" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="comentario">Comentário</label>    
                                     <textarea name="comentario" id="comentario" placeholder="Comentário"></textarea>
                                 </div>
                             </div>
