@@ -117,7 +117,7 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <label for="data">Data</label>
-                                    <input type="text" name="data" class="input_data_hora" id="data" placeholder="Data do registro" value="<?= date('d/m/Y H:i',  strtotime(date('Y-m-d H:i'))) ?>" required>
+                                    <input type="text" name="data" class="input_data_hora input_filtro_data" id="data" placeholder="Data do registro" value="<?= date('d/m/Y',  strtotime(date('Y-m-d'))) ?>" required>
                                 </div>
                             </div>
 

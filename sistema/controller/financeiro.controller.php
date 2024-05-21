@@ -7,6 +7,8 @@ $tipos_pagamento = ['A vista', 'Parcelamento'];
 
 if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') {
 	if (validateForm($_POST)) {
+		$_POST['data'] = str_replace('/', '-', $_POST['data']);
+		$_POST['data'] = date('Y-m-d',  strtotime($_POST['data']));
 		$financeiro = new Financeiro($_POST);
 		$financeiroService = new FinanceiroService($conexao, $financeiro);
 		$idInsert = $financeiroService->inserir();
@@ -16,6 +18,8 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') {
 
 if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id'])) {
 	if (validateForm($_POST)) {
+		$_POST['data'] = str_replace('/', '-', $_POST['data']);
+		$_POST['data'] = date('Y-m-d',  strtotime($_POST['data']));
 		$financeiro = new Financeiro($_POST);
 		$financeiroService = new FinanceiroService($conexao, $financeiro);
 		$financeiroService->atualizar($_POST['id']);

@@ -13,7 +13,7 @@ class FinanceiroService
 
     public function inserir()
     {
-        $data_registro = date('Y-m-d H:i',  strtotime($this->financeiro->__get('data')));
+        $hora_atual = date('H:i:s');
         return $this->conexao->inserir('financeiro', [
             'id_pagador' => $this->financeiro->__get('id_pagador'),
             'id_recebedor' => $this->financeiro->__get('id_recebedor'),
@@ -23,7 +23,8 @@ class FinanceiroService
             'num_parcelas' => $this->financeiro->__get('num_parcelas'),
             'val_parcela' => $this->financeiro->__get('val_parcela'),
             'comentario' => $this->financeiro->__get('comentario'),
-            'data' => $data_registro,
+            'data' => $this->financeiro->__get('data'),
+            'hora' => $hora_atual,
         ]);
     }
 
@@ -52,7 +53,7 @@ class FinanceiroService
 
     public function atualizar($id)
     {
-        $data_registro = date('Y-m-d H:i',  strtotime($this->financeiro->__get('data')));
+        $hora_atual = date('H:i:s');
         $this->conexao->atualizar("financeiro", [
             'id_pagador' => $this->financeiro->__get('id_pagador'),
             'id_recebedor' => $this->financeiro->__get('id_recebedor'),
@@ -62,7 +63,8 @@ class FinanceiroService
             'num_parcelas' => $this->financeiro->__get('num_parcelas'),
             'val_parcela' => $this->financeiro->__get('val_parcela'),
             'comentario' => $this->financeiro->__get('comentario'),
-            'data' => $data_registro,
+            'data' => $this->financeiro->__get('data'),
+            'hora' => $hora_atual,
         ], "id = $id");
     }
 

@@ -107,7 +107,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
 
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="valor_entrada">Valor de entrada</label>
+                                        <label for="valor_entrada">Valor de comissão</label>
                                         <input type="text" name="valor_entrada" id="valor_entrada" placeholder="Valor de entrada" required value="<?= $financeiroService->recuperar($id)[0]->valor_entrada ?>" readonly>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -123,12 +123,15 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
 
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="val_parcela">Valor da parcela</label>
+                                        <label for="val_parcela">
+                                            Valor da parcela
+                                            <span class="badge badge-warning" style="font-size: 11px;">(Comissão)</span>
+                                        </label>
                                         <input type="text" name="val_parcela" id="val_parcela" placeholder="Valor da parcela" required value="<?= $financeiroService->recuperar($id)[0]->val_parcela ?>" readonly>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="data">Data</label>
-                                        <input type="text" name="data" class="input_data_hora" id="data" placeholder="Data" value="<?= date('d/m/Y H:i',  strtotime($financeiroService->recuperar($id)[0]->data)) ?>">
+                                        <input type="text" name="data" class="input_data_hora input_filtro_data" id="data" placeholder="Data" value="<?= date('d/m/Y',  strtotime($financeiroService->recuperar($id)[0]->data)) ?>">
                                     </div>
                                 </div>
 
