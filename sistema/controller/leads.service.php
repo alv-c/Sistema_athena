@@ -22,6 +22,7 @@ class LeadsService
                 'telefone2' => $this->lead->__get('telefone2'),
                 'email' => $this->lead->__get('email'),
                 'profissao' => $this->lead->__get('profissao'),
+                'data_nascimento' => $this->lead->__get('data_nascimento'),
                 'data' => $data,
                 'data_aux' => $data_aux
             ];
@@ -32,6 +33,7 @@ class LeadsService
                 'telefone2' => $this->lead->__get('telefone2'),
                 'email' => $this->lead->__get('email'),
                 'profissao' => $this->lead->__get('profissao'),
+                'data_nascimento' => $this->lead->__get('data_nascimento'),
                 'id_usuario_consultor' => $this->lead->__get('id_usuario_consultor'),
                 'data' => $data,
                 'data_aux' => $data_aux,
@@ -83,6 +85,7 @@ class LeadsService
             'telefone2' => $this->lead->__get('telefone2'),
             'email' => $this->lead->__get('email'),
             'profissao' => $this->lead->__get('profissao'),
+            'data_nascimento' => $this->lead->__get('data_nascimento'),
             'id_usuario_consultor' => $this->lead->__get('id_usuario_consultor'),
             'midia' => $this->lead->__get('midia'),
             'status' => $this->lead->__get('status')

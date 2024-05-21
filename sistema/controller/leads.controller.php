@@ -17,6 +17,8 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id
 		$log = empty($_POST['anotacao']) ? false : true;
 		$_POST['telefone'] = $conexao->removerCaracteresEsp($_POST['telefone']);
 		$_POST['telefone2'] = $conexao->removerCaracteresEsp($_POST['telefone2']);
+		$_POST['data_nascimento'] = str_replace('/', '-', $_POST['data_nascimento']);
+		$_POST['data_nascimento'] = date('Y-m-d',  strtotime($_POST['data_nascimento']));
 		$dados_follow = [
 			'data_follow' => $_POST['data_follow'],
 			'hora_follow' => $_POST['hora_follow'],
@@ -62,6 +64,8 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id']
 if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir_lead_manual') {
 	$_POST['telefone'] = $conexao->removerCaracteresEsp($_POST['telefone']);
 	$_POST['telefone2'] = $conexao->removerCaracteresEsp($_POST['telefone2']);
+	$_POST['data_nascimento'] = str_replace('/', '-', $_POST['data_nascimento']);
+	$_POST['data_nascimento'] = date('Y-m-d',  strtotime($_POST['data_nascimento']));
 	$lead = new Lead($_POST);
 	$leadService = new LeadsService($conexao, $lead);
 	$leadService->inserir();
@@ -76,6 +80,8 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'filtrarLead') {
 		$array_post = $_POST;
 		$array_post['telefone'] = $conexao->removerCaracteresEsp($array_post['telefone']);
 		$array_post['telefone2'] = $conexao->removerCaracteresEsp($array_post['telefone2']);
+		$array_post['data_nascimento'] = str_replace('/', '-', $array_post['data_nascimento']);
+		$array_post['data_nascimento'] = date('Y-m-d',  strtotime($array_post['data_nascimento']));
 		$array_post['data_aux'] = [$_POST['data_ini'], $_POST['data_fim']];
 		unset($array_post['data_ini']);
 		unset($array_post['data_fim']);

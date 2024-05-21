@@ -6,6 +6,7 @@
         private $telefone2 = null;
         private $email = null;
         private $profissao = null;
+        private $data_nascimento = null;
         private $id_usuario_consultor = null;
         private $anotacao = null;
         private $midia = null;

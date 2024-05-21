@@ -80,6 +80,10 @@ $data_dia_ant = date('Y-m-d', $data);
                                 <input type="text" name="profissao" id="profissao" class="form-filtro" placeholder="Profissão" value="<?= isset($_POST['profissao']) ? $_POST['profissao'] : ''; ?>">
                             </div>
                             <div class="item">
+                                <label for="data_nascimento">Data de nascimento:</label>
+                                <input type="text" name="data_nascimento" id="data_nascimento" class="form-filtro input_filtro_data" placeholder="Data de nascimento" value="<?= isset($_POST['data_nascimento']) ? $_POST['data_nascimento'] : ''; ?>">
+                            </div>
+                            <div class="item">
                                 <label for="id_usuario_consultor">Consultor:</label>
                                 <select name="id_usuario_consultor" id="id_usuario_consultor" class="form-filtro">
                                     <option hidden value="0">Selecione o consultor</option>

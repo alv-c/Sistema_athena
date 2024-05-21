@@ -84,6 +84,10 @@ $pagina = 'novoLead';
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="data_nascimento">Data nascimento</label>
+                                    <input type="text" class="input_filtro_data" name="data_nascimento" id="data_nascimento" placeholder="Data nascimento">
+                                </div>
                                 <?php if ($usuarioSessao->nivel > 1) { ?>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="id_usuario_consultor">Corretor</label>
@@ -96,6 +100,9 @@ $pagina = 'novoLead';
                                 <?php } else if ($usuarioSessao->nivel == 1) { ?>
                                     <input type="hidden" name="id_usuario_consultor" value="<?= $usuarioSessao->id ?>">
                                 <?php } ?>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" required>
@@ -105,6 +112,7 @@ $pagina = 'novoLead';
                                     </select>
                                 </div>
                             </div>
+
                             <div class="mt-3">
                                 <input type="hidden" name="acao" value="inserir_lead_manual">
                                 <button type="submit" class="btn btn-dark btn-block btn-sm">Salvar</button>

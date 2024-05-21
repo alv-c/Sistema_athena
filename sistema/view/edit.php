@@ -99,6 +99,10 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
+                                        <label for="data_nascimento">Data de nascimento</label>
+                                        <input type="text" class="input_filtro_data" name="data_nascimento" id="data_nascimento" placeholder="Data de nascimento" value="<?= date('d/m/Y', strtotime($leadService->recuperar($id)[0]->data_nascimento)) ?>">
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
                                         <label for="id_usuario_consultor">Corretor</label>
                                         <select name="id_usuario_consultor" id="id_usuario_consultor">
                                             <option value="0" hidden>Selecione um corretor</option>
@@ -107,6 +111,8 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="midia">Status</label>
                                         <select name="status" id="status">
@@ -115,8 +121,6 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="anotacao">Anotação</label>
                                         <textarea name="anotacao" id="anotacao" placeholder="Comentário"></textarea>
