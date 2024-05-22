@@ -20,6 +20,19 @@
   background: #555;
 }
 
+/** ANIMACOES **/
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+  }
+}
 body {
   font-family: "Poppins", sans-serif;
   background: #fafafa;
@@ -287,6 +300,30 @@ body .wrapper #content .navbar .line {
   height: 1px;
   border-bottom: 1px dashed #ddd;
   margin: 40px 0;
+}
+body .wrapper #content .navbar .wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+body .wrapper #content .navbar .wrap .button {
+  transition: all 0.3s ease-in-out 0s;
+}
+body .wrapper #content .navbar .wrap button.button::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: 6px solid #DC143C;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 53.5%;
+  transform: translate(-50%, -50%);
+  animation: ring 1.5s infinite;
 }
 body .wrapper #content section.sessao-tabela div.circle-stts {
   width: 17px;

@@ -20,6 +20,23 @@
 }
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+
+/** ANIMACOES **/
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 150px;
+        height: 150px;
+        opacity: 0;
+    }
+}
+
 //CORPO DA PÁGINA
 
 body {
@@ -318,6 +335,33 @@ body {
                     height: 1px;
                     border-bottom: 1px dashed #ddd;
                     margin: 40px 0;
+                }
+
+                .wrap {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    z-index: 2;
+
+                    .button {
+                        transition: all 0.3s ease-in-out 0s;
+                    }
+
+                    button.button::after {
+                        content: '';
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 100%;
+                        border: 6px solid #DC143C;
+                        position: absolute;
+                        z-index: -1;
+                        top: 50%;
+                        left: 53.5%;
+                        transform: translate(-50%, -50%);
+                        animation: ring 1.5s infinite;
+                    }
                 }
             }
 
