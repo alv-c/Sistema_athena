@@ -115,6 +115,19 @@ class GlobalObj
         // }
     }
 
+    public function criarNotifFollow ()
+    {
+        try {
+            $sql = "SELECT id FROM followup WHERE DATE(data) = CURDATE()";
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_NUM);
+        } catch (PDOException $e) {
+            echo "Erro: " . $e->getMessage();
+            return false;
+        }
+    }
+
     // require 'vendor/autoload.php'; // Caminho para o autoload do Composer
     // use PhpOffice\PhpSpreadsheet\IOFactory;
     function xlsToJSON($xlsFilePath)

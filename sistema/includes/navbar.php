@@ -8,6 +8,10 @@
         <button type="button" class="btn btn-dark ml-2" data-toggle="modal" data-target="#modalFollowup">
             <i class="fas fa-address-card" id="ico-btn-flw"></i>
             <span id="span-btn-flw">Followup</span>
+
+            <?php if((bool)count($conexao->criarNotifFollow())) : ?>
+                <h3>NOTIFICAR</h3>
+            <?php endif; ?>
         </button>
         <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-align-justify"></i>
