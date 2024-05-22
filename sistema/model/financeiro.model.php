@@ -11,6 +11,7 @@ class Financeiro
     private $preco = null;
     private $comentario = null;
     private $data = null;
+    private $dia_vencimento = null;
 
     public function __construct(array $post = [])
     {

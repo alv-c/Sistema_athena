@@ -116,12 +116,16 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
                                     <input type="text" name="val_parcela" id="val_parcela" placeholder="Valor da parcela" required readonly>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <label for="data">Data</label>
+                                    <label for="data">Data do registro</label>
                                     <input type="text" name="data" class="input_data_hora input_filtro_data" id="data" placeholder="Data do registro" value="<?= date('d/m/Y',  strtotime(date('Y-m-d'))) ?>" required>
                                 </div>
                             </div>
 
                             <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="dia_vencimento">Dia do vencimento</label>
+                                    <input type="number" min="1" max="31" name="dia_vencimento" id="dia_vencimento" placeholder="Dia do vencimento" value="1" required>
+                                </div>
                                 <div class="col-md-6 col-sm-12">
                                     <label for="comentario">Comentário</label>    
                                     <textarea name="comentario" id="comentario" placeholder="Comentário"></textarea>

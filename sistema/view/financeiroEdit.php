@@ -130,12 +130,16 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                         <input type="text" name="val_parcela" id="val_parcela" placeholder="Valor da parcela" required value="<?= $financeiroService->recuperar($id)[0]->val_parcela ?>" readonly>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="data">Data</label>
-                                        <input type="text" name="data" class="input_data_hora input_filtro_data" id="data" placeholder="Data" value="<?= date('d/m/Y',  strtotime($financeiroService->recuperar($id)[0]->data)) ?>">
+                                        <label for="data">Data do registro</label>
+                                        <input type="text" name="data" class="input_data_hora input_filtro_data" id="data" placeholder="Data do registro" value="<?= date('d/m/Y',  strtotime($financeiroService->recuperar($id)[0]->data)) ?>">
                                     </div>
                                 </div>
 
                                 <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="dia_vencimento">Dia do vencimento</label>
+                                        <input type="number" min="1" max="31" name="dia_vencimento" id="dia_vencimento" placeholder="Dia do vencimento" value="<?= $financeiroService->recuperar($id)[0]->dia_vencimento ?>" required>
+                                    </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="data">Comentário</label>
                                         <textarea name="comentario" id="comentario" placeholder="Comentário"><?= $financeiroService->recuperar($id)[0]->comentario ?></textarea>
