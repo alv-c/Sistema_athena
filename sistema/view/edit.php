@@ -123,7 +123,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="anotacao">Anotação</label>
-                                        <textarea name="anotacao" id="anotacao" placeholder="Comentário" class="required-js" required="false"></textarea>
+                                        <textarea name="anotacao" id="anotacao" placeholder="Comentário"></textarea>
                                         <div class="aviso-follow" id="aviso-follow">
                                             <div class="alert alert-warning mt-3 role=" role="alert">
                                                 <strong>Atenção!</strong> Esta anotação será utilizada para a criação de follow-up!

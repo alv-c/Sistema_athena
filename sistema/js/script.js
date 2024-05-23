@@ -204,12 +204,14 @@ if (pagina == 'edit') {
             for (let i = 0; i < inputs.length; i++) {
                 inputs[i].setAttribute("required", "true");
             }
+            document.getElementById('anotacao').setAttribute("required", "true")
         } else {
             containFllw.style.display = 'none';
             aviso.style.display = 'none'
             for (let i = 0; i < inputs.length; i++) {
                 inputs[i].setAttribute("required", "false");
             }
+            document.getElementById('anotacao').removeAttribute("required")
         }
     }
 }
