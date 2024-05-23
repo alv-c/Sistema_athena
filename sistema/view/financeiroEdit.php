@@ -155,8 +155,61 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                         </fieldset>
                     </div>
                 </section>
-                <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/footer.php'; ?>
 
+                <section class="sessao-tabela pt-4 mt-4">
+                    <span class="h5">Parcelas</span>
+                    <div class="contain pt-4">
+                        <div id="scroll">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="tabela-parcelas">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Prcl nº</th>
+                                            <th scope="col">Val da Comissão</th>
+                                            <th scope="col">Val Parcela</th>
+                                            <th scope="col">Vencimento</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Data registro</th>
+                                            <th scope="col">
+                                                Marcar Pgto.
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            $parcelas = $conexao->ler("SELECT * FROM parcelas_financeiro WHERE id_financeiro = {$id} ORDER BY sequencia_parcela ASC");
+                                            foreach($parcelas as $parcela) :
+                                        ?>
+                                        <tr>
+                                            <th scope="row"><?= $parcela->sequencia_parcela ?></th>
+                                            <td>R$<?= str_replace('.', ',', $parcela->valor_comissao) ?></td>
+                                            <td>R$<?= str_replace('.', ',', $parcela->val_parcela) ?></td>
+                                            <td><?= date('d/m/Y',  strtotime($parcela->data_vencimento)) ?></td>
+                                            <td><?= ((bool)$parcela->quitacao) ? 'Paga' : 'Em aberto'; ?></td>
+                                            <td><?= date('d/m/Y H:i:s',  strtotime($parcela->data)) ?></td>
+                                            <td>
+                                                <?php if(!((bool)$parcela->quitacao)) : ?>
+                                                    <form action="./financeiroEdit.php" method="post">
+                                                        <input type="hidden" name="editId" value="<?= $id ?>">
+                                                        <input type="hidden" name="acao" value="pprc">
+                                                        <input type="hidden" name="idpr" value="<?= $parcela->id ?>">
+                                                        <button type="submit" class="btn btn-danger" style="background: #B22222; color: #fff;">Pagar</button>
+                                                    </form>
+                                                <?php else : ?>
+                                                    <span class="badge badge-success" style="font-size: 13px;">Pago</span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                        <?php 
+                                            endforeach; 
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/footer.php'; ?>
             </div>
         </div>
     </body>

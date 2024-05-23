@@ -12,6 +12,14 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir') {
 		$financeiro = new Financeiro($_POST);
 		$financeiroService = new FinanceiroService($conexao, $financeiro);
 		$idInsert = $financeiroService->inserir();
+		$array_parc = [
+			'id_financeiro' => $idInsert,
+			'valor_comissao' => $_POST['valor_entrada'],
+			'num_parcelas' => $_POST['num_parcelas'],
+			'val_parcela' => $_POST['val_parcela'],
+			'data_vencimento' => $_POST['dia_vencimento']
+		];
+		$financeiroService->gerarParcelas($array_parc);
 		header('Location: /sistema/view/financeiro.php');
 	}
 }
@@ -33,6 +41,15 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'deletar' && !empty($_POST['id']
 		$financeiroService = new FinanceiroService($conexao, $financeiro);
 		$financeiroService->deletar($_POST['id']);
 		header('Location: /sistema/view/financeiro.php?usuarioDeletado=true');
+	}
+} 
+
+if (!empty($_POST['acao']) && $_POST['acao'] == 'pprc' && !empty($_POST['idpr'])) {
+	if (validateForm($_POST)) {
+		$conexao->atualizar("parcelas_financeiro", [
+            'quitacao' => 1,
+        ], "id = {$_POST['idpr']}");
+		header('Location: /sistema/view/financeiroEdit.php?editId=' . $_POST['editId']);
 	}
 } else {
 	header('Content-Type: text/html; charset=utf-8');

@@ -29,6 +29,32 @@ class FinanceiroService
         ]);
     }
 
+    public function gerarParcelas(array $post = [])
+    {
+        $diaDoMes = $post['data_vencimento'];
+        $numeroParcelas = $post['num_parcelas'];
+        if ($diaDoMes < 1 || $diaDoMes > 31) {
+            throw new InvalidArgumentException("O dia do mês deve estar entre 1 e 31.");
+        }
+        $dataVencimento = date('Y-m', strtotime('now')) . '-' . sprintf('%02d', $diaDoMes);
+        for ($i = 0; $i < $numeroParcelas; $i++) {
+            $dataVencimento = date('Y-m-d', strtotime("$dataVencimento +1 month"));
+            $post['sequencia_parcela'] = $i + 1;
+            $post['data_vencimento'] = $dataVencimento;
+            $post['data'] = date('Y-m-d H:i:s');
+            $this->conexao->inserir('parcelas_financeiro', [
+                'id_financeiro' => $post['id_financeiro'],
+                'valor_comissao' => $post['valor_comissao'],
+                'num_parcelas' => $post['num_parcelas'],
+                'val_parcela' => $post['val_parcela'],
+                'sequencia_parcela' => $post['sequencia_parcela'],
+                'data_vencimento' => $post['data_vencimento'],
+                'data' => $post['data'],
+            ]);
+        }
+        return true;
+    }
+
     public function recuperar($id = null)
     { //read
         $query = null;
@@ -78,7 +104,7 @@ class FinanceiroService
     public function recuperarPagadores($data)
     { //read
         $query = null;
-        switch($data) {
+        switch ($data) {
             case $data['nivel'] == 1:
                 $query = "SELECT id, nome FROM leads WHERE id_usuario_consultor = {$data['id']} ORDER BY nome ASC";
                 break;
@@ -102,7 +128,7 @@ class FinanceiroService
     public function recuperarRecebedores($data)
     { //read
         $query = null;
-        switch($data) {
+        switch ($data) {
             case $data['nivel'] == 1:
                 $query = "SELECT id, nome FROM usuarios WHERE id = {$data['id']} ORDER BY nome ASC";
                 break;
