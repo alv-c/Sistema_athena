@@ -47,7 +47,7 @@ $data_dia_ant = date('Y-m-d', $data);
     <!-- FONT AWEASOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>Página incial | Sistema Athena</title>
+    <title>Importar lead | Sistema Athena</title>
 </head>
 
 <body>
@@ -65,15 +65,14 @@ $data_dia_ant = date('Y-m-d', $data);
                         <a href='#' id='select-all'>select all</a>
                         <a href='#' id='deselect-all'>deselect all</a>
 
-                        <select multiple="multiple" id="meu_seletor" name="meu_seletor[]">
-                            <option value='elem_1'>elem 1</option>
-                            <option value='elem_2'>elem 2</option>
-                            <option value='elem_3'>elem 3</option>
-                            <option value='elem_4'>elem 4</option>
+                        <select multiple="multiple" id="meu_seletor" name="meu_seletor[]" required>
+                            <?php foreach($leadService->retornarConsultores($usuarioSessao->id, $usuarioSessao->nivel) as $item) : ?>
+                                <option value="<?= $item->id ?>"><?= $item->nome ?></option>
+                            <?php endforeach; ?>                    
                         </select>
                     </div>
 
-                    <input type="file" id="data_file" accept=".xlsx">
+                    <input type="file" id="data_file" accept=".xlsx" required>
 
                     <button type="button" id="btn-importar">IMPORTAR</button>
 

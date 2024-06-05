@@ -292,7 +292,7 @@ if (pagina == 'importar_lead') {
         xhr.open("GET", `${url}?arq=${jsonData}&users=${usuarios}`, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log(xhr.responseText)
+                console.log('Importação bem sucedida!');
             }
         };
         xhr.send();
