@@ -284,3 +284,17 @@ if (pagina == 'novoFinanceiro' || pagina == 'financeiroEdit') {
         });
     }
 }
+
+if (pagina == 'importar_lead') {
+    function enviarJSONParaPHP(jsonData, usuarios, url) {
+        var xhr = new XMLHttpRequest();
+        jsonData = JSON.stringify(jsonData);
+        xhr.open("GET", `${url}?arq=${jsonData}&users=${usuarios}`, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText)
+            }
+        };
+        xhr.send();
+    }
+}

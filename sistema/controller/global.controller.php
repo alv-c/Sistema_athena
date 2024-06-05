@@ -127,44 +127,6 @@ class GlobalObj
             return false;
         }
     }
-
-    // require 'vendor/autoload.php'; // Caminho para o autoload do Composer
-    // use PhpOffice\PhpSpreadsheet\IOFactory;
-    function xlsToJSON($xlsFilePath)
-    {
-        // Verifica se o arquivo XLS existe
-        if (!file_exists($xlsFilePath)) {
-            throw new Exception("O arquivo XLS não foi encontrado.");
-        }
-
-        // Carrega o arquivo XLS
-        $spreadsheet = IOFactory::load($xlsFilePath);
-
-        // Converte o arquivo XLS para array associativo
-        $dataArray = [];
-        foreach ($spreadsheet->getActiveSheet()->toArray() as $row) {
-            $dataArray[] = $row;
-        }
-
-        // Converte array associativo para JSON
-        $json = json_encode($dataArray);
-
-        // Verifica se a conversão foi bem-sucedida
-        if ($json === false) {
-            throw new Exception("Não foi possível converter XLS para JSON.");
-        }
-
-        return $json;
-    }
-
-    // Exemplo de uso
-    // $xlsFilePath = "arquivo.xls";
-    // try {
-    //     $json = xlsToJSON($xlsFilePath);
-    //     echo $json;
-    // } catch (Exception $e) {
-    //     echo "Erro: " . $e->getMessage();
-    // }
 }
 
 $conexaoModel = new Conexao();

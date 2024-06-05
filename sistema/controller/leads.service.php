@@ -202,7 +202,7 @@ class LeadsService
                 $conditions[] = "$table.$column BETWEEN '$value[0]' AND '$value[1]'";
             } else if (is_numeric($value)) {
                 $value = (int)$value;
-                if($value) $conditions[] = "$table.$column = '$value'";
+                if ($value) $conditions[] = "$table.$column = '$value'";
             } else {
                 if (empty($value)) continue;
                 $conditions[] = "$table.$column LIKE '%$value%'";
@@ -228,8 +228,41 @@ class LeadsService
         // }
     }
 
-    public function criar_followup($campos = []) {
-        if((bool)count($campos)) {
+    public function balanceador_leads($data)
+    {
+        // Consulta para obter o consultor com o menor número de leads associados
+        // $consulta = "SELECT USUARIOS.id, COUNT(LEADS.id) AS total_usuarios
+        // FROM usuarios USUARIOS
+        // LEFT JOIN leads LEADS ON USUARIOS.id = LEADS.id_usuario_consultor
+        // WHERE USUARIOS.nivel = 1 AND USUARIOS.status = 1
+        // GROUP BY USUARIOS.id
+        // ORDER BY total_usuarios ASC
+        // LIMIT 1";
+        // $resultado = $this->conexao->ler($consulta);
+
+        // print_r($resultado);
+        // if ($resultado->num_rows > 0) {
+            // $row = $resultado->fetch_assoc();
+            // $consultor_id = $row["id"];
+
+            // // Inserir o usuário na tabela usuarios associado ao consultor obtido
+            // $inserir = "INSERT INTO leads (nome, telefone, email) 
+            //     VALUES ('$nome', '$telefone', $consultor_id)";
+            
+            
+            // if ($this->conexao->query($inserir) === TRUE) {
+            //     echo "Lead inserido com sucesso!";
+            // } else {
+            //     echo "Erro ao inserir lead: " . $this->conexao->error;
+            // }
+        // } else {
+        //     echo "Não foi possível encontrar um consultor disponível.";
+        // }
+    }
+
+    public function criar_followup($campos = [])
+    {
+        if ((bool)count($campos)) {
             $this->conexao->inserir('followup', $campos);
         }
     }

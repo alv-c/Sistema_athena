@@ -24,12 +24,19 @@ $data_dia_ant = date('Y-m-d', $data);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+    <!-- xlsx full -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
     <!-- DATATABLE -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
     <!-- ESTILO -->
     <link rel="stylesheet" type="text/css" href="/sistema/css/style.css">
+
+    <!-- MULTISELECT JS -->
+    <link rel="stylesheet" type="text/css" href="/sistema/js/multiselect_js/multi-select.css">
+    <script src="/sistema/js/multiselect_js/jquery.multi-select.js"></script>
 
     <!-- JS -->
     <script>
@@ -53,12 +60,70 @@ $data_dia_ant = date('Y-m-d', $data);
             <!-- SESSÕES -->
             <section class="sessao-tabela pt-4">
                 <div class="contain">
-                    
-                    <h3>Ol´á mundo</h3>
 
+                    <div>
+                        <a href='#' id='select-all'>select all</a>
+                        <a href='#' id='deselect-all'>deselect all</a>
+
+                        <select multiple="multiple" id="meu_seletor" name="meu_seletor[]">
+                            <option value='elem_1'>elem 1</option>
+                            <option value='elem_2'>elem 2</option>
+                            <option value='elem_3'>elem 3</option>
+                            <option value='elem_4'>elem 4</option>
+                        </select>
+                    </div>
+
+                    <input type="file" id="data_file" accept=".xlsx">
+
+                    <button type="button" id="btn-importar">IMPORTAR</button>
 
                 </div>
             </section>
+
+            <script>
+                // XSLS-TO-JSON
+                var XLSL_request;
+                document.querySelector('#data_file').addEventListener('change', function() {
+                    var reader = new FileReader();
+                    reader.onload = function() {
+                        var arrayBuffer = this.result,
+                            array = new Uint8Array(arrayBuffer),
+                            binaryString = String.fromCharCode.apply(null, array);
+                        var workbook = XLSX.read(binaryString, {
+                            type: "binary"
+                        });
+                        var first_sheet_name = workbook.SheetNames[0];
+                        var worksheet = workbook.Sheets[first_sheet_name];
+                        XLSL_request = XLSX.utils.sheet_to_json(worksheet, {
+                            raw: true
+                        });
+                    }
+                    reader.readAsArrayBuffer(this.files[0]);
+                });
+
+                document.querySelector('#btn-importar').addEventListener('click', function() {
+                    enviarJSONParaPHP(
+                        XLSL_request,
+                        $('#meu_seletor').val(),
+                        '/sistema/includes/importar_lead_excel.php'
+                    );
+                });
+
+                /**
+                 * *********************************************************************
+                 */
+
+                // MULTISELECT JS
+                $('#meu_seletor').multiSelect();
+                $('#select-all').click(function() {
+                    $('#meu_seletor').multiSelect('select_all');
+                    return false;
+                });
+                $('#deselect-all').click(function() {
+                    $('#meu_seletor').multiSelect('deselect_all');
+                    return false;
+                });
+            </script>
             <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/footer.php'; ?>
         </div>
     </div>
