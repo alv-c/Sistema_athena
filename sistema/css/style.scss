@@ -474,6 +474,49 @@ body {
                             }
                         }
                     }
+
+                    label.label-file {
+                        display: block;
+                        cursor: pointer;
+
+                        &.custom {
+                            display: flex;
+                            flex-wrap: nowrap;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            width: 120px;
+
+                            >div.ico {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border: 2px solid #343a40;
+                                border-radius: 100%;
+                                width: 65px;
+                                height: 65px;
+
+                                >i {
+                                    color: #343a40;
+                                }
+                            }
+
+                            >span {
+                                display: block;
+                                text-align: center;
+                                padding-top: 10px;
+                                width: 100%;
+                                max-width: 120px;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+                        }
+                    }
+
+                    input[type="file"].file-custom {
+                        display: none;
+                    }
                 }
 
                 &.view-lead {

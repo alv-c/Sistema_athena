@@ -401,6 +401,43 @@ body .wrapper #content section.sessao-tabela table tbody tr td div.content-btn i
 body .wrapper #content section.sessao-tabela table tbody tr th div.content-btn i {
   color: #fff;
 }
+body .wrapper #content section.sessao-tabela label.label-file {
+  display: block;
+  cursor: pointer;
+}
+body .wrapper #content section.sessao-tabela label.label-file.custom {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+}
+body .wrapper #content section.sessao-tabela label.label-file.custom > div.ico {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #343a40;
+  border-radius: 100%;
+  width: 65px;
+  height: 65px;
+}
+body .wrapper #content section.sessao-tabela label.label-file.custom > div.ico > i {
+  color: #343a40;
+}
+body .wrapper #content section.sessao-tabela label.label-file.custom > span {
+  display: block;
+  text-align: center;
+  padding-top: 10px;
+  width: 100%;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body .wrapper #content section.sessao-tabela input[type=file].file-custom {
+  display: none;
+}
 body .wrapper #content section.view-lead {
   display: flex;
   align-items: center;

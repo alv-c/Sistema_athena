@@ -58,24 +58,50 @@ $data_dia_ant = date('Y-m-d', $data);
             <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar.php' ?>
 
             <!-- SESSÕES -->
-            <section class="sessao-tabela pt-4">
-                <div class="contain">
+            <section class="sessao-tabela">
+                <span class="h5">Importação de leads</span>
+                <div class="contain pt-4">
 
-                    <div>
-                        <a href='#' id='select-all'>select all</a>
-                        <a href='#' id='deselect-all'>deselect all</a>
-
-                        <select multiple="multiple" id="meu_seletor" name="meu_seletor[]" required>
-                            <?php foreach($leadService->retornarConsultores($usuarioSessao->id, $usuarioSessao->nivel) as $item) : ?>
-                                <option value="<?= $item->id ?>"><?= $item->nome ?></option>
-                            <?php endforeach; ?>                    
-                        </select>
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">Instruções de uso:</h4>
+                        <hr>
+                        <span>1º Faça o <strong>download da planilha</strong> de exemplo.</span>
+                        <hr>
+                        <span>2º <strong>Selecione o/s consultor/s</strong> que irão receber os leads importados via Excel.</span>
+                        <hr>
+                        <span>
+                            3º Selecione a planilha a ser importada, seguindo as regras de estrutura de colunas da planilha exemplar. <br>
+                            <strong>(Colunas NOME, TELEFONE E EMAIL)</strong>
+                        </span>
                     </div>
 
-                    <input type="file" id="data_file" accept=".xlsx" required>
+                    <label for="btn-down-plani" class="pt-3 d-block text-uppercase">Download planilha exemplar</label>
+                    <a href='/sistema/files/planilha-exemplo.xlsx' id="btn-down-plani" class="btn btn-dark text-white" download="planilha-exemplo.xlsx">
+                        <i class="fas fa-file-excel"></i>
+                        Download
+                    </a>
 
-                    <button type="button" id="btn-importar">IMPORTAR</button>
-
+                    <div>
+                        <label for="meu_seletor" class="pt-3 d-block text-uppercase">Selecione o corretor</label>
+                        <div class="d-flex flex-nowrap pb-2" style="gap: 10px;">
+                            <a href='#' class="btn btn-sm btn-success text-white" id='select-all'>Selecionar todos</a>
+                            <a href='#' class="btn btn-sm btn-dark text-white" id='deselect-all'>Desfazer todos</a>
+                        </div>
+                        <select multiple="multiple" id="meu_seletor" name="meu_seletor[]" required>
+                            <?php foreach ($leadService->retornarConsultores($usuarioSessao->id, $usuarioSessao->nivel) as $item) : ?>
+                                <option value="<?= $item->id ?>"><?= $item->nome ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <label for="data_file" class="label-file mt-3">SELECIONE O ARQUIVO</label> <!-- label indicadora -->
+                    <label for="data_file" class="label-file custom">
+                        <div class="ico">
+                            <i class="fas fa-upload fa-2x"></i>
+                        </div>
+                        <span id="nome_arquivo">arquivo</span>
+                    </label> <!-- label para formatar -->
+                    <input type="file" id="data_file" accept=".xlsx" class="file-custom" required>
+                    <button type="button" id="btn-importar" class="btn btn-sm btn-block btn-dark mt-4">IMPORTAR</button>
                 </div>
             </section>
 
@@ -101,11 +127,15 @@ $data_dia_ant = date('Y-m-d', $data);
                 });
 
                 document.querySelector('#btn-importar').addEventListener('click', function() {
-                    enviarJSONParaPHP(
-                        XLSL_request,
-                        $('#meu_seletor').val(),
-                        '/sistema/includes/importar_lead_excel.php'
-                    );
+                    if (XLSL_request == undefined || !$('#meu_seletor').val().length) {
+                        alert('preencha esta poha direito!') //CRIAR VALIDAÇÃO
+                    } else {
+                        enviarJSONParaPHP(
+                            XLSL_request,
+                            $('#meu_seletor').val(),
+                            '/sistema/includes/importar_lead_excel.php'
+                        );
+                    }
                 });
 
                 /**
@@ -122,6 +152,12 @@ $data_dia_ant = date('Y-m-d', $data);
                     $('#meu_seletor').multiSelect('deselect_all');
                     return false;
                 });
+
+                //add nome arquivo importado no input file custom
+                document.getElementById('data_file').onchange = function() {
+                    document.getElementById('nome_arquivo').innerHTML = ''
+                    document.getElementById('nome_arquivo').innerHTML = this.value
+                };
             </script>
             <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/footer.php'; ?>
         </div>
