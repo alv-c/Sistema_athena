@@ -15,7 +15,7 @@
                     $queryFlw = '';
                     switch ($usuarioSessao->nivel) {
                         case 1:
-                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead, LEADS.telefone
+                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, FLW.status, USR.nome AS nome_usuario, LEADS.nome AS nome_lead, LEADS.telefone
                                     FROM followup FLW
                                         LEFT JOIN usuarios USR
                                             ON (USR.id = FLW.id_usuario)
@@ -23,30 +23,33 @@
                                             ON (LEADS.id = FLW.id_lead)
                                     WHERE FLW.data >= CURDATE()
                                         AND FLW.id_usuario = $usuarioSessao->id
+                                        AND FLW.status = 0
                                     ORDER BY LEADS.nome ASC";
                             break;
 
                         case 2:
-                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead, LEADS.telefone
+                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, FLW.status, USR.nome AS nome_usuario, LEADS.nome AS nome_lead, LEADS.telefone
                                     FROM followup FLW
                                         LEFT JOIN usuarios USR
                                             ON (USR.id = FLW.id_usuario)
                                         LEFT JOIN leads LEADS
                                             ON (LEADS.id = FLW.id_lead)
                                     WHERE FLW.data >= CURDATE()
+                                        AND FLW.status = 0
                                         AND USR.gerente = $usuarioSessao->id 
                                         OR FLW.id_usuario = $usuarioSessao->id 
                                     ORDER BY LEADS.nome ASC";
                             break;
 
                         case 3:
-                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, USR.nome AS nome_usuario, LEADS.nome AS nome_lead, LEADS.telefone
+                            $queryFlw = "SELECT FLW.id, FLW.descricao, FLW.data, FLW.status, USR.nome AS nome_usuario, LEADS.nome AS nome_lead, LEADS.telefone
                                     FROM followup FLW
                                         LEFT JOIN usuarios USR
                                             ON (USR.id = FLW.id_usuario)
                                         LEFT JOIN leads LEADS
                                             ON (LEADS.id = FLW.id_lead)
                                     WHERE FLW.data >= CURDATE()
+                                    AND FLW.status = 0
                                     ORDER BY LEADS.nome ASC";
                             break;
                     }
@@ -60,6 +63,7 @@
                                     <th scope="col">Telefone</th>
                                     <th scope="col">Descrição</th>
                                     <th scope="col">Data</th>
+                                    <th scope="col">Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,6 +73,9 @@
                                         <td class="col-fone"><?= $follow->telefone ?></td>
                                         <td><?= $follow->descricao ?></td>
                                         <td><?= date('d/m/Y H:i:s',  strtotime($follow->data)) ?></td>
+                                        <td>
+                                            <button type="button" class="btn btn-block btn-xl btn-warning" onclick="finalizarFollow(<?= $follow->id ?>)">Finalizar</button>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

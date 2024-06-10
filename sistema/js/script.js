@@ -1,3 +1,14 @@
+function finalizarFollow(id) {
+    $.ajax({
+        url: "/sistema/includes/finalizarFollow.php", 
+        data: { 'data_id': `${id}`}, 
+        type: 'GET', 
+        success: function (result) {
+            location.reload();
+        }
+    });
+}
+
 $(document).ready(function () {
     $('.initfadeOut').fadeOut()
 

@@ -118,7 +118,7 @@ class GlobalObj
     public function criarNotifFollow ()
     {
         try {
-            $sql = "SELECT id FROM followup WHERE DATE(data) = CURDATE()";
+            $sql = "SELECT id FROM followup WHERE DATE(data) = CURDATE() AND status = 0";
             $stmt = $this->conexao->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_NUM);
