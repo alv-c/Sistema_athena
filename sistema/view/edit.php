@@ -114,6 +114,10 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
+                                        <label for="cpf">CPF</label>
+                                        <input type="text" name="cpf" id="cpf" placeholder="CPF" value="<?= $leadService->recuperar($id)[0]->cpf ?>">
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
                                         <label for="midia">Status</label>
                                         <select name="status" id="status">
                                             <?php foreach ($leadService->retornarStatus() as $status) : ?>
@@ -121,6 +125,8 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="anotacao">Anotação</label>
                                         <textarea name="anotacao" id="anotacao" placeholder="Comentário"></textarea>

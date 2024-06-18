@@ -104,6 +104,10 @@ $pagina = 'novoLead';
 
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
+                                    <label for="cpf">CPF</label>
+                                    <input type="text" name="cpf" id="cpf" placeholder="CPF">
+                                </div>
+                                <div class="col-md-6 col-sm-12">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" required>
                                         <?php foreach ($leadService->retornarStatus() as $status) : ?>

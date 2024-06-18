@@ -19,10 +19,10 @@ class LeadsService
             $campos = [
                 'nome' => $this->lead->__get('nome'),
                 'telefone' => $this->lead->__get('telefone'),
-                'telefone2' => $this->lead->__get('telefone2'),
+                // 'telefone2' => $this->lead->__get('telefone2'),
                 'email' => $this->lead->__get('email'),
-                'profissao' => $this->lead->__get('profissao'),
-                'data_nascimento' => $this->lead->__get('data_nascimento'),
+                // 'profissao' => $this->lead->__get('profissao'),
+                // 'data_nascimento' => $this->lead->__get('data_nascimento'),
                 'data' => $data,
                 'data_aux' => $data_aux
             ];
@@ -32,6 +32,7 @@ class LeadsService
                 'telefone' => $this->lead->__get('telefone'),
                 'telefone2' => $this->lead->__get('telefone2'),
                 'email' => $this->lead->__get('email'),
+                'cpf' => $this->lead->__get('cpf'),
                 'profissao' => $this->lead->__get('profissao'),
                 'data_nascimento' => $this->lead->__get('data_nascimento'),
                 'id_usuario_consultor' => $this->lead->__get('id_usuario_consultor'),
@@ -84,6 +85,7 @@ class LeadsService
             'telefone' => $this->lead->__get('telefone'),
             'telefone2' => $this->lead->__get('telefone2'),
             'email' => $this->lead->__get('email'),
+            'cpf' => $this->lead->__get('cpf'),
             'profissao' => $this->lead->__get('profissao'),
             'data_nascimento' => $this->lead->__get('data_nascimento'),
             'id_usuario_consultor' => $this->lead->__get('id_usuario_consultor'),
@@ -200,7 +202,7 @@ class LeadsService
         foreach ($filters as $column => $value) {
             if (is_array($value)) {
                 $conditions[] = "$table.$column BETWEEN '$value[0]' AND '$value[1]'";
-            } else if (is_numeric($value)) {
+            } else if (is_numeric($value) && $column != 'cpf') {
                 $value = (int)$value;
                 if ($value) $conditions[] = "$table.$column = '$value'";
             } else {

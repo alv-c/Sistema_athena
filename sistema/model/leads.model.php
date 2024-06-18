@@ -10,6 +10,7 @@
         private $id_usuario_consultor = null;
         private $anotacao = null;
         private $midia = null;
+        private $cpf = null;
         private $status = null;
 
         public function __construct (array $post = []) {

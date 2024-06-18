@@ -81,7 +81,7 @@ $data_dia_ant = date('Y-m-d', $data);
                             </div>
                             <div class="item">
                                 <label for="data_nascimento">Data de nascimento:</label>
-                                <input type="text" name="data_nascimento" id="data_nascimento" class="form-filtro input_filtro_data" placeholder="Data de nascimento" value="<?= isset($_POST['data_nascimento']) ? $_POST['data_nascimento'] : ''; ?>">
+                                <input type="text" name="data_nascimento" id="data_nascimento" class="form-filtro input_filtro_data" placeholder="Data de nascimento" value="<?= !empty($_POST['data_nascimento']) ? $_POST['data_nascimento'] : ''; ?>">
                             </div>
                             <div class="item">
                                 <label for="id_usuario_consultor">Consultor:</label>
@@ -108,6 +108,10 @@ $data_dia_ant = date('Y-m-d', $data);
                                         <option value="<?= $midia->id ?>" <?= isset($_POST['midia']) && $midia->id == $_POST['midia'] ? 'selected' : ''; ?>><?= $midia->nome ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                            </div>
+                            <div class="item">
+                                <label for="cpf">CPF:</label>
+                                <input type="cpf" name="cpf" id="cpf" class="form-filtro" placeholder="CPF" value="<?= isset($_POST['cpf']) ? $_POST['cpf'] : ''; ?>">
                             </div>
                             <div class="item">
                                 <label for="status">Status:</label>
