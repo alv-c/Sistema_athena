@@ -293,6 +293,12 @@ if (pagina == 'novoFinanceiro' || pagina == 'financeiroEdit') {
                 ],
             });
         });
+
+        function submitFormPagarParcela (form) {
+            if(form != null && form != undefined) {
+                form.submit();
+            }
+        }
     }
 }
 

@@ -60,6 +60,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
 
     <body>
         <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modalFollowup.php' ?>
+        <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modal_confirmar_pag.php' ?>
         <div class="wrapper">
             <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar-aside.php' ?>
             <div id="content">
@@ -177,31 +178,40 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $parcelas = $conexao->ler("SELECT * FROM parcelas_financeiro WHERE id_financeiro = {$id} ORDER BY sequencia_parcela ASC");
-                                            foreach($parcelas as $parcela) :
+                                        $parcelas = $conexao->ler("SELECT * FROM parcelas_financeiro WHERE id_financeiro = {$id} ORDER BY sequencia_parcela ASC");
+                                        foreach ($parcelas as $index => $parcela) :
                                         ?>
-                                        <tr>
-                                            <th scope="row"><?= $parcela->sequencia_parcela ?></th>
-                                            <td>R$<?= str_replace('.', ',', $parcela->valor_comissao) ?></td>
-                                            <td>R$<?= str_replace('.', ',', $parcela->val_parcela) ?></td>
-                                            <td><?= date('d/m/Y',  strtotime($parcela->data_vencimento)) ?></td>
-                                            <td><?= ((bool)$parcela->quitacao) ? 'Paga' : 'Em aberto'; ?></td>
-                                            <td><?= date('d/m/Y H:i:s',  strtotime($parcela->data)) ?></td>
-                                            <td>
-                                                <?php if(!((bool)$parcela->quitacao)) : ?>
-                                                    <form action="./financeiroEdit.php" method="post">
-                                                        <input type="hidden" name="editId" value="<?= $id ?>">
-                                                        <input type="hidden" name="acao" value="pprc">
-                                                        <input type="hidden" name="idpr" value="<?= $parcela->id ?>">
-                                                        <button type="submit" class="btn btn-danger" style="background: #B22222; color: #fff;">Pagar</button>
-                                                    </form>
-                                                <?php else : ?>
-                                                    <span class="badge badge-success" style="font-size: 13px;">Pago</span>
-                                                <?php endif; ?>
-                                            </td>
-                                        </tr>
-                                        <?php 
-                                            endforeach; 
+                                            <tr>
+                                                <th scope="row"><?= $parcela->sequencia_parcela ?></th>
+                                                <td>R$<?= str_replace('.', ',', $parcela->valor_comissao) ?></td>
+                                                <td>R$<?= str_replace('.', ',', $parcela->val_parcela) ?></td>
+                                                <td><?= date('d/m/Y',  strtotime($parcela->data_vencimento)) ?></td>
+                                                <td><?= ((bool)$parcela->quitacao) ? 'Paga' : 'Em aberto'; ?></td>
+                                                <td><?= date('d/m/Y H:i:s',  strtotime($parcela->data)) ?></td>
+                                                <td>
+                                                    <?php if (!((bool)$parcela->quitacao)) : ?>
+                                                        <form action="./financeiroEdit.php" method="post" id="form_pag_parc_<?= $index + 1 ?>">
+                                                            <input type="hidden" name="editId" value="<?= $id ?>">
+                                                            <input type="hidden" name="acao" value="pprc">
+                                                            <input type="hidden" name="idpr" value="<?= $parcela->id ?>">
+                                                            <button 
+                                                                type="button" 
+                                                                class="btn btn-danger" 
+                                                                data-val-parc="<?= str_replace('.', ',', $parcela->val_parcela) ?>" 
+                                                                data-num-titulo="<?= $parcela->sequencia_parcela ?>" 
+                                                                data-form="form_pag_parc_<?= $index + 1 ?>" 
+                                                                data-toggle="modal" 
+                                                                data-target="#modal_confirm_pag">
+                                                                    pagar
+                                                            </button>
+                                                        </form>
+                                                    <?php else : ?>
+                                                        <span class="badge badge-success" style="font-size: 13px;">Pago</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        endforeach;
                                         ?>
                                     </tbody>
                                 </table>
@@ -223,12 +233,7 @@ if ((!empty($_POST['editId']) && !is_null($_POST['editId'])) || (!empty($_GET['e
              */
             $("#id_pagador").select2();
             $("#id_recebedor").select2();
-        })
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            verificaConsultor()
+            verificaConsultor();
         })
 
         function verificaConsultor() {
