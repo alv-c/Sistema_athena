@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <strong>Atenção!</strong> existem campos vazios obrigatórios para concluir esta operação! <br>
+                <strong>Atenção!</strong> <br> Existem campos vazios obrigatórios para concluir esta operação. <br>
                 <strong>Por favor, preencha corretamente para continuar!</strong>
             </div>
             <div class="modal-footer">
