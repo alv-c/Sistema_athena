@@ -46,6 +46,7 @@ class LeadsService
         if (is_null($this->lead->__get('id_usuario_consultor')) || empty($this->lead->__get('id_usuario_consultor'))) {
             $this->enviarLeadConsultor($lastId);
         }
+        return $lastId;
     }
 
     public function recuperar($id = null)

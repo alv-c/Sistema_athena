@@ -33,9 +33,9 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id
 		$leadService = new LeadsService($conexao, $lead);
 		$id_insercao_log = $leadService->atualizar($_POST['id'], $log, $_POST['user']);
 		if(
-			!is_null($dados_follow['data_follow']) && 
-			!is_null($dados_follow['hora_follow']) && 
-			isset($dados_follow['criar_follow']) && 
+			!is_null($dados_follow['data_follow']) &&
+			!is_null($dados_follow['hora_follow']) &&
+			isset($dados_follow['criar_follow']) &&
 			!empty($dados_follow['anotacao']) &&
 			(bool)$id_insercao_log
 		) {
@@ -49,7 +49,13 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'atualizar' && !empty($_POST['id
 			];
 			$leadService->criar_followup($campos);
 		}
-		header('Location: /sistema/view/edit.php?editId=' . $_POST['id']);
+
+		// status 8 -> venda finalizada
+		if ($_POST['status'] == 8 && !empty($_POST['id'])) {
+			header("Location: /sistema/view/novoFinanceiro.php?idLeadFinan={$_POST['id']}");
+		} else {
+			header('Location: /sistema/view/edit.php?editId=' . $_POST['id']);
+		}
 	}
 }
 
@@ -70,8 +76,13 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'inserir_lead_manual') {
 	$_POST['data_nascimento'] = date('Y-m-d',  strtotime($_POST['data_nascimento']));
 	$lead = new Lead($_POST);
 	$leadService = new LeadsService($conexao, $lead);
-	$leadService->inserir();
-	header('Location: /sistema/view/index.php');
+	$lastId = $leadService->inserir();
+	//status 8 -> venda finalizada
+	if ($_POST['status'] == 8 && !empty($lastId)) {
+		header("Location: /sistema/view/novoFinanceiro.php?idLeadFinan=$lastId");
+	} else {
+		header('Location: /sistema/view/index.php');
+	}
 }
 
 if (!empty($_POST['acao']) && $_POST['acao'] == 'filtrarLead') {
@@ -83,7 +94,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'filtrarLead') {
 		$array_post['telefone'] = $conexao->removerCaracteresEsp($array_post['telefone']);
 		$array_post['telefone2'] = $conexao->removerCaracteresEsp($array_post['telefone2']);
 		$array_post['cpf'] = $conexao->removerCaracteresEsp($array_post['cpf']);
-		if(!empty($array_post['data_nascimento'])) {
+		if (!empty($array_post['data_nascimento'])) {
 			$array_post['data_nascimento'] = str_replace('/', '-', $array_post['data_nascimento']);
 			$array_post['data_nascimento'] = date('Y-m-d',  strtotime($array_post['data_nascimento']));
 		}
