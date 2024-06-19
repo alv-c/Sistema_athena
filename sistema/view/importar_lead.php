@@ -52,6 +52,9 @@ $data_dia_ant = date('Y-m-d', $data);
 
 <body>
     <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modalFollowup.php' ?>
+    <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modal_sucesso.php' ?>
+    <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modal_erro.php' ?>
+    <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/modal_preencha_corret.php' ?>
     <div class="wrapper">
         <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar-aside.php' ?>
         <div id="content">
@@ -128,7 +131,7 @@ $data_dia_ant = date('Y-m-d', $data);
 
                 document.querySelector('#btn-importar').addEventListener('click', function() {
                     if (XLSL_request == undefined || !$('#meu_seletor').val().length) {
-                        alert('preencha esta poha direito!') //CRIAR VALIDAÇÃO
+                        $('#modal_preencha_corret').modal('show');
                     } else {
                         enviarJSONParaPHP(
                             XLSL_request,

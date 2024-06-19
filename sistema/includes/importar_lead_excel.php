@@ -19,10 +19,14 @@
             try {
                 $conexao->inserir('leads', $item);
             } catch (Error $e) {
-                return $e->getMessage();
+                echo $e->getMessage();
+                print_r(json_encode(['retorno' => false]));
+                return;
             }
         }
+        print_r(json_encode(['retorno' => true]));
+        return;
     } else {
-        return false;
+        print_r(json_encode(['retorno' => false]));
     }
 ?>

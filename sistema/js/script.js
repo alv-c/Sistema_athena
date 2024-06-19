@@ -9,6 +9,10 @@ function finalizarFollow(id) {
     });
 }
 
+function redirecionar(caminho) {
+    window.location.href = caminho;
+}
+
 $(document).ready(function () {
     $('.initfadeOut').fadeOut()
 
@@ -309,7 +313,11 @@ if (pagina == 'importar_lead') {
         xhr.open("GET", `${url}?arq=${jsonData}&users=${usuarios}`, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log('Importação bem sucedida!');
+                if(JSON.parse(xhr.responseText).retorno) {
+                    $('#modal_sucesso').modal('show');
+                } else {
+                    $('#modal_erro').modal('show');
+                }
             }
         };
         xhr.send();
