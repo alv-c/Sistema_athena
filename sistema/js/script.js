@@ -1,8 +1,8 @@
 function finalizarFollow(id) {
     $.ajax({
-        url: "/sistema/includes/finalizarFollow.php", 
-        data: { 'data_id': `${id}`}, 
-        type: 'GET', 
+        url: "/sistema/includes/finalizarFollow.php",
+        data: { 'data_id': `${id}` },
+        type: 'GET',
         success: function (result) {
             location.reload();
         }
@@ -298,8 +298,8 @@ if (pagina == 'novoFinanceiro' || pagina == 'financeiroEdit') {
             });
         });
 
-        function submitFormPagarParcela (form) {
-            if(form != null && form != undefined) {
+        function submitFormPagarParcela(form) {
+            if (form != null && form != undefined) {
                 form.submit();
             }
         }
@@ -313,7 +313,7 @@ if (pagina == 'importar_lead') {
         xhr.open("GET", `${url}?arq=${jsonData}&users=${usuarios}`, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                if(JSON.parse(xhr.responseText).retorno) {
+                if (JSON.parse(xhr.responseText).retorno) {
                     $('#modal_sucesso').modal('show');
                 } else {
                     $('#modal_erro').modal('show');
@@ -323,3 +323,5 @@ if (pagina == 'importar_lead') {
         xhr.send();
     }
 }
+
+if (pagina == 'dashboard') {}

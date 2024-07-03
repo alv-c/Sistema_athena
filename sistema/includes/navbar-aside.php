@@ -21,6 +21,9 @@
             </ul>
         </li> -->
         <li>
+            <a href="/sistema/view/dashboard.php">Dashboard</a>
+        </li>
+        <li>
             <a href="/sistema/index.php">Painel</a>
         </li>
         <?php if ($usuarioSessao->nivel >= 2) : ?>

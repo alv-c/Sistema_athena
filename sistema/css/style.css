@@ -438,6 +438,26 @@ body .wrapper #content section.sessao-tabela label.label-file.custom > span {
 body .wrapper #content section.sessao-tabela input[type=file].file-custom {
   display: none;
 }
+body .wrapper #content section.sessao-tabela fieldset.container-chart {
+  border: 2px solid red;
+}
+body .wrapper #content section.sessao-tabela fieldset.container-chart div.contain-chart-barra {
+  border: 2px solid lime;
+  margin-bottom: 40px;
+}
+body .wrapper #content section.sessao-tabela fieldset.container-chart div.grid-chart {
+  border: 2px solid cyan;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 768px) {
+  body .wrapper #content section.sessao-tabela fieldset.container-chart div.grid-chart {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
 body .wrapper #content section.view-lead {
   display: flex;
   align-items: center;
