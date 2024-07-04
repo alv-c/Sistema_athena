@@ -519,24 +519,28 @@ body {
                     }
 
                     fieldset.container-chart {
-                        border: 2px solid red;
-
                         div {
                             &.contain-chart-barra {
-                                border: 2px solid lime;
                                 margin-bottom: 40px;
                             }
 
                             &.grid-chart {
-                                border: 2px solid cyan;
                                 display: flex;
                                 flex-wrap: nowrap;
                                 flex-direction: column;
                                 justify-content: center;
+                                gap: 30px;
 
                                 @media(min-width: 768px) {
                                     flex-direction: row;
-                                    justify-content: space-around;
+                                    justify-content: space-between;
+                                    gap: 0;
+                                }
+
+                                >div.item {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
                                 }
                             }
                         }
@@ -679,8 +683,6 @@ body {
 
                 &.filtro-lead {
                     >div.contain-filtro {
-                        padding-top: 20px;
-
                         >form {
                             div.grid {
                                 display: grid;

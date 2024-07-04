@@ -40,7 +40,7 @@ $data_dia_ant = date('Y-m-d', $data);
     <!-- FONT AWEASOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>Página incial | Sistema Athen</title>
+    <title>Exportação de leads | Sistema Athen</title>
 </head>
 
 <body>
@@ -51,7 +51,9 @@ $data_dia_ant = date('Y-m-d', $data);
             <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar.php' ?>
 
             <!-- FILTROS -->
-            <section class="filtro-lead pb-2" id="filtros">
+            <section class="filtro-lead" id="filtros">
+                <span class="h5 d-block mb-4">Exportação de Leads</span>
+
                 <?php if (!empty($filtro)) : ?>
                     <a href="./exportar_lead.php" class="btn btn-dark btn-sm text-white">Limpar filtro</a>
                 <?php endif; ?>

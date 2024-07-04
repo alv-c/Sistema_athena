@@ -2,6 +2,13 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/global.controller.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
 $pagina = 'dashboard';
+
+$numAguardandoAtend = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads WHERE status = 1;")[0]->numRegistro;
+$numAtendAtivo = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads WHERE status = 2;")[0]->numRegistro;
+$numAtendFrio = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads WHERE status = 3;")[0]->numRegistro;
+$numAtendAgendado = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads WHERE status = 4;")[0]->numRegistro;
+$numVendaGanha = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads WHERE status = 7;")[0]->numRegistro;
+$numVendaFinalizada = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads WHERE status = 8;")[0]->numRegistro;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -45,8 +52,8 @@ $pagina = 'dashboard';
 
             <!-- SESSÕES -->
             <section class="sessao-tabela">
-                <span class="h5">Dashboard</span>
-                <div class="contain pt-4">
+                <span class="h5 d-block mb-4">Dashboard</span>
+                <div class="contain">
 
                     <fieldset class="container-chart">
                         <div class="contain-chart-barra">
@@ -74,10 +81,24 @@ $pagina = 'dashboard';
         new Chart(chartBarra, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: [
+                    'Aguardando atendimento', 
+                    'Atendimento ativo', 
+                    'Atendimento frio', 
+                    'Agendado', 
+                    'Venda ganha', 
+                    'Venda finalizada'
+                ],
                 datasets: [{
                     label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: [
+                        <?= $numAguardandoAtend ?>, 
+                        <?= $numAtendAtivo ?>, 
+                        <?= $numAtendFrio ?>, 
+                        <?= $numAtendAgendado ?>, 
+                        <?= $numVendaGanha ?>, 
+                        <?= $numVendaFinalizada ?>
+                    ],
                     borderWidth: 1
                 }]
             },
@@ -189,4 +210,4 @@ coluna categoria.
 contagem de registros obtida na subquery interna.
 
 5 - `AS contagens_por_categoria`: É um alias opcional para a subquery interna, tornando o código  -->
-mais legível.
+<!-- mais legível. -->

@@ -46,7 +46,7 @@ $pagina = 'gerente';
 
             <!-- SESSÕES -->
             <section class="sessao-tabela">
-                <span class="h5">Lista de <?= $usuarioSessao->nivel == 2 || isset($_GET['idUser']) ? 'corretores' : 'gerentes'; ?></span>
+                <span class="h5">Lista de <?= $usuarioSessao->nivel == 2 || isset($_GET['idUser']) ? 'Corretores' : 'Gerentes'; ?></span>
                 <div class="contain pt-4">
                     <div id="scroll">
                         <div class="table-responsive">

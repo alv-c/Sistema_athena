@@ -53,6 +53,7 @@ $pagina = 'financeiro';
 
             <!-- SESSÕES -->
             <section class="sessao-tabela pt-4">
+                <span class="h5 d-block mb-4">Lista de Registros Financeiros</span>
                 <div class="contain">
                     <div id="scroll">
                         <div class="table-responsive">

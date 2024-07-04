@@ -50,6 +50,7 @@ $pagina = 'index';
 
             <!-- SESSÕES -->
             <section class="sessao-tabela pt-4">
+                <span class="d-block h5 mb-4">Lista de Leads</span>
                 <div class="contain">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered" id="tabela-leads">

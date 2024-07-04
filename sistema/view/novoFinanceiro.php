@@ -49,22 +49,25 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
         <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar-aside.php' ?>
         <div id="content">
             <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/navbar.php' ?>
-
             <!-- SESSÕES -->
             <section class="view-lead">
                 <div class="contain">
+                    <?php if (isset($_GET['idLeadFinan'])) : ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Redirecionamento bem sucedido!</strong>
+                            <br> <strong>Atenção!</strong> Ao finalizar a venda, você foi redirecionado para a geração do registro financeiro do mesmo.
+                        </div>
+                    <?php endif; ?>
                     <fieldset>
                         <form method="post" action="/sistema/controller/financeiro.controller.php">
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <label for="id_pagador">Nome do pagador</label>
                                     <select name="id_pagador" id="id_pagador" required>
                                         <option hidden value="">Selecione o pagador</option>
                                         <?php foreach ($financeiroService->recuperarPagadores(['id' => $usuarioSessao->id, 'nivel' => $usuarioSessao->nivel]) as $pagador) : ?>
-                                            <option value="<?= $pagador->id ?>" 
-                                                <?= (isset($_GET['idLeadFinan']) && $_GET['idLeadFinan'] == $pagador->id) ? 'selected' : ''; ?>>
-                                                    <?= $pagador->nome ?>
+                                            <option value="<?= $pagador->id ?>" <?= (isset($_GET['idLeadFinan']) && $_GET['idLeadFinan'] == $pagador->id) ? 'selected' : ''; ?>>
+                                                <?= $pagador->nome ?>
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
@@ -79,7 +82,6 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
                                     </select>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <label for="tipo_pagamento">Pagamento de intermediação</label>
@@ -94,7 +96,6 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
                                     <input type="text" name="preco" id="preco" placeholder="000,000,000" required onkeyup="calcularParcela()">
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <label for="valor_entrada">Valor de comissão</label>
@@ -109,11 +110,10 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
                                     </select>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <label for="val_parcela">
-                                        Valor da parcela 
+                                        Valor da parcela
                                         <span class="badge badge-warning" style="font-size: 11px;">(Comissão)</span>
                                     </label>
                                     <input type="text" name="val_parcela" id="val_parcela" placeholder="Valor da parcela" required readonly>
@@ -123,18 +123,16 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
                                     <input type="text" name="data" class="input_data_hora input_filtro_data" id="data" placeholder="Data do registro" value="<?= date('d/m/Y',  strtotime(date('Y-m-d'))) ?>" required>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <label for="dia_vencimento">Dia do vencimento</label>
                                     <input type="number" min="1" max="31" name="dia_vencimento" id="dia_vencimento" placeholder="Dia do vencimento" value="1" required>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <label for="comentario">Comentário</label>    
+                                    <label for="comentario">Comentário</label>
                                     <textarea name="comentario" id="comentario" placeholder="Comentário"></textarea>
                                 </div>
                             </div>
-
                             <div class="mt-3">
                                 <input type="hidden" name="acao" value="inserir">
                                 <button type="submit" class="btn btn-dark btn-block btn-sm">Salvar</button>
@@ -143,20 +141,21 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
                     </fieldset>
                 </div>
             </section>
-
             <script>
                 $(document).ready(function() {
                     /**
                      * SELECT 2 (SELECT COM BUSCA)
                      */
-                    $("#id_pagador").select2();
+                    $("#id_pagador").select2(
+                        <?php if (isset($_GET['idLeadFinan'])) : ?>
+                            { disabled:'readonly' }
+                        <?php endif; ?>
+                    );
                     $("#id_recebedor").select2();
                 })
             </script>
-
             <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/footer.php'; ?>
         </div>
     </div>
 </body>
-
 </html>

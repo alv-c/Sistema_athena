@@ -65,6 +65,7 @@ class FinanceiroService
                         ON (LEADS.id = FINAN.id_pagador)
                     LEFT JOIN usuarios USUARIOS
                         ON (USUARIOS.id = FINAN.id_recebedor)
+                ORDER BY FINAN.id DESC
             ";
         } else {
             $query = "SELECT FINAN.*, LEADS.nome AS nome_pagador, USUARIOS.nome AS nome_recebedor
@@ -73,7 +74,8 @@ class FinanceiroService
                                 ON (LEADS.id = FINAN.id_pagador)
                             LEFT JOIN usuarios USUARIOS
                                 ON (USUARIOS.id = FINAN.id_recebedor)
-                        WHERE FINAN.id = $id";
+                        WHERE FINAN.id = $id
+                    ORDER BY FINAN.id DESC";
         }
         return $this->conexao->ler($query);
     }
