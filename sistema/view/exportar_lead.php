@@ -55,7 +55,9 @@ $data_dia_ant = date('Y-m-d', $data);
                 <span class="h5 d-block mb-4">Exportação de Leads</span>
 
                 <?php if (!empty($filtro)) : ?>
-                    <a href="./exportar_lead.php" class="btn btn-dark btn-sm text-white">Limpar filtro</a>
+                    <div class="mb-4">
+                        <a href="./exportar_lead.php" class="btn btn-dark btn-sm text-white">Limpar filtro</a>
+                    </div>
                 <?php endif; ?>
 
                 <div class="contain-filtro">
