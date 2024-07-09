@@ -1,6 +1,8 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/controller/gerente.controller.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/sistema/includes/validaSessao.php';
+$pagina = 'usuariosLeads';
+
 if (!empty($_GET['idUser'])) :
 ?>
     <!DOCTYPE html>
@@ -26,10 +28,15 @@ if (!empty($_GET['idUser'])) :
         <link rel="stylesheet" type="text/css" href="/sistema/css/style.css">
 
         <!-- JS -->
+        <script> var pagina = '<?= $pagina ?>'; </script>
         <script src="/sistema/js/script.js"></script>
 
         <!-- FONT AWEASOME -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- DATATABLE -->
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
         <title>Gerente | Sistema Athena</title>
     </head>
@@ -113,7 +120,7 @@ if (!empty($_GET['idUser'])) :
                     <div class="contain">
                         <div id="scroll">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered">
+                                <table class="table table-striped table-bordered" id="tabela-usuarios-leads">
                                     <thead>
                                         <tr>
                                             <th scope="col">Data</th>

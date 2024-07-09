@@ -96,6 +96,15 @@ class FinanceiroService
             'data' => $this->financeiro->__get('data'),
             'hora' => $hora_atual,
         ], "id = $id");
+        $this->conexao->excluir("parcelas_financeiro", "id_financeiro = $id");
+        $array_parc = [
+			'id_financeiro' => $id,
+			'valor_comissao' => $this->financeiro->__get('valor_entrada'),
+			'num_parcelas' => $this->financeiro->__get('num_parcelas'),
+			'val_parcela' => $this->financeiro->__get('val_parcela'),
+			'data_vencimento' => $this->financeiro->__get('dia_vencimento')
+		];
+		$this->gerarParcelas($array_parc);
     }
 
     public function deletar($id)

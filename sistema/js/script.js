@@ -164,16 +164,13 @@ if (pagina == 'gerente') {
 
 if (pagina == 'exportar_lead') {
     function exportToExcel(id) {
-        var location = 'data:application/vnd.ms-excel;base64,';
-        var excelTemplate = '<html> ' +
-            '<head> ' +
-            '<meta http-equiv="content-type" content="text/plain; charset=UTF-8"/> ' +
-            '</head> ' +
-            '<body> ' +
-            document.getElementById(`${id}`).innerHTML +
-            '</body> ' +
-            '</html>'
-        window.location.href = location + window.btoa(excelTemplate);
+        var table_div = document.getElementById(`${id}`);
+        var blobData = new Blob(['\ufeff' + table_div.outerHTML], { type: 'application/vnd.ms-excel' });
+        var url = window.URL.createObjectURL(blobData);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'Meu arquivo Excel'
+        a.click();
     }
 }
 
@@ -324,4 +321,35 @@ if (pagina == 'importar_lead') {
     }
 }
 
-if (pagina == 'dashboard') {}
+if (pagina == 'dashboard') { }
+
+if (pagina == 'usuariosLeads') {
+    $(document).ready(function () {
+        // dataTable
+        new DataTable('#tabela-usuarios-leads', {
+            language: {
+                info: 'Página _PAGE_ de _PAGES_',
+                infoEmpty: 'Nenhum registro encontrado!',
+                infoFiltered: '(_MAX_ registros encontrados.)',
+                lengthMenu: '_MENU_ Número de registros',
+                zeroRecords: 'Nenhum registro encontrado!',
+                search: '',
+                searchPlaceholder: 'Buscar',
+                paginate: {
+                    "next": "Avançar",
+                    "previous": "Voltar"
+                }
+            },
+            paging: true,
+            scrollCollapse: false,
+            scrollY: '500px',
+            order: [],
+            columnDefs: [
+                {
+                    'targets': [3],
+                    'orderable': false,
+                }
+            ],
+        });
+    });
+}

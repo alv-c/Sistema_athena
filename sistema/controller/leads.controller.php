@@ -105,7 +105,7 @@ if (!empty($_POST['acao']) && $_POST['acao'] == 'filtrarLead') {
 		$arrayLeads = $leadService->filtroDados('leads', $array_post);
 		$filtro = true;
 	}
-} else if (strripos($_SERVER['PHP_SELF'], 'sistema')) {
+} else {
 	header('Content-Type: text/html; charset=utf-8');
 	$lead = new Lead();
 	$leadService = new LeadsService($conexao, $lead);

@@ -78,7 +78,7 @@ $pagina = 'novoUsuario';
                                 <div class="col-md-6 col-sm-12">
                                     <div>
                                         <label for="creci">Creci</label>
-                                        <input type="text" name="creci" id="creci" placeholder="Creci">
+                                        <input type="text" name="creci" id="creci" placeholder="Creci" maxlength="5">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">

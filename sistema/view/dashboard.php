@@ -60,14 +60,14 @@ $numVendaFinalizada = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads 
                             <canvas id="chart-barra"></canvas>
                         </div>
 
-                        <div class="grid-chart">
+                        <!-- <div class="grid-chart">
                             <div class="item">
                                 <canvas id="chart-circular-left"></canvas>
                             </div>
                             <div class="item">
                                 <canvas id="chart-circular-right"></canvas>
                             </div>
-                        </div>
+                        </div> -->
                     </fieldset>
 
                 </div>
@@ -90,7 +90,7 @@ $numVendaFinalizada = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads 
                     'Venda finalizada'
                 ],
                 datasets: [{
-                    label: '# of Votes',
+                    // label: '# of Votes',
                     data: [
                         <?= $numAguardandoAtend ?>, 
                         <?= $numAtendAtivo ?>, 
@@ -114,67 +114,67 @@ $numVendaFinalizada = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads 
                         position: 'top',
                     },
                     title: {
-                        display: true,
-                        text: 'GRAFICO BARRA'
+                        display: false,
+                        text: 'Índice de leads por status'
                     }
                 }
             }
         });
 
-        const circularLeft = document.getElementById('chart-circular-left');
-        new Chart(circularLeft, {
-            type: 'doughnut',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [10, 19, 10, 5, 2, 10],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'GRAFICO CIRCULAR ESQUERDO'
-                    }
-                }
-            }
-        });
+        // const circularLeft = document.getElementById('chart-circular-left');
+        // new Chart(circularLeft, {
+        //     type: 'doughnut',
+        //     data: {
+        //         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        //         datasets: [{
+        //             label: '# of Votes',
+        //             data: [10, 19, 10, 5, 2, 10],
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //     options: {
+        //         scales: {
+        //             y: {
+        //                 beginAtZero: true
+        //             }
+        //         },
+        //         responsive: true,
+        //         plugins: {
+        //             legend: {
+        //                 position: 'top',
+        //             },
+        //             title: {
+        //                 display: true,
+        //                 text: 'GRAFICO CIRCULAR ESQUERDO'
+        //             }
+        //         }
+        //     }
+        // });
 
-        const circularRight = document.getElementById('chart-circular-right');
-        new Chart(circularRight, {
-            type: 'pie',
-            data: {
-                labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'purple'],
-                datasets: [{
-                    label: 'Dataset 1',
-                    data: [10, 19, 10, 5, 2, 10],
-                    backgroundColor: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'purple'],
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'GRAFICO CIRCULAR DIREITO'
-                    }
-                }
-            }
-        });
+        // const circularRight = document.getElementById('chart-circular-right');
+        // new Chart(circularRight, {
+        //     type: 'pie',
+        //     data: {
+        //         labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'purple'],
+        //         datasets: [{
+        //             label: 'Dataset 1',
+        //             data: [10, 19, 10, 5, 2, 10],
+        //             backgroundColor: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'purple'],
+        //         }]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         plugins: {
+        //             legend: {
+        //                 position: 'top',
+        //             },
+        //             title: {
+        //                 display: true,
+        //                 text: 'GRAFICO CIRCULAR DIREITO'
+        //             }
+        //         }
+        //     }
+        // });
     </script>
 </body>
 
