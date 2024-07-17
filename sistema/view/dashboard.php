@@ -90,7 +90,7 @@ $numVendaFinalizada = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads 
                     'Venda finalizada'
                 ],
                 datasets: [{
-                    // label: '# of Votes',
+                    label: 'Número de leads por status',
                     data: [
                         <?= $numAguardandoAtend ?>, 
                         <?= $numAtendAtivo ?>, 
@@ -99,7 +99,8 @@ $numVendaFinalizada = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads 
                         <?= $numVendaGanha ?>, 
                         <?= $numVendaFinalizada ?>
                     ],
-                    borderWidth: 1
+                    borderWidth: 1,
+                    backgroundColor: '#343a40',
                 }]
             },
             options: {
@@ -115,8 +116,8 @@ $numVendaFinalizada = $conexao->ler("SELECT COUNT(id) AS numRegistro FROM leads 
                     },
                     title: {
                         display: false,
-                        text: 'Índice de leads por status'
-                    }
+                        // text: 'Índice de leads por status'
+                    },
                 }
             }
         });

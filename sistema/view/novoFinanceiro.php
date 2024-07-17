@@ -66,6 +66,7 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
                                     <select name="id_pagador" id="id_pagador" required>
                                         <option hidden value="">Selecione o pagador</option>
                                         <?php foreach ($financeiroService->recuperarPagadores(['id' => $usuarioSessao->id, 'nivel' => $usuarioSessao->nivel]) as $pagador) : ?>
+                                            <?php if(isset($_GET['idLeadFinan']) && $_GET['idLeadFinan'] != $pagador->id) continue; ?>
                                             <option value="<?= $pagador->id ?>" <?= (isset($_GET['idLeadFinan']) && $_GET['idLeadFinan'] == $pagador->id) ? 'selected' : ''; ?>>
                                                 <?= $pagador->nome ?>
                                             </option>
@@ -146,11 +147,6 @@ $numero_parcelas = array(1, 2, 3, 4, 5);
                     /**
                      * SELECT 2 (SELECT COM BUSCA)
                      */
-                    $("#id_pagador").select2(
-                        <?php if (isset($_GET['idLeadFinan'])) : ?>
-                            { disabled:'readonly' }
-                        <?php endif; ?>
-                    );
                     $("#id_recebedor").select2();
                 })
             </script>
